@@ -1,0 +1,106 @@
+[
+    {
+      "img": "https://i.ibb.co/xDK41JG/MSI-Ge-Force-RTX-3080-Gaming-X-Trio-10-G.png",
+      "price": 500,
+      "name": "MSI GeForce RTX 3080 Gaming X Trio 10G",
+      "availableQuantity": 120,
+      "minimumOrderQuantity": 5,
+      "description": "The Msi Geforce Rtx 3080 Ventus 3x plus 10g oc lhr Graphics Card brings the power of real-time ray tracing and AI to your PC games. The Geforce Rtx 3080 Ventus 3x plus 10g oc lhr Graphics Card features 10GB of GDDR6X VRAM and a 320-bit memory interface,"
+    },
+    {
+      "img": "https://i.ibb.co/7y2ncFT/ram.png",
+      "price": 40,
+      "name": "Corsair Vengeance Lpx 8GB",
+      "availableQuantity": 399,
+      "minimumOrderQuantity": 50,
+      "description": "VENGEANCE® LPX 8GB (1 x 8GB) DDR4 DRAM 3200MHz C16 Memory Kit - Black. VENGEANCE LPX memory is designed for high-performance overclocking."
+    },
+    {
+      "img": "https://i.ibb.co/znHh12y/trident-z-royal.png",
+      "price": 40,
+      "name": "rident z royal 8GB",
+      "availableQuantity": 295,
+      "minimumOrderQuantity": 50,
+      "description": "The latest G.Skill Trident Z Royal 8GB DDR4 3200MHz Silver Heatsink Desktop RAM is the newest member of the Trident Z family"
+    },
+    {
+      "img": "https://i.ibb.co/fd12kpj/sumsumg-nvm.png",
+      "price": 80,
+      "name": "sumsumg 970 EVO NVMe® M.2 SSD 500GB",
+      "availableQuantity": 400,
+      "minimumOrderQuantity": 30,
+      "description": "Feel the NVMe™ difference. The 970 EVO transforms high-end gaming and streamlines graphic intensive workflows with the new Phoenix controller and Intelligent TurboWrite technology"
+    },
+    {
+      "img": "https://i.ibb.co/wKZvxCf/nvm-storage.png",
+      "price": 60,
+      "name": "Transcend 110S 512GB M.2 2280",
+      "availableQuantity": 130,
+      "minimumOrderQuantity": 30,
+      "description": "Transcend's PCIe SSD 110S utilizes the PCI Express Gen3 x4 interface supported by the latest NVMe standard, to unleash next-generation performance."
+    },
+    {
+      "img": "https://i.ibb.co/71ffkNH/msi-x470-gaming-plus-max-motherboard-1.png",
+      "price": 169,
+      "name": "MSI X470 Gaming Plus Max RGB AMD Motherboard",
+      "availableQuantity": 330,
+      "minimumOrderQuantity": 15,
+      "description": "Satisfying gamers with what they really need, X470 GAMING PLUS MAX is equipped with Core boost, Turbo M.2, Audio Boost, USB 3.2 Gen2"
+    },
+    {
+      "img": "https://i.ibb.co/bN1q2C8/Motherboard-MSI-A520-M-A-PRO-AM4.png",
+      "price": 210,
+      "name": "Motherboard MSI A520M-A PRO AM4",
+      "availableQuantity": 280,
+      "minimumOrderQuantity": 10,
+      "description": "Supports AMD Ryzen™ 5000 & 3000 Series desktop processors and AMD Ryzen™ 4000 G-Series desktop processors Supports DDR4 Memory, up to 4600(OC) MHz Turbo M.2: Running at PCI-E Gen3 x4 maximizes performance for NVMe based SSDs"
+    },
+    {
+      "img": "https://i.ibb.co/PhgPn0G/Gigabyte-B560-M-DS3-H-motherboard.png",
+      "price": 200,
+      "name": "Gigabyte B560M DS3H motherboard",
+      "availableQuantity": 190,
+      "minimumOrderQuantity": 10,
+      "description": "Gigabyte B560M DS3H Micro ATX Motherboard supports 11th and 10th Gen Intel Core Series Processors and Dual Channel Non-ECC Unbuffered DDR4, 4 DIMMs with Direct ..."
+    },
+    {
+      "img": "https://i.ibb.co/VYq1NmV/Gigabyte-Aorus-AC300-W-Atx-Mid-tower.png",
+      "price": 120,
+      "name": "Gigabyte Aorus AC300W Atx Mid-tower",
+      "availableQuantity": 290,
+      "minimumOrderQuantity": 10,
+      "description": "The Aorus AC300W Case From Gigabyte Can Accommodate ATX, Micro-ATX, And Mini-ITX Motherboards Making It Ideal For Both DIY Enthusiasts And Gamers. Additionally, It Can Fit Up To Two 3.5“ And Three 2.5' Drives Bays (Behind The MB Tray)."
+    },
+    {
+      "img": "https://i.ibb.co/KKRmVQm/XIGMATEK-OMG-Gaming-Case.png",
+      "price": 70,
+      "name": "XIGMATEK OMG Gaming Case",
+      "availableQuantity": 310,
+      "minimumOrderQuantity": 15,
+      "description": "Xigmatek Presents The OMG Micro-ATX Chassis Sporting A Unique “OMG!” Meshed Front Panel With A Black And Red Colour Theme. The Xigmatek OMG Packs A Window Tempered Glass Side Panel For Viewing Pleasure Of The Interior Which Has A Power Supply Shroud To Hide Cables And Anything Unwanted To Be Seen. The OMG Chassis Supports Up To Five 120mm Cooling Fans Offering Decent Cooling Options."
+    },
+    {
+      "img": "https://i.ibb.co/wSggZXr/Antec-DP301-M-Compact-Micro-ATX-Gaming-Casing.png",
+      "price": 60,
+      "name": "Antec DP301M Compact Micro-ATX Gaming Casing",
+      "availableQuantity": 183,
+      "minimumOrderQuantity": 20,
+      "description": "Antec DP301M Compact Micro-ATX Gaming Casing is another Dark Phantom Antec new gaming series. It still keeps excellent quality and the capability of being equipped with high-performance components. In this gamoing casing, the ARGB boomerang front panel design represents the agility and speed in the gaming realm"
+    },
+    {
+      "img": "https://i.ibb.co/hs601XG/Fantech-FB301-Turbine-PC-Casing-Fan.png",
+      "price": 20,
+      "name": "Fantech FB301 Turbine PC Casing Fan",
+      "availableQuantity": 600,
+      "minimumOrderQuantity": 60,
+      "description": "The Fantech TURBINE FB-301 Price in 20$ in Today's 2022-05-22 Market. This FANTECH TURBINE FB-301 ADDRESSABLE RGB CASE FAN Manufacturing by Fantech Comes With Based on 0 reviews.Tech Land BD Offers you Fantech TURBINE FB-301 by 20$ and its regular price is 20$ Which is also In Stock Now at our Showroom. Follow us on Facebook For Regular updates & Offer. Subscribe Our YouTube Channel for Product Reviews."
+    },
+    {
+      "img": "https://i.ibb.co/xf8yQ7T/Dark-Flash-DLM22-Pink-Micro-ATX-Computer-Casing.png",
+      "price": 50,
+      "name": "DarkFlash DLM22 Pink MicroATX Computer Casing",
+      "availableQuantity": 600,
+      "minimumOrderQuantity": 30,
+      "description": "DarkFlash DLM22 Pink MicroATX Computer Casing Price in US is only 50$ in Today’s 6 December, 2021 Market. Order DarkFlash DLM22 Pink MicroATX Computer Casing Online and Get Product within 48 hours. Follow us on Facebook for regular updates."
+    }
+  ]

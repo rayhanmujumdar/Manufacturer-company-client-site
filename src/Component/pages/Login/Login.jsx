@@ -39,7 +39,7 @@ const Login = () => {
   },[error])
   return (
     <div className="h-[92vh] flex justify-center items-center">
-      <div className="card flex-shrink-0 w-full max-w-lg shadow-2xl bg-base-100 mx-auto">
+      <div className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto">
         <div className="card-body">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-control">

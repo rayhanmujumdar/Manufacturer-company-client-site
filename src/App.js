@@ -5,7 +5,7 @@ import Login from './Component/pages/Login/Login';
 import SignIn from './Component/pages/SignIn/SignIn';
 import Navbar from './Component/Shared/Navbar/Navbar';
 import { Toaster } from 'react-hot-toast';
-import Product from './Component/pages/Product/Product';
+import Product from './Component/pages/Home/HomeProduct';
 import RequiredAuth from './Component/Shared/RequiredAuth/RequiredAuth';
 
 function App() {
