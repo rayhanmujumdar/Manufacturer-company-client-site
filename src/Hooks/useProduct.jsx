@@ -1,3 +1,4 @@
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import axiosPrivate from "../axiosPrivate/axiosPrivate.js";
 import Loading from "../Component/Shared/Loading/Loading.jsx";
@@ -15,6 +16,13 @@ const useProduct = () => {
   if(isLoading){
     return <Loading className='text-black'></Loading>
   }
+  if(error){
+    toast.error(error.message,{
+      id: 'error'
+    })
+    return <Loading className='text-black'></Loading>
+  }
+  console.log(product)
   return {
     products: product.data,
     isLoading,

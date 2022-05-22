@@ -2,16 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import SocialLogin from "../Login/SocialLogin";
-import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
+import { useAuthState, useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../../firebase/firebase.init';
 import Loading from '../../Shared/Loading/Loading';
 import toast from 'react-hot-toast';
 
-const SignIn = () => {
+const SignUp = () => {
+  const [user] = useAuthState(auth)
     const navigate = useNavigate()
     const [
         createUserWithEmailAndPassword,
-        user,
+        signupUser,
         loading,
         error,
       ] = useCreateUserWithEmailAndPassword(auth);
@@ -153,4 +154,4 @@ const SignIn = () => {
     );
 };
 
-export default SignIn;
+export default SignUp;

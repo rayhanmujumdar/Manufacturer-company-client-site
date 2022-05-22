@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import { useAuthState, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -10,8 +10,9 @@ import SocialLogin from "./SocialLogin";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [user] = useAuthState(auth)
   const from = location?.state?.from.pathname || "/";
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const [signInWithEmailAndPassword, loginUser, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const {
     register,
@@ -119,7 +120,7 @@ const Login = () => {
               </button>
             </div>
           </form>
-          <SocialLogin></SocialLogin>
+          <SocialLogin from={from}></SocialLogin>
         </div>
       </div>
     </div>

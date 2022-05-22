@@ -2,11 +2,11 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './Component/pages/Home/Home';
 import Login from './Component/pages/Login/Login';
-import SignIn from './Component/pages/SignIn/SignIn';
+import SignUp from './Component/pages/SignUp/SignUp';
 import Navbar from './Component/Shared/Navbar/Navbar';
 import { Toaster } from 'react-hot-toast';
-import Product from './Component/pages/Home/HomeProduct';
 import RequiredAuth from './Component/Shared/RequiredAuth/RequiredAuth';
+import Products from './Component/pages/Products/Products';
 
 function App() {
   return (
@@ -15,12 +15,13 @@ function App() {
       <Routes>
         <Route path='/' element={<Home></Home>}></Route>
         <Route path='/home' element={<Home></Home>}></Route>
-        <Route path='/product' element={
+        <Route path='/products' element={
           <RequiredAuth>
-            <Product></Product>
+            <Products></Products>
           </RequiredAuth>
         }></Route>
-        <Route path='/signUp' element={<SignIn></SignIn>}></Route>
+        <Route path='/product/:id' element={}></Route>
+        <Route path='/signUp' element={<SignUp></SignUp>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
       </Routes>
       <Toaster/>
