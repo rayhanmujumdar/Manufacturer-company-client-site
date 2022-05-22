@@ -22,7 +22,6 @@ const useProduct = () => {
     })
     return <Loading className='text-black'></Loading>
   }
-  console.log(product)
   return {
     products: product.data,
     isLoading,

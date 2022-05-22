@@ -7,6 +7,7 @@ import Navbar from './Component/Shared/Navbar/Navbar';
 import { Toaster } from 'react-hot-toast';
 import RequiredAuth from './Component/Shared/RequiredAuth/RequiredAuth';
 import Products from './Component/pages/Products/Products';
+import PurchaseProduct from './Component/pages/PurchaseProduct/PurchaseProduct';
 
 function App() {
   return (
@@ -20,7 +21,10 @@ function App() {
             <Products></Products>
           </RequiredAuth>
         }></Route>
-        <Route path='/product/:id' element={}></Route>
+        <Route path='/product/:id' element={
+        <RequiredAuth>
+          <PurchaseProduct></PurchaseProduct>
+        </RequiredAuth>}></Route>
         <Route path='/signUp' element={<SignUp></SignUp>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
       </Routes>
