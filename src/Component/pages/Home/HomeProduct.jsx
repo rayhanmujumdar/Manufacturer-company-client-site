@@ -34,7 +34,7 @@ const HomeProduct = () => {
           </div>
         </div>
         <div className="mt-5">
-        <button onClick={() => navigate('/products')} class="btn btn-active">See More</button>
+        <button onClick={() => navigate('/products')} className="btn btn-active">See More</button>
         </div>
       </div>
     </div>
