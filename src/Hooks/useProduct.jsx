@@ -1,5 +1,6 @@
 import { useQuery } from "react-query";
 import axiosPrivate from "../axiosPrivate/axiosPrivate.js";
+import Loading from "../Component/Shared/Loading/Loading.jsx";
 
 const useProduct = () => {
   const {
@@ -11,9 +12,11 @@ const useProduct = () => {
     const url = "http://localhost:5000/product";
     return axiosPrivate.get(url);
   });
-  console.log(product)
+  if(isLoading){
+    return <Loading className='text-black'></Loading>
+  }
   return {
-    product,
+    products: product.data,
     isLoading,
     error,
     refetch,
