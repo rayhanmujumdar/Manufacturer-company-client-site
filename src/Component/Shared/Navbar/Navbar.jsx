@@ -1,19 +1,27 @@
 import React from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
+import auth from "../../../firebase/firebase.init";
+import { signOut } from "firebase/auth";
 
 const Navbar = () => {
+  const [user, loading, error] = useAuthState(auth);
   const navLink = (
     <>
       <li>
-        <Link to='home'>Home</Link>
+        <Link to="home">Home</Link>
       </li>
       <li>
-        <Link to='product'>Product</Link>
+        <Link to="product">Product</Link>
       </li>
       <li>
-        <Link to='about'>About</Link>
+        <Link to="about">About</Link>
       </li>
-      <li><Link to='login'>Login</Link></li>
+      {user && (
+        <li>
+          <Link to="dashboard">Dashboard</Link>
+        </li>
+      )}
     </>
   );
   return (
@@ -43,13 +51,23 @@ const Navbar = () => {
             {navLink}
           </ul>
         </div>
-        <Link to='/' className="btn btn-ghost normal-case text-xl">Computer Market</Link>
+        <Link to="/" className="btn btn-ghost normal-case text-xl">
+          Computer Market
+        </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{navLink}</ul>
       </div>
       <div className="navbar-end">
-        <button className="btn btn-xs h-10">Sign out</button>
+        {user ? (
+          <button onClick={() => signOut(auth)} className="btn btn-xs h-10">
+            Sign out
+          </button>
+        ) : (
+          <Link to="/login" className="btn btn-xs h-10">
+            Login
+          </Link>
+        )}
       </div>
     </div>
   );

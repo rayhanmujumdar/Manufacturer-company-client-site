@@ -62,7 +62,7 @@ const SignIn = () => {
                 placeholder="Name"
                 className="input input-bordered"
               />
-              {errors.name?.type === 'required' && <p className="text-left text-red-500">{errors.name.message}</p>}
+              {errors.name?.type === 'required' && <p className="text-left mt-0.5 text-red-500">{errors.name.message}</p>}
             </div>
             {/* email input */}
             <div className="form-control">
@@ -84,8 +84,8 @@ const SignIn = () => {
                 placeholder="email"
                 className="input input-bordered"
               />
-              {errors.email?.type === 'required' && <p className="text-left text-red-500">{errors.email.message}</p>}
-              {errors.email?.type === 'pattern' && <p className="text-left text-red-500">{errors.email.message}</p>}
+              {errors.email?.type === 'required' && <p className="text-left mt-0.5 text-red-500">{errors.email.message}</p>}
+              {errors.email?.type === 'pattern' && <p className="text-left mt-0.5 text-red-500">{errors.email.message}</p>}
             </div>
             {/* password input */}
             <div className="form-control">
@@ -108,8 +108,8 @@ const SignIn = () => {
                 placeholder="password"
                 className="input input-bordered"
               />
-              {errors.password?.type === 'required' && <p className="text-left text-red-500">{errors.password.message}</p>}
-              {errors.password?.type === 'minLength' && <p className="text-left text-red-500">{errors.password.message}</p>}
+              {errors.password?.type === 'required' && <p className="text-left mt-0.5 text-red-500">{errors.password.message}</p>}
+              {errors.password?.type === 'minLength' && <p className="text-left mt-0.5 text-red-500">{errors.password.message}</p>}
             </div>
             {/* confirm password input */}
             <div className="form-control">
@@ -130,8 +130,8 @@ const SignIn = () => {
                 placeholder="password"
                 className="input input-bordered"
               />
-              {errors.confirmPassword?.type === 'required' && <p className="text-left text-red-500">{errors.confirmPassword.message}</p>}
-              {errors.confirmPassword?.type === 'match' && <p className="text-left text-red-500">Password MissMatch</p>}
+              {errors.confirmPassword?.type === 'required' && <p className="text-left mt-0.5 text-red-500">{errors.confirmPassword.message}</p>}
+              {errors.confirmPassword?.type === 'match' && <p className="text-left mt-0.5 text-red-500">Password MissMatch</p>}
               <label className="label">
                 <p className="label-text-alt link link-hover text-left">
                   Forgot password?
