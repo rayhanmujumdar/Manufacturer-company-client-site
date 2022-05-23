@@ -18,7 +18,7 @@ const HomeProduct = () => {
       }}
     >
       <div className="md:container md:mx-auto py-20 mx-5">
-        <h1 className="text-5xl font-bold text-left mb-5 text-stone-800">Our Product</h1>
+        <h1 className="text-5xl font-bold text-left mb-5 text-stone-800 uppercase">Our Product</h1>
         <div className="grid lg:grid-cols-2 gap-3">
           <div className="">
             <div className="sticky top-0">
