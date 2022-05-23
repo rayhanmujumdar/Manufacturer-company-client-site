@@ -1,24 +1,27 @@
 import React, { useEffect } from "react";
-import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useAuthState, useSignInWithGoogle } from 'react-firebase-hooks/auth';
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import auth from '../../../firebase/firebase.init'
+import useToken from "../../../Hooks/useToken";
 import Loading from "../../Shared/Loading/Loading";
 
 const SocialLogin = ({from}) => {
+  const [user] = useAuthState(auth)
   const navigate = useNavigate()
-    const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [token] = useToken(user)
+    const [signInWithGoogle, googleUser, loading, error] = useSignInWithGoogle(auth);
     const handleGoogleSignUp = () => {
         signInWithGoogle()
     }
     useEffect(() => {
-      if(user){
+      if(token){
           toast.success('Successfully login',{
             id: 'success'
           })
           navigate(from,{replace: true})
       }
-    },[user])
+    },[token,navigate,from])
     useEffect(() => {
         if(error){
             toast.error(error.code,{

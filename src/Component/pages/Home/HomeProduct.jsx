@@ -23,7 +23,7 @@ const HomeProduct = () => {
           <div className="">
             <div className="sticky top-0">
               {products?.slice(0, 1).map((product) => (
-                <Product product={product}></Product>
+                <Product key={product._id} product={product}></Product>
               ))}
             </div>
           </div>
