@@ -1,5 +1,7 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
+import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
@@ -17,11 +19,21 @@ const PurchaseProduct = () => {
     setIsOpen(true);
   }
   // get the single product data
-  const { data:product, isLoading, error, refetch ,isFetched} = useQuery("singleProduct", () => {
+  const { data:product, isLoading, error, refetch ,isError} = useQuery("singleProduct", () => {
     return axiosPrivate.get(`http://localhost:5000/product/${id}?email=${user?.email}`);
   });
   // handle error
   if (isLoading) {
+    return <Loading className="text-black"></Loading>;
+  }
+  if(isError){
+    if(error.response.status === 401 || error.response.status === 403){
+      toast.error(error?.response?.data.message || 'SameThing was wrong',{
+        id:'error'
+      })
+      signOut(auth)
+      navigate('/login')
+    }
     return <Loading className="text-black"></Loading>;
   }
   const { _id,img, name, description, availableQuantity,price,minimumOrderQuantity } = product.data

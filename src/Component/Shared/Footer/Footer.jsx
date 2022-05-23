@@ -40,16 +40,16 @@ const Footer = () => {
             <h5 className="uppercase text-left font-bold mb-2.5 text-gray-800">Links</h5>
             <ul className="list-none mb-0 flex gap-x-5">
               <li className='w-10 h-10 text-center leading-10 rounded-full text-white bg-stone-600 hover:bg-stone-500'>
-                 <a href="https://github.com/rayhanmujumdar" target="_blank" rel="noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+                 <a href="https://github.com/rayhanmujumdar" target="_blank" rel="noreferrer"><i  className="fa-brands fa-facebook-f"></i></a>
               </li>
               <li className='w-10 h-10 text-center leading-10 rounded-full text-white bg-stone-600 hover:bg-stone-500'>
-              <a href="https://github.com/rayhanmujumdar" target="_blank" rel="noreferrer"><i class="fa-brands fa-google"></i></a>
+              <a href="https://github.com/rayhanmujumdar" target="_blank" rel="noreferrer"><i  className="fa-brands fa-google"></i></a>
               </li>
               <li className='w-10 h-10 text-center leading-10 rounded-full text-white bg-stone-600 hover:bg-stone-500'>
-              <a href="https://github.com/rayhanmujumdar" target="_blank" rel="noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+              <a href="https://github.com/rayhanmujumdar" target="_blank" rel="noreferrer"><i  className="fa-brands fa-linkedin-in"></i></a>
               </li>
               <li className='w-10 h-10 text-center leading-10 rounded-full text-white bg-stone-600 hover:bg-stone-500'>
-              <a href="https://github.com/rayhanmujumdar" target="_blank" rel="noreferrer"><i class="fa-brands fa-github"></i></a>
+              <a href="https://github.com/rayhanmujumdar" target="_blank" rel="noreferrer"><i  className="fa-brands fa-github"></i></a>
               </li>
             </ul>
           </div>

@@ -4,9 +4,11 @@ import { Link } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
 import { signOut } from "firebase/auth";
 import logo from '../../../image/logo/company logo.png'
+import useNav from "../../../Hooks/useNav";
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
+  const [nav] = useNav()
   const navLink = (
     <>
       <li>
@@ -26,7 +28,7 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className="navbar bg-base-100">
+    <div className={`navbar  ${nav ? 'fixed z-10 top-0 bg-base-200' : 'bg-base-100'}`}>
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">

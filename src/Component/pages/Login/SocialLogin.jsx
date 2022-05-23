@@ -19,7 +19,7 @@ const SocialLogin = ({ from }) => {
       toast.success("Successfully login", {
         id: "success",
       });
-      navigate(from, { replace: true });
+      navigate(from || "/", { replace: true });
     }
   }, [token, navigate, from]);
   useEffect(() => {
