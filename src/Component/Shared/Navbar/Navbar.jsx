@@ -3,6 +3,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
 import { signOut } from "firebase/auth";
+import logo from '../../../image/logo/company logo.png'
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
@@ -51,8 +52,12 @@ const Navbar = () => {
             {navLink}
           </ul>
         </div>
-        <Link to="/" className="btn btn-ghost normal-case text-xl">
-          Computer Market
+        <Link
+          to="/"
+          className="btn btn-ghost normal-case text-xl font-bold mb-2.5 text-gray-800 flex items-start"
+        >
+          <img src={logo} alt="" />
+          <span>Computer Market</span>
         </Link>
       </div>
       <div className="navbar-center hidden lg:flex">
@@ -60,10 +65,13 @@ const Navbar = () => {
       </div>
       <div className="navbar-end">
         {user ? (
-          <button onClick={() => {
-            signOut(auth)
-            localStorage.removeItem('accessToken')
-            }} className="btn btn-xs h-10">
+          <button
+            onClick={() => {
+              signOut(auth);
+              localStorage.removeItem("accessToken");
+            }}
+            className="btn btn-xs h-10"
+          >
             Sign out
           </button>
         ) : (

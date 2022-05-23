@@ -8,7 +8,7 @@ const Review = ({review}) => {
     }
     console.log(stars)
   return (
-    <div class="card w-96 bg-base-100 shadow-xl">
+    <div class="card bg-base-100 shadow-xl">
       <div class="card-body">
         <div class="card-actions justify-center flex-col items-center">
             <img src={img} alt="" className="w-20"/>
