@@ -11,11 +11,9 @@ import SocialLogin from "./SocialLogin";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [user] = useAuthState(auth)
-  const [token] = useToken(user)
   const from = location?.state?.from.pathname || "/";
   const [signInWithEmailAndPassword, loginUser, loading, error] =
-    useSignInWithEmailAndPassword(auth);
+  useSignInWithEmailAndPassword(auth);
   const {
     register,
     handleSubmit,
@@ -25,6 +23,7 @@ const Login = () => {
     const { email, password } = data;
     await signInWithEmailAndPassword(email, password);
   };
+  const [token] = useToken(loginUser?.user)
   useEffect(() => {
     if (token) {
         toast.success('Successfully Login',{
@@ -60,7 +59,7 @@ const Login = () => {
                     message: "invalid Email",
                   },
                 })}
-                type="text"
+                type="email"
                 placeholder="email"
                 className="input input-bordered"
               />
@@ -86,7 +85,7 @@ const Login = () => {
                     message: "Minimum 6 character",
                   },
                 })}
-                type="text"
+                type="password"
                 placeholder="password"
                 className="input input-bordered"
               />

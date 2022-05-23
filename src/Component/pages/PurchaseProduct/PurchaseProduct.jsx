@@ -1,28 +1,27 @@
 import React, { useEffect, useState } from "react";
-import toast from "react-hot-toast";
+import { useAuthState } from "react-firebase-hooks/auth";
 import { useQuery } from "react-query";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
+import auth from "../../../firebase/firebase.init";
 import Footer from "../../Shared/Footer/Footer";
 import Loading from "../../Shared/Loading/Loading";
 import PurchaseModal from "./PurchaseModal";
 
 const PurchaseProduct = () => {
+  const [user] = useAuthState(auth)
+  const navigate = useNavigate()
   const { id } = useParams();
   const [modalIsOpen,setIsOpen] = useState(false)
   function openModal() {
     setIsOpen(true);
   }
-  const { data:product, isLoading, error, refetch } = useQuery("singleProduct", () => {
-    return axiosPrivate.get(`http://localhost:5000/product/${id}`);
+  // get the single product data
+  const { data:product, isLoading, error, refetch ,isFetched} = useQuery("singleProduct", () => {
+    return axiosPrivate.get(`http://localhost:5000/product/${id}?email=${user?.email}`);
   });
+  // handle error
   if (isLoading) {
-    return <Loading className="text-black"></Loading>;
-  }
-  if (error) {
-    toast.error(error.message, {
-      id: "error",
-    });
     return <Loading className="text-black"></Loading>;
   }
   const { _id,img, name, description, availableQuantity,price,minimumOrderQuantity } = product.data
