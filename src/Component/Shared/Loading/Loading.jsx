@@ -1,11 +1,11 @@
-import React from 'react';
+import React from "react";
 
-const Loading = ({className}) => {
-    return (
-        <div>
-            <button className={`btn bg-transparent  border-0 loading ${className}`}></button>
-        </div>
-    );
+const Loading = ({ className }) => {
+  return (
+    <div>
+        <p className={`btn bg-transparent border-0 loading ${className}`}></p>
+    </div>
+  );
 };
 
 export default Loading;

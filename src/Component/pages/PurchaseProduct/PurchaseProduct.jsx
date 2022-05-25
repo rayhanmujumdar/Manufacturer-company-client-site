@@ -55,7 +55,7 @@ const PurchaseProduct = () => {
           </p>
           <p className="text-xl">Price: <span className="font-bold">${price} (Single quantity)</span></p>
           <p className="text-xl">MiniMum Order Quantity: <span className="font-bold">{minimumOrderQuantity} pieces</span></p>
-          <p className="text-xl">Available Quantity: <span className="font-bold">{availableQuantity} pieces</span></p>
+          <p className="text-xl">Available Quantity: <span className="font-bold">{availableQuantity}</span></p>
           {quantityCondition && <p className="text-red-500">This product minimum quantity is not available</p>}
           </div>
           <button disabled={quantityCondition} onClick={openModal} className="btn btn-primary">Order</button>

@@ -30,8 +30,8 @@ const Product = ({ product }) => {
         </p>
         <div>
           <p className="text-xl">Price: ${price}</p>
-          <p>Available Quantity: {availableQuantity}</p>
-          <p>Minimum Purchase: {minimumOrderQuantity}</p>
+          <p>Available Quantity: <span className="font-semibold">{availableQuantity}/p</span></p>
+          <p>Minimum Purchase: <span className="font-semibold">{minimumOrderQuantity}/p</span></p>
         </div>
         <button onClick={() => handlePurchase(_id)} className="btn btn-primary">Purchase</button>
       </div>

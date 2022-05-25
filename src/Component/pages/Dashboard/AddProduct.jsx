@@ -210,10 +210,10 @@ const AddProduct = () => {
             )}
           </div>
           <div className="form-control mt-6">
-            <div disabled={loading} className="btn btn-primary">
+            <button disabled={loading || false} className="btn btn-primary">
               upload product
               {loading && <Loading className='text-white'></Loading>}
-            </div>
+            </button>
           </div>
         </form>
       </div>
