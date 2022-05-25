@@ -9,6 +9,8 @@ import RequiredAuth from './Component/Shared/RequiredAuth/RequiredAuth';
 import Products from './Component/pages/Products/Products';
 import PurchaseProduct from './Component/pages/PurchaseProduct/PurchaseProduct';
 import NotFound from './Component/Shared/NotFound/NotFound';
+import Dashboard from './Component/pages/Dashboard/Dashboard';
+import Reviews from './Component/pages/Reviews/Reviews';
 
 function App() {
   return (
@@ -26,6 +28,15 @@ function App() {
         <RequiredAuth>
           <PurchaseProduct></PurchaseProduct>
         </RequiredAuth>}></Route>
+        <Route path='/reviews' element={
+        <RequiredAuth>
+          <Reviews></Reviews>
+        </RequiredAuth>}></Route>
+        <Route path='/dashboard' element={<RequiredAuth>
+          <Dashboard></Dashboard>
+        </RequiredAuth>}>
+          <Route path='profile' element={<}></Route>
+        </Route>
         <Route path='/signUp' element={<SignUp></SignUp>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>

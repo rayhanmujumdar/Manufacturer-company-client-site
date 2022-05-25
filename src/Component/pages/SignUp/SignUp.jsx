@@ -11,9 +11,11 @@ import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 import toast from "react-hot-toast";
 import useToken from "../../../Hooks/useToken";
+import { signOut } from "firebase/auth";
 
 const SignUp = () => {
   const navigate = useNavigate();
+  const [user] = useAuthState(auth)
   const [createUserWithEmailAndPassword, signUpUser, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
     const [updateProfile] = useUpdateProfile(auth);

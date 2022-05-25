@@ -39,7 +39,6 @@ const PurchaseModal = ({ modalIsOpen, setIsOpen,product,refetch,setAvailable }) 
   }
   const onSubmit = async data => {
     const {phoneNumber,minimumQuantity} =  data
-    console.log(minimumOrderQuantity,minimumQuantity)
       if(availableQuantity >= minimumQuantity){
         const orderPlaced = {
           email: user?.email,

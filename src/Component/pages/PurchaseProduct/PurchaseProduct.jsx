@@ -27,12 +27,12 @@ const PurchaseProduct = () => {
     return <Loading className="text-black"></Loading>;
   }
   if(isError){
-    if(error.response.status === 401 || error.response.status === 403){
+    if(error?.response.status === 401 || error?.response.status === 403){
+      signOut(auth)
+      navigate('/login')
       toast.error(error?.response?.data.message || 'SameThing was wrong',{
         id:'error'
       })
-      signOut(auth)
-      navigate('/login')
     }
     return <Loading className="text-black"></Loading>;
   }

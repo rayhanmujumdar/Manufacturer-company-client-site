@@ -3,12 +3,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { Link } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
 import { signOut } from "firebase/auth";
-import logo from '../../../image/logo/company logo.png'
+import logo from "../../../image/logo/company logo.png";
 import useNav from "../../../Hooks/useNav";
+import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
   const [user, loading, error] = useAuthState(auth);
-  const [nav] = useNav()
+  const [nav] = useNav();
+  const { pathname } = useLocation();
   const navLink = (
     <>
       <li>
@@ -16,6 +18,12 @@ const Navbar = () => {
       </li>
       <li>
         <Link to="products">Product</Link>
+      </li>
+      <li>
+        <Link to="reviews">Reviews</Link>
+      </li>
+      <li>
+        <Link to="blog">Blog</Link>
       </li>
       <li>
         <Link to="about">About</Link>
@@ -28,7 +36,11 @@ const Navbar = () => {
     </>
   );
   return (
-    <div className={`navbar  ${nav ? 'fixed z-10 top-0 bg-base-200' : 'bg-base-100'}`}>
+    <div
+      className={`navbar  ${
+        nav ? "fixed z-10 top-0 bg-base-200" : "bg-base-100"
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden">
@@ -54,18 +66,28 @@ const Navbar = () => {
             {navLink}
           </ul>
         </div>
-        <Link
-          to="/"
-          className="btn btn-ghost normal-case text-xl font-bold mb-2.5 text-gray-800 flex items-start"
-        >
-          <img src={logo} alt="" />
-          <span>Computer Market</span>
-        </Link>
+        <div className="md:block hidden">
+          <Link
+            to="/"
+            className="btn btn-ghost normal-case text-xl font-bold mb-2.5 text-gray-800 flex flex-col justify-start items-start"
+          >
+            <img src={logo} alt="" />
+            <span>Computer Market</span>
+          </Link>
+        </div>
       </div>
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal p-0">{navLink}</ul>
       </div>
       <div className="navbar-end">
+        {pathname === "/dashboard" && (
+          <label
+            htmlFor="my-dashboard"
+            className="btn btn-xs h-10 mr-3 btn-primary drawer-button lg:hidden"
+          >
+            Open Dashboard
+          </label>
+        )}
         {user ? (
           <button
             onClick={() => {

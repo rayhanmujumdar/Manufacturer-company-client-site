@@ -1,3 +1,4 @@
+import { signOut } from "firebase/auth";
 import React, { useEffect } from "react";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
@@ -7,6 +8,7 @@ import useToken from "../../../Hooks/useToken";
 import Loading from "../../Shared/Loading/Loading";
 
 const SocialLogin = ({ from }) => {
+  const [user] = useAuthState(auth)
   const navigate = useNavigate();
   const [signInWithGoogle, googleUser, loading, error] =
     useSignInWithGoogle(auth);
