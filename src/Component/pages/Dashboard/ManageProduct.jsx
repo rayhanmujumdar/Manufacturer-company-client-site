@@ -24,11 +24,11 @@ const ManageProduct = () => {
     }
     const {data: products} = data
     return (
-        <div>
-            <h1 className='text-2xl font-semibold text-gray-600'>Manage My product</h1>
-            <div className='grid xl:grid-cols-2 gap-4 mt-4 md:grid-cols-2'>
+        <div className='my-5'>
+            <h1 className='text-2xl font-semibold text-gray-600 mb-4'>Manage My product</h1>
+            <div className='grid xl:grid-cols-2 gap-4 md:grid-cols-2'>
                 {
-                    products.map(product => <SingleManageProduct key={product._id} product={product}></SingleManageProduct>)
+                    products.map(product => <SingleManageProduct key={product._id} product={product} refetch={refetch}></SingleManageProduct>)
                 }
             </div>
         </div>
