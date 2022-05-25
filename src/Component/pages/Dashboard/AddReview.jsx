@@ -119,7 +119,6 @@ const AddReview = () => {
           <div className="form-control mt-6">
             <button type="submit" className="btn btn-primary">
               Submit
-              {/* {loading && <Loading className='text-white'></Loading>} */}
             </button>
           </div>
         </form>

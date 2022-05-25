@@ -10,14 +10,14 @@ const Review = ({ review }) => {
     <div className="card bg-base-100 shadow-xl">
       <div className="card-body">
         <div className="card-actions justify-center flex-col items-center">
-          {img ? <div class="avatar">
-            <div class="w-24 rounded-full">
+          {img ? <div  className="avatar">
+            <div  className="w-24 rounded-full">
               <img src={img} alt={name + "feedback"} />
             </div>
           </div>:
-          <div class="avatar placeholder">
-            <div class="bg-neutral-focus text-neutral-content rounded-full w-24">
-              <span class="text-3xl">{name.slice(0,1).toUpperCase()}</span>
+          <div  className="avatar placeholder">
+            <div  className="bg-neutral-focus text-neutral-content rounded-full w-24">
+              <span  className="text-3xl">{name.slice(0,1).toUpperCase()}</span>
             </div>
           </div>}
           <h3 className="text-xl font-semibold">{name}</h3>
