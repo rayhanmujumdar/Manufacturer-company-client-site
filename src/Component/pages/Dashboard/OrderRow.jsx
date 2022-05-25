@@ -33,7 +33,7 @@ const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
           <div>
             <button
-              onClick={() => navigate("dashboard/payment")}
+              onClick={() => navigate("/dashboard/payment")}
               className="btn btn-sm mr-2 border-0 bg-green-700"
             >
               Pay

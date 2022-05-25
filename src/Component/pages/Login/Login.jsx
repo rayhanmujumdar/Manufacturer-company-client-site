@@ -11,6 +11,7 @@ import SocialLogin from "./SocialLogin";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [user] = useAuthState(auth)
   const from = location?.state?.from.pathname || "/";
   const [signInWithEmailAndPassword, loginUser, loading, error] =
   useSignInWithEmailAndPassword(auth);
@@ -23,7 +24,7 @@ const Login = () => {
     const { email, password } = data;
     await signInWithEmailAndPassword(email, password);
   };
-  const [token] = useToken(loginUser?.user)
+  const [token] = useToken(user)
   useEffect(() => {
     if (token) {
         toast.success('Successfully Login',{

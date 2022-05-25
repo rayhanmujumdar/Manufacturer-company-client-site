@@ -20,7 +20,7 @@ const CustomerReviews = () => {
             <button onClick={() => navigate('/reviews')} className='text-3xl mt-2'><i  className="fa-solid fa-arrow-right animate-pulse"></i></button>
             </div>
             <div className='grid lg:grid-cols-3 md:grid-cols-2 gap-4 mt-5'>
-                {reviews?.data.map(review => <Review key={review._id} review={review}></Review>)}
+                {reviews?.data.slice(0,3).map(review => <Review key={review._id} review={review}></Review>)}
             </div>
         </div>
     );

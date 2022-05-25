@@ -11,7 +11,6 @@ import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 import toast from "react-hot-toast";
 import useToken from "../../../Hooks/useToken";
-import { signOut } from "firebase/auth";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -34,7 +33,7 @@ const SignUp = () => {
       reset();
     }
   };
-  const [token] = useToken(signUpUser?.user);
+  const [token] = useToken(user);
   useEffect(() => {
     if (token) {
       toast.success("SignUp SuccessFully", {

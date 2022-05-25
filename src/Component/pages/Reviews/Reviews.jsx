@@ -11,7 +11,6 @@ const Reviews = () => {
     if(isLoading){
         return <Loading className='text-black'></Loading>
     }
-    console.log(reviews)
   return (
     <div className="sm:container sm:mx-auto mx-5">
       <h1 className="text-4xl text-stone-700 font-semibold">
