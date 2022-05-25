@@ -38,16 +38,18 @@ const PurchaseModal = ({ modalIsOpen, setIsOpen,product,refetch,setAvailable }) 
     currentPrice = value * price
   }
   const onSubmit = async data => {
-    const {phoneNumber,minimumQuantity} =  data
+    const {phoneNumber,minimumQuantity,address} =  data
       if(availableQuantity >= minimumQuantity){
         const orderPlaced = {
           email: user?.email,
           product: name,
           cost: currentPrice,
-          order: parseInt(minimumQuantity),
+          orderQuantity: parseInt(minimumQuantity),
           phoneNumber,
-          img
+          img,
+          address
         }
+        console.log(orderPlaced)
         const url = 'http://localhost:5000/productOrder'
         const {data} = await axiosPrivate.post(url,orderPlaced)
         if(data.acknowledged){
@@ -66,7 +68,6 @@ const PurchaseModal = ({ modalIsOpen, setIsOpen,product,refetch,setAvailable }) 
           })
         }
       }
-      
   };
   return (
     <div>
@@ -168,6 +169,26 @@ const PurchaseModal = ({ modalIsOpen, setIsOpen,product,refetch,setAvailable }) 
                   readOnly
                 />
               </div>
+              <div className="form-control">
+                <label className="label">
+                  <span className="label-text">Address</span>
+                </label>
+                <input
+                {...register('address',{
+                  required: {
+                    value: true,
+                    message: 'Address is required'
+                  }
+                })}
+                  type="text"
+                  placeholder="Address"
+                  className="input input-bordered"
+                />
+                {errors.address?.type === "required" && (
+                <p className="text-left mt-0.5 text-red-500">{errors.address.message}</p>
+              )}
+              </div>
+              {/* phone number input*/}
               <div className="form-control">
                 <label className="label">
                   <span className="label-text">Phone Number</span>

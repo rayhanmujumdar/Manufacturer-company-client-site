@@ -80,7 +80,7 @@ const Navbar = () => {
         <ul className="menu menu-horizontal p-0">{navLink}</ul>
       </div>
       <div className="navbar-end">
-        {pathname === "/dashboard" && (
+        {pathname.includes('/dashboard') && (
           <label
             htmlFor="my-dashboard"
             className="btn btn-xs h-10 mr-3 btn-primary drawer-button lg:hidden"

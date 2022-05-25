@@ -11,6 +11,8 @@ import PurchaseProduct from './Component/pages/PurchaseProduct/PurchaseProduct';
 import NotFound from './Component/Shared/NotFound/NotFound';
 import Dashboard from './Component/pages/Dashboard/Dashboard';
 import Reviews from './Component/pages/Reviews/Reviews';
+import Profile from './Component/pages/Dashboard/Profile';
+import MyOrders from './Component/pages/Dashboard/MyOrders';
 
 function App() {
   return (
@@ -35,7 +37,8 @@ function App() {
         <Route path='/dashboard' element={<RequiredAuth>
           <Dashboard></Dashboard>
         </RequiredAuth>}>
-          <Route path='profile' element={<}></Route>
+          <Route index element={<Profile></Profile>}></Route>
+          <Route path='/dashboard/my-orders' element={<MyOrders></MyOrders>}></Route>
         </Route>
         <Route path='/signUp' element={<SignUp></SignUp>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
