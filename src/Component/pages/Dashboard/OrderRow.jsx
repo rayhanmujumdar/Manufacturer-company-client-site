@@ -25,10 +25,10 @@ const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
           {product}
         </td>
         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-          {orderQuantity}
+          {orderQuantity}/p
         </td>
         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
-          {cost}
+          ${cost}
         </td>
         <td className="text-sm text-gray-900 font-light px-6 py-4 whitespace-nowrap">
           <div>

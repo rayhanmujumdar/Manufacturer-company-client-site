@@ -17,6 +17,7 @@ const AddReview = () => {
   const onSubmit = async (data) => {
     const review = {
         ...data,
+        name: user?.displayName,
         email: user?.email,
         img: user?.photoURL,
         rating: parseInt(rating)
@@ -43,21 +44,13 @@ const AddReview = () => {
               <span className="label-text">Your Name</span>
             </label>
             <input
-              {...register("name", {
-                required: {
-                  value: true,
-                  message: "Name is required",
-                },
-              })}
               type="text"
               placeholder="Name"
               className="input input-bordered"
+              defaultValue={user?.displayName}
+              readOnly
+              disabled
             />
-            {errors.name?.type === "required" && (
-              <p className="text-left mt-0.5 text-red-500">
-                {errors.name.message}
-              </p>
-            )}
           </div>
           <div className="form-control">
             <label className="label">
