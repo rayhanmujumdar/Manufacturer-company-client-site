@@ -26,7 +26,6 @@ const Login = () => {
     await signInWithEmailAndPassword(email, password);
   };
   const [token,isLoading] = useToken(user)
-  console.log(isLoading)
   useEffect(() => {
     if (token) {
         toast.success('Successfully Login',{

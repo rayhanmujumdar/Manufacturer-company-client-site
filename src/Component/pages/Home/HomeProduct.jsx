@@ -20,14 +20,14 @@ const HomeProduct = () => {
       <div className="md:container md:mx-auto py-20 mx-5">
         <h1 className="text-5xl font-bold text-left mb-5 text-stone-800 uppercase">Our Product</h1>
         <div className="grid lg:grid-cols-2 gap-3">
-          <div className="">
+          <div className="lg:mx-0 md:mx-auto">
             <div className="sticky top-0">
               {products?.slice(0, 1).map((product) => (
                 <Product key={product._id} product={product}></Product>
               ))}
             </div>
           </div>
-          <div className="grid lg:grid-cols-2 md:grid-cols-1 gap-4">
+          <div className="grid lg:grid-cols-2 gap-4 md:place-content-center">
             {products?.slice(1, 5).map((product) => (
               <Product key={product._id} product={product}></Product>
             ))}

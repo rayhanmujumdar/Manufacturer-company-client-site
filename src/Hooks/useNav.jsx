@@ -12,7 +12,18 @@ const useNav = () => {
           setNav(false)
       }
     };
-}, []);
+    return () => {
+      window.removeEventListener("scroll",function () {
+        let currentScrollPos = window.scrollY;
+        if (currentScrollPos > 400) {
+            setNav(true)
+        }
+         else {
+            setNav(false)
+        }
+      })
+    }
+});
 return [nav,setNav]
 };
 

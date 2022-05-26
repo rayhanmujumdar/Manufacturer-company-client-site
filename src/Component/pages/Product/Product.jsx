@@ -16,8 +16,8 @@ const Product = ({ product }) => {
     <div data-aos="zoom-in"
     data-aos-duration="600"
     data-aos-delay="50"
-    className="card bg-base-100 shadow-xl rounded-sm">
-      <div className="mx-auto px-3 min-h-fit">
+    className="card bg-base-100 shadow-xl rounded-sm lg:w-full md:w-96">
+      <div className="mx-auto px-3 min-h-fit md:mx-auto">
         <img src={img} alt={name} className="w-96" />
       </div>
       <div className="card-body text-left">

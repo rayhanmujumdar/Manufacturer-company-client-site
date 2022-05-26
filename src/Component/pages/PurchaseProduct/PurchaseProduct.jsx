@@ -10,10 +10,12 @@ import Footer from "../../Shared/Footer/Footer";
 import Loading from "../../Shared/Loading/Loading";
 import PurchaseModal from "./PurchaseModal";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
+import useAdmin from '../../../Hooks/useAdmin'
 
 const PurchaseProduct = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
+  const [admin] = useAdmin(user)
   const { id } = useParams();
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
@@ -88,9 +90,10 @@ const PurchaseProduct = () => {
                   This product minimum quantity is not available
                 </p>
               )}
+              {admin && <p className="text-red-500">Admin Not Ordered Product</p>}
             </div>
             <button
-              disabled={quantityCondition}
+              disabled={quantityCondition || admin}
               onClick={openModal}
               className="btn btn-primary"
             >

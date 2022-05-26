@@ -11,6 +11,7 @@ const customStyles = {
     marginRight: "-50%",
     transform: "translate(-50%, -50%)",
     borderRadius: '20px',
+    border: '0'
   },
 };
 Modal.setAppElement("#root");
@@ -45,7 +46,7 @@ const OrderDeleteModal = ({ orderDelete, modalIsOpen, setIsOpen,refetch }) => {
           <div  className="card-body items-center">
               <p className="w-14 h-14 text-2xl border-2 border-red-600 text-center leading-[50px] rounded-full text-red-500"><i  className="fa-solid fa-xmark-large">x</i></p>
             <h2  className="card-title justify-center text-3xl font-light">Are You Sure?</h2>
-            <p className="text-center text-lg">Do you really-want to <span className="font-bold">{product}</span> Ordered Cancel this records?</p>
+            <p className="text-center text-lg">Do you really-want to <span className="font-bold">{product}</span> Ordered Cancel this Product</p>
             <div  className="card-actions justify-end">
               <button onClick={()=> handleOrderDelete(_id)}  className="btn btn-error">delete</button>
               <button onClick={closeModal}  className="btn btn-success">cancel</button>

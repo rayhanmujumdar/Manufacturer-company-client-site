@@ -28,7 +28,7 @@ const SingleManageProduct = ({ product,refetch }) => {
       <div className="card-body text-left">
         <h2 className="card-title">{name}</h2>
         <p>{description}</p>
-        {update ? <UpdateProduct id={_id} setUpdate={setUpdate} refetch={refetch}></UpdateProduct> : <div className="border-2 border-gray-600 px-6 bg-gray-600 py-5 rounded-lg bg-opacity-50">
+        {update ? <UpdateProduct availableQuantity={availableQuantity} id={_id} setUpdate={setUpdate} refetch={refetch}></UpdateProduct> : <div className="border-2 border-gray-600 px-6 bg-gray-600 py-5 rounded-lg bg-opacity-50">
           <p className="text-xl">Available Quantity: {availableQuantity}/p</p>
           <p className="text-xl whitespace-nowrap">
             Minimum Order Quantity: {minimumOrderQuantity}/p
