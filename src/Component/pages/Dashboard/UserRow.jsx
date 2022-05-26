@@ -6,7 +6,7 @@ const UserRow = ({ user, index,authUser }) => {
   const { email } = user;
   const [admin] = useAdmin(authUser)
     const handleAdmin = async(email) => {
-        const url = `http://localhost:5000/user/admin/${email}`
+        const url = `https://fast-river-13040.herokuapp.com/user/admin/${email}`
         const {data} = await axiosPrivate.put(url)
         console.log(data)
     }

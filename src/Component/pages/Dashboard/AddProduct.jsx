@@ -36,7 +36,7 @@ const AddProduct = () => {
         availableQuantity: parseInt(data?.availableQuantity),
         minimumOrderQuantity: parseInt(data?.minimumOrderQuantity)
     }
-    const postUrl = `http://localhost:5000/addProduct?email=${user?.email}`
+    const postUrl = `https://fast-river-13040.herokuapp.com/addProduct?email=${user?.email}`
     const {data: postData} = await axiosPrivate.post(postUrl,addProductData)
     if(postData.insertedId){
         toast.success('Add To Product',{

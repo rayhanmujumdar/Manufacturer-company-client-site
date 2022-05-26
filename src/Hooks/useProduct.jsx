@@ -10,7 +10,7 @@ const useProduct = () => {
     error,
     refetch,
   } = useQuery("product", () => {
-    const url = "http://localhost:5000/product";
+    const url = "https://fast-river-13040.herokuapp.com/product";
     return axiosPrivate.get(url);
   });
   if(isLoading){

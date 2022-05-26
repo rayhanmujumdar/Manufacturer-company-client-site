@@ -11,7 +11,7 @@ import UserRow from "./UserRow";
 const MakeAdmin = () => {
   const [user] = useAuthState(auth);
   const { data, isLoading, error } = useQuery("users", () => {
-    return axiosPrivate.get(`http://localhost:5000/user?email=${user?.email}`);
+    return axiosPrivate.get(`https://fast-river-13040.herokuapp.com/user?email=${user?.email}`);
   });
   if (isLoading) {
     return <Loading className="text-black"></Loading>;

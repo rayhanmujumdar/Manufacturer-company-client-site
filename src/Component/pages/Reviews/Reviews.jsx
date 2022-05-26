@@ -6,7 +6,7 @@ import Review from "../Home/Review";
 
 const Reviews = () => {
     const {data: reviews,isLoading,error,refetch} = useQuery('reviews',() => {
-        return axiosPrivate.get('http://localhost:5000/allReviews')
+        return axiosPrivate.get('https://fast-river-13040.herokuapp.com/allReviews')
     })
     if(isLoading){
         return <Loading className='text-black'></Loading>

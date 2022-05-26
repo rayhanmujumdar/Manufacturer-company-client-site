@@ -23,7 +23,8 @@ const AddReview = () => {
         rating: parseInt(rating)
     }
     if(data){
-        const url = `http://localhost:5000/addReview`
+        const url = `https://fast-river-13040.herokuapp.com/addReview?email=${user?.email}`
+        console.log(url)
         const {data} = await axiosPrivate.post(url,review)
         if(data.insertedId){
             toast.success("Thanks for you Feedback")
