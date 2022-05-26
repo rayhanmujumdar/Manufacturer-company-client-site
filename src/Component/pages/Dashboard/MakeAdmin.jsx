@@ -9,11 +9,11 @@ import Loading from "../../Shared/Loading/Loading";
 import UserRow from "./UserRow";
 
 const MakeAdmin = () => {
-  const [user] = useAuthState(auth);
+  const [authUser,loading] = useAuthState(auth);
   const { data, isLoading, error } = useQuery("users", () => {
-    return axiosPrivate.get(`https://fast-river-13040.herokuapp.com/user?email=${user?.email}`);
+    return axiosPrivate.get(`http://localhost:5000/user?email=${authUser?.email}`);
   });
-  if (isLoading) {
+  if (isLoading || loading) {
     return <Loading className="text-black"></Loading>;
   }
   if (error) {
@@ -39,7 +39,6 @@ const MakeAdmin = () => {
           {users.map((user, index) => (
             <UserRow
               key={user._id}
-              authUser={user}
               user={user}
               index={index}
             ></UserRow>

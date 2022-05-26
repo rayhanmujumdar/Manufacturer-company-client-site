@@ -50,7 +50,7 @@ const PurchaseModal = ({ modalIsOpen, setIsOpen,product,refetch,setAvailable }) 
           address
         }
         console.log(orderPlaced)
-        const url = 'https://fast-river-13040.herokuapp.com/productOrder'
+        const url = 'http://localhost:5000/productOrder'
         const {data} = await axiosPrivate.post(url,orderPlaced)
         if(data.acknowledged){
           toast.success("Order Confirmed",{
@@ -59,7 +59,7 @@ const PurchaseModal = ({ modalIsOpen, setIsOpen,product,refetch,setAvailable }) 
           setIsOpen(false);
           const quantity = availableQuantity - minimumQuantity
           const available = {quantity}
-          const url = `https://fast-river-13040.herokuapp.com/product/${_id}`
+          const url = `http://localhost:5000/product/${_id}`
           await axiosPrivate.put(url,available)
           refetch()
         }else{

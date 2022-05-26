@@ -1,25 +1,55 @@
-import React from "react";
+import React, { useState } from "react";
+import toast from "react-hot-toast";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import useAdmin from "../../../Hooks/useAdmin";
+import DeleteUserModal from "./DeleteUserModal";
 
-const UserRow = ({ user, index,authUser }) => {
-  const { email } = user;
-  const [admin] = useAdmin(authUser)
-    const handleAdmin = async(email) => {
-        const url = `https://fast-river-13040.herokuapp.com/user/admin/${email}`
-        const {data} = await axiosPrivate.put(url)
-        console.log(data)
+const UserRow = ({ user, index }) => {
+  const { email, role } = user;
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const handleAdmin = async (email) => {
+    const url = `http://localhost:5000/user/admin/${email}`;
+    const { data } = await axiosPrivate.put(url);
+    if (data.modifiedCount > 0) {
+      toast.success("New Admin Added", {
+        id: "success",
+      });
     }
+  };
+  function openModal() {
+    setIsOpen(true);
+  }
   return (
     <>
       <tr className="hover">
         <th>{index + 1}</th>
-        <td>{email}</td>
         <td>
-            {!admin && <button onClick={() => handleAdmin(email)}  className="btn btn-sm mr-2 btn-success">make Admin</button>}
+          {email}{" "}
+          <span className="text-green-400">
+            {role === "admin" && "(admin)"}
+          </span>
         </td>
         <td>
-            <button  className="btn btn-sm btn-error">Delete User</button>
+          {role !== "admin" && (
+            <button
+              onClick={() => handleAdmin(email)}
+              className="btn btn-sm mr-2 btn-success"
+            >
+              make Admin
+            </button>
+          )}
+        </td>
+        <td>
+          {role !== "admin" && (
+            <button onClick={openModal} className="btn btn-sm btn-error">
+              Delete User
+            </button>
+          )}
+        <DeleteUserModal
+        user={user}
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+        ></DeleteUserModal>
         </td>
       </tr>
     </>

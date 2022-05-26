@@ -10,7 +10,7 @@ import SingleManageProduct from './SingleManageProduct';
 const ManageProduct = () => {
     const [user] = useAuthState(auth)
     const {data,isLoading,error,refetch} = useQuery('manageProduct',() => {
-        const url = `https://fast-river-13040.herokuapp.com/manageProduct?email=${user?.email}`
+        const url = `http://localhost:5000/manageProduct?email=${user?.email}`
         return axiosPrivate.get(url)
     })
     if(error){

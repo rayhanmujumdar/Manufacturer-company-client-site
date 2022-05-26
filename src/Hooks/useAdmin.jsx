@@ -7,7 +7,7 @@ const useAdmin = (user) => {
   useEffect(() => {
     const admin = async () => {
       if (user.email) {
-        const url = `https://fast-river-13040.herokuapp.com/admin/${user?.email}`;
+        const url = `http://localhost:5000/admin/${user?.email}`;
         const { data } = await axiosPrivate.get(url);
         setLoading(false)
         setAdmin(data.admin);

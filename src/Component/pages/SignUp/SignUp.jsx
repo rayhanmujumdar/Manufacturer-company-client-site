@@ -14,26 +14,26 @@ import useToken from "../../../Hooks/useToken";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const [user] = useAuthState(auth)
+  const [user,authLoading] = useAuthState(auth)
   const [createUserWithEmailAndPassword, signUpUser, loading, error] =
     useCreateUserWithEmailAndPassword(auth);
     const [updateProfile] = useUpdateProfile(auth);
     const {
       register,
-    handleSubmit,
-    formState: { errors },
-    reset,
-  } = useForm();
-  const [password, setPassword] = useState("");
-  const onSubmit = async (data) => {
-    const { email, password, name } = data;
-    if (data) {
-      await createUserWithEmailAndPassword(email, password);
-      await updateProfile({ displayName: name });
-      reset();
-    }
-  };
-  const [token] = useToken(user);
+      handleSubmit,
+      formState: { errors },
+      reset,
+    } = useForm();
+    const [password, setPassword] = useState("");
+    const onSubmit = async (data) => {
+      const { email, password, name } = data;
+      if (data) {
+        await createUserWithEmailAndPassword(email, password);
+        await updateProfile({ displayName: name });
+        reset();
+      }
+    };
+  const [token,isLoading] = useToken(user);
   useEffect(() => {
     if (token) {
       toast.success("SignUp SuccessFully", {
@@ -49,6 +49,9 @@ const SignUp = () => {
       });
     }
   }, [error]);
+  if(authLoading || loading || isLoading){
+    return <Loading className='text-black'></Loading>
+  }
   return (
     <div className="h-[92vh] flex justify-center items-center">
       <div className="card flex-shrink-0 w-full md:max-w-lg max-w-xs shadow-2xl bg-base-100 mx-auto">

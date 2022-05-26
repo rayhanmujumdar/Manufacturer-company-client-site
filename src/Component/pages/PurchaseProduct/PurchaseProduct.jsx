@@ -20,7 +20,7 @@ const PurchaseProduct = () => {
   }
   // get the single product data
   const { data:product, isLoading, error, refetch ,isError} = useQuery("singleProduct", () => {
-    return axiosPrivate.get(`https://fast-river-13040.herokuapp.com/product/${id}?email=${user?.email}`);
+    return axiosPrivate.get(`http://localhost:5000/product/${id}?email=${user?.email}`);
   });
   // handle error
   if (isLoading) {

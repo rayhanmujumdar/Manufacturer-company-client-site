@@ -8,7 +8,7 @@ import Loading from '../../Shared/Loading/Loading'
 const CustomerReviews = () => {
     const navigate = useNavigate()
     const {data: reviews,isLoading} = useQuery('review',() => {
-        return axiosPrivate.get('https://fast-river-13040.herokuapp.com/homeReview')
+        return axiosPrivate.get('http://localhost:5000/homeReview')
     })
     if(isLoading){
         return <Loading className='text-black'></Loading>

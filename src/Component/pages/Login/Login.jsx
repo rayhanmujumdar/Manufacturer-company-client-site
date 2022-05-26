@@ -11,7 +11,7 @@ import SocialLogin from "./SocialLogin";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [user] = useAuthState(auth)
+  const [user,authLoading] = useAuthState(auth)
   const from = location?.state?.from.pathname || "/";
   const [signInWithEmailAndPassword, loginUser, loading, error] =
   useSignInWithEmailAndPassword(auth);
@@ -24,7 +24,8 @@ const Login = () => {
     const { email, password } = data;
     await signInWithEmailAndPassword(email, password);
   };
-  const [token] = useToken(user)
+  const [token,isLoading] = useToken(user)
+  console.log(isLoading)
   useEffect(() => {
     if (token) {
         toast.success('Successfully Login',{
@@ -40,6 +41,9 @@ const Login = () => {
         })
     }
   },[error])
+  if(isLoading || loading || authLoading){
+    return <Loading className='text-black'></Loading>
+  }
   return (
     <div className="h-[92vh] flex justify-center items-center">
       <div className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto">
