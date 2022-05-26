@@ -10,7 +10,7 @@ import UserRow from "./UserRow";
 
 const MakeAdmin = () => {
   const [authUser,loading] = useAuthState(auth);
-  const { data, isLoading, error } = useQuery("users", () => {
+  const { data, isLoading, error,refetch } = useQuery("users", () => {
     return axiosPrivate.get(`http://localhost:5000/user?email=${authUser?.email}`);
   });
   if (isLoading || loading) {
@@ -38,6 +38,7 @@ const MakeAdmin = () => {
         <tbody>
           {users.map((user, index) => (
             <UserRow
+            refetch={refetch}
               key={user._id}
               user={user}
               index={index}

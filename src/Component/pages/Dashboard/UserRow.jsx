@@ -1,23 +1,19 @@
 import React, { useState } from "react";
-import toast from "react-hot-toast";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
-import useAdmin from "../../../Hooks/useAdmin";
+import { useAuthState } from "react-firebase-hooks/auth";
+import auth from "../../../firebase/firebase.init";
 import DeleteUserModal from "./DeleteUserModal";
+import MakeAdminModal from "./MakeAdminModal";
 
-const UserRow = ({ user, index }) => {
+const UserRow = ({ user, index, refetch }) => {
+  const [authUser] = useAuthState(auth);
   const { email, role } = user;
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const handleAdmin = async (email) => {
-    const url = `http://localhost:5000/user/admin/${email}`;
-    const { data } = await axiosPrivate.put(url);
-    if (data.modifiedCount > 0) {
-      toast.success("New Admin Added", {
-        id: "success",
-      });
-    }
-  };
-  function openModal() {
-    setIsOpen(true);
+  const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
+  const [adminModalIsOpen, setAdminModalIsOpen] = useState(false);
+  function openDeleteModal() {
+    setDeleteModalIsOpen(true);
+  }
+  function openAdminModal() {
+    setAdminModalIsOpen(true);
   }
   return (
     <>
@@ -26,13 +22,15 @@ const UserRow = ({ user, index }) => {
         <td>
           {email}{" "}
           <span className="text-green-400">
-            {role === "admin" && "(admin)"}
+            {role === "admin" && email === authUser?.email
+              ? "(admin (Me))"
+              : role === "admin" && "(admin)"}
           </span>
         </td>
         <td>
           {role !== "admin" && (
             <button
-              onClick={() => handleAdmin(email)}
+              onClick={openAdminModal}
               className="btn btn-sm mr-2 btn-success"
             >
               make Admin
@@ -40,16 +38,23 @@ const UserRow = ({ user, index }) => {
           )}
         </td>
         <td>
-          {role !== "admin" && (
-            <button onClick={openModal} className="btn btn-sm btn-error">
-              Delete User
+          {email !== authUser?.email && (
+            <button onClick={openDeleteModal} className="btn btn-sm btn-error">
+              Delete Admin
             </button>
           )}
-        <DeleteUserModal
-        user={user}
-          modalIsOpen={modalIsOpen}
-          setIsOpen={setIsOpen}
-        ></DeleteUserModal>
+          <DeleteUserModal
+            refetch={refetch}
+            user={user}
+            deleteModalIsOpen={deleteModalIsOpen}
+            setDeleteModalIsOpen={setDeleteModalIsOpen}
+          ></DeleteUserModal>
+          <MakeAdminModal
+            refetch={refetch}
+            user={user}
+            setAdminModalIsOpen={setAdminModalIsOpen}
+            adminModalIsOpen={adminModalIsOpen}
+          ></MakeAdminModal>
         </td>
       </tr>
     </>

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
+import { Link } from "react-router-dom";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
@@ -10,13 +11,13 @@ import OrderRow from "./OrderRow";
 
 const MyOrders = () => {
   const [user] = useAuthState(auth);
-  const [orderDelete,setOrderDelete] = useState(null)
+  const [orderDelete, setOrderDelete] = useState(null);
   const [modalIsOpen, setIsOpen] = useState(false);
   const {
     data: orders,
     isLoading,
     error,
-    refetch
+    refetch,
   } = useQuery("MyOrders", () => {
     const url = `http://localhost:5000/orders?email=${user?.email}`;
     return axiosPrivate.get(url);
@@ -31,10 +32,11 @@ const MyOrders = () => {
     return <Loading className="text-black"></Loading>;
   }
   return (
-      <div className="w-full">
-        <div className="lg:container mx-auto overflow-x-auto sm:-mx-6 lg:-mx-8">
-          <div className="inline-block min-w-full sm:px-6 lg:px-8">
-            <div className="overflow-hidden">
+    <div className="w-full">
+      <div className="lg:container mx-auto overflow-x-auto sm:-mx-6 lg:-mx-8">
+        <div className="inline-block min-w-full sm:px-6 lg:px-8">
+          <div className="overflow-hidden">
+            {orders?.data?.length ? (
               <table className="min-w-full">
                 <thead className="bg-white border-b p-1">
                   <tr>
@@ -79,7 +81,7 @@ const MyOrders = () => {
                 <tbody>
                   {orders?.data.map((order, index) => (
                     <OrderRow
-                    setOrderDelete={setOrderDelete}
+                      setOrderDelete={setOrderDelete}
                       key={order._id}
                       index={index}
                       order={order}
@@ -88,16 +90,28 @@ const MyOrders = () => {
                   ))}
                 </tbody>
               </table>
-              {orderDelete && <OrderDeleteModal
-              orderDelete={orderDelete}
-              modalIsOpen={modalIsOpen}
-              setIsOpen={setIsOpen}
-              refetch={refetch}
-              ></OrderDeleteModal>}
-            </div>
+            ) : (
+              <div className="flex flex-col justify-center items-center">
+                <p className="font-bold text-xl text-red-600 text">
+                  No Order Found
+                </p>
+                <Link to="/products" className="btn btn-wide mt-5">
+                  Purchase product
+                </Link>
+              </div>
+            )}
+            {orderDelete && (
+              <OrderDeleteModal
+                orderDelete={orderDelete}
+                modalIsOpen={modalIsOpen}
+                setIsOpen={setIsOpen}
+                refetch={refetch}
+              ></OrderDeleteModal>
+            )}
           </div>
         </div>
       </div>
+    </div>
   );
 };
 
