@@ -10,7 +10,7 @@ const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
   }
   return (
     <>
-      <tr className="bg-gray-100 border-b text-left">
+      <tr data-aos="zoom-out-right" className="bg-gray-100 border-b text-left">
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
           {index + 1}
         </td>

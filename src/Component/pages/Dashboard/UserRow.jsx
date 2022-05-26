@@ -17,7 +17,7 @@ const UserRow = ({ user, index, refetch }) => {
   }
   return (
     <>
-      <tr className="hover">
+      <tr data-aos="fade-right" className="hover">
         <th>{index + 1}</th>
         <td>
           {email}{" "}
@@ -39,7 +39,7 @@ const UserRow = ({ user, index, refetch }) => {
         </td>
         <td>
           {email !== authUser?.email && (
-            <button onClick={openDeleteModal} className="btn btn-sm btn-error">
+            <button disabled={role !== "admin"} onClick={openDeleteModal} className="btn btn-sm btn-error">
               Delete Admin
             </button>
           )}

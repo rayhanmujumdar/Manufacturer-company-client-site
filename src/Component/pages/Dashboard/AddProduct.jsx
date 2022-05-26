@@ -48,7 +48,7 @@ const AddProduct = () => {
     }
   };
   return (
-    <div className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto">
+    <div data-aos="zoom-in-down" className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto">
       <PageTitle title='Dashboard/Add-Product'></PageTitle>
       <h1 className="text-2xl font-semibold text-gray-500">Add A Product</h1>
       <div className="card-body">

@@ -38,7 +38,7 @@ const AddReview = () => {
     setRating(rating)
   };
   return (
-    <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto">
+    <div data-aos="zoom-in" className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto">
       <PageTitle title="Dashboard/Add-Review"></PageTitle>
       <div className="card-body">
         <form onSubmit={handleSubmit(onSubmit)}>

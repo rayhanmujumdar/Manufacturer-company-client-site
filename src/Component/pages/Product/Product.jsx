@@ -13,7 +13,10 @@ const Product = ({ product }) => {
      navigate(`/product/${id}`)
   }
   return (
-    <div className="card bg-base-100 shadow-xl rounded-sm">
+    <div data-aos="zoom-in"
+    data-aos-duration="600"
+    data-aos-delay="50"
+    className="card bg-base-100 shadow-xl rounded-sm">
       <div className="mx-auto px-3 min-h-fit">
         <img src={img} alt={name} className="w-96" />
       </div>

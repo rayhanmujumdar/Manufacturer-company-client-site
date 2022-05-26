@@ -21,8 +21,14 @@ import MakeAdmin from './Component/pages/Dashboard/MakeAdmin';
 import PrivateAdmin from './Component/Shared/PrivateAdmin/PrivateAdmin';
 import PrivateUser from './Component/Shared/PrivateUser/PrivateUser';
 import ManageAllOrders from './Component/pages/Dashboard/ManageAllOrders';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
 
 function App() {
+  useEffect(() => {
+    AOS.init()
+  },[])
   return (
     <div className="App">
       <Navbar></Navbar>
