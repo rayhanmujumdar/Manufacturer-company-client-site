@@ -17,6 +17,8 @@ import Payment from './Component/pages/Dashboard/Payment';
 import AddReview from './Component/pages/Dashboard/AddReview';
 import AddProduct from './Component/pages/Dashboard/AddProduct';
 import ManageProduct from './Component/pages/Dashboard/ManageProduct';
+import MakeAdmin from './Component/pages/Dashboard/MakeAdmin';
+import PrivateAdmin from './Component/Shared/PrivateAdmin/PrivateAdmin';
 
 function App() {
   return (
@@ -46,8 +48,9 @@ function App() {
           <Route path='/dashboard/my-orders' element={<MyOrders></MyOrders>}></Route>
           <Route path='/dashboard/add-review' element={<AddReview></AddReview>}></Route>
           <Route path='/dashboard/payment' element={<Payment></Payment>}></Route>
-          <Route path='/dashboard/add-product' element={<AddProduct></AddProduct>}></Route>
-          <Route path='/dashboard/manage-product' element={<ManageProduct></ManageProduct>}></Route>
+          <Route path='/dashboard/add-product' element={<PrivateAdmin><AddProduct></AddProduct></PrivateAdmin>}></Route>
+          <Route path='/dashboard/manage-product' element={<PrivateAdmin><ManageProduct></ManageProduct></PrivateAdmin>}></Route>
+          <Route path='/dashboard/make-admin' element={<PrivateAdmin><MakeAdmin></MakeAdmin></PrivateAdmin>}></Route>
         </Route>
         <Route path='/signUp' element={<SignUp></SignUp>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
