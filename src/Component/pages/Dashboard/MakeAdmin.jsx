@@ -4,8 +4,8 @@ import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
-import useAdmin from "../../../Hooks/useAdmin";
 import Loading from "../../Shared/Loading/Loading";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 import UserRow from "./UserRow";
 
 const MakeAdmin = () => {
@@ -25,6 +25,7 @@ const MakeAdmin = () => {
   const { data: users } = data;
   return (
     <div className="overflow-x-auto w-full">
+      <PageTitle title='Dashboard/Make-Admin'></PageTitle>
       <table className="table w-full">
         {/* <!-- head --> */}
         <thead>

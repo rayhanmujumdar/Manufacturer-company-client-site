@@ -20,6 +20,7 @@ import ManageProduct from './Component/pages/Dashboard/ManageProduct';
 import MakeAdmin from './Component/pages/Dashboard/MakeAdmin';
 import PrivateAdmin from './Component/Shared/PrivateAdmin/PrivateAdmin';
 import PrivateUser from './Component/Shared/PrivateUser/PrivateUser';
+import ManageAllOrders from './Component/pages/Dashboard/ManageAllOrders';
 
 function App() {
   return (
@@ -52,6 +53,7 @@ function App() {
           <Route path='/dashboard/add-product' element={<PrivateAdmin><AddProduct></AddProduct></PrivateAdmin>}></Route>
           <Route path='/dashboard/manage-product' element={<PrivateAdmin><ManageProduct></ManageProduct></PrivateAdmin>}></Route>
           <Route path='/dashboard/make-admin' element={<PrivateAdmin><MakeAdmin></MakeAdmin></PrivateAdmin>}></Route>
+          <Route path='/dashboard/manage-all-orders' element={<PrivateAdmin><ManageAllOrders></ManageAllOrders></PrivateAdmin>}></Route>
         </Route>
         <Route path='/signUp' element={<SignUp></SignUp>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>

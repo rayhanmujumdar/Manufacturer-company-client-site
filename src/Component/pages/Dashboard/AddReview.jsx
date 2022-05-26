@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import auth from "../../../firebase/firebase.init";
 import axiosPrivate from '../../../axiosPrivate/axiosPrivate'
 import toast from "react-hot-toast";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 
 const AddReview = () => {
   const [user] = useAuthState(auth);
@@ -38,6 +39,7 @@ const AddReview = () => {
   };
   return (
     <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100 mx-auto">
+      <PageTitle title="Dashboard/Add-Review"></PageTitle>
       <div className="card-body">
         <form onSubmit={handleSubmit(onSubmit)}>
           <div className="form-control">

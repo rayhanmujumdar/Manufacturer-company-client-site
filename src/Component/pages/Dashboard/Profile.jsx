@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 import UpdateProfile from "./UpdateProfile";
 
 const Profile = () => {
@@ -13,6 +14,7 @@ const Profile = () => {
   const { displayName, email, emailVerified, photoURL } = user;
   const profile = (
     <div>
+      <PageTitle title='Dashboard/My-Profile'></PageTitle>
       <h1 className="text-2xl mb-3 text-stone-600 font-semibold">My Profile</h1>
       <div className="card w-96 bg-base-100 shadow-xl">
         {photoURL ? (

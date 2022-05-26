@@ -4,6 +4,7 @@ import { Link, Outlet } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
 import useAdmin from "../../../Hooks/useAdmin";
 import Loading from "../../Shared/Loading/Loading";
+import PageTitle from '../../Shared/PageTitle/PageTitle'
 
 const Dashboard = () => {
   const [user] = useAuthState(auth)
@@ -13,6 +14,7 @@ const Dashboard = () => {
   }
   return (
     <div className="drawer drawer-mobile">
+      <PageTitle title='Dashboard'></PageTitle>
       <input id="my-dashboard" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content flex flex-col items-center justify-start">
         <h1 className="text-4xl mb-4">My DashBoard</h1>

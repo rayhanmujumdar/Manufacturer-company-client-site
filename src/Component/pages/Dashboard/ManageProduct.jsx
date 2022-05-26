@@ -5,6 +5,7 @@ import { useQuery } from 'react-query';
 import axiosPrivate from '../../../axiosPrivate/axiosPrivate';
 import auth from '../../../firebase/firebase.init';
 import Loading from '../../Shared/Loading/Loading';
+import PageTitle from '../../Shared/PageTitle/PageTitle';
 import SingleManageProduct from './SingleManageProduct';
 
 const ManageProduct = () => {
@@ -25,6 +26,7 @@ const ManageProduct = () => {
     const {data: products} = data
     return (
         <div className='my-5'>
+            <PageTitle title='Dashboard/Manage-Product'></PageTitle>
             <h1 className='text-2xl font-semibold text-gray-600 mb-4'>Manage My product</h1>
             <div className='grid xl:grid-cols-2 gap-4 md:grid-cols-2'>
                 {

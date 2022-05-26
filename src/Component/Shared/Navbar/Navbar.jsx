@@ -8,7 +8,7 @@ import useNav from "../../../Hooks/useNav";
 import { useLocation } from "react-router-dom";
 
 const Navbar = () => {
-  const [user, loading, error] = useAuthState(auth);
+  const [user] = useAuthState(auth);
   const [nav] = useNav();
   const { pathname } = useLocation();
   const navLink = (
@@ -26,7 +26,7 @@ const Navbar = () => {
         <Link to="blog">Blog</Link>
       </li>
       <li>
-        <Link to="about">About</Link>
+        <Link to="about">My Portfolio</Link>
       </li>
       {user && (
         <li>

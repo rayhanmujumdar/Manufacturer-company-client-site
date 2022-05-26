@@ -6,15 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import 'tw-elements';
 import { QueryClient, QueryClientProvider } from 'react-query'
+import { HelmetProvider } from 'react-helmet-async';
 const root = ReactDOM.createRoot(document.getElementById('root'))
 const queryClient = new QueryClient()
 root.render(
   <QueryClientProvider client={queryClient}>
-  <BrowserRouter>
-    <React.StrictMode>
-    <App />
-  </React.StrictMode>
-  </BrowserRouter>
+  <HelmetProvider>
+    <BrowserRouter>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </BrowserRouter>
+  </HelmetProvider>
   </QueryClientProvider>
 );
 

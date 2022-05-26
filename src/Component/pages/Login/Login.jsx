@@ -6,6 +6,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
 import useToken from "../../../Hooks/useToken";
 import Loading from "../../Shared/Loading/Loading";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 import SocialLogin from "./SocialLogin";
 
 const Login = () => {
@@ -46,6 +47,7 @@ const Login = () => {
   }
   return (
     <div className="h-[92vh] flex justify-center items-center">
+      <PageTitle title='LogIn'></PageTitle>
       <div className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto">
         <div className="card-body">
           <form onSubmit={handleSubmit(onSubmit)}>

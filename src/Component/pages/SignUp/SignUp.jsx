@@ -11,6 +11,7 @@ import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 import toast from "react-hot-toast";
 import useToken from "../../../Hooks/useToken";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 
 const SignUp = () => {
   const navigate = useNavigate();
@@ -54,6 +55,7 @@ const SignUp = () => {
   }
   return (
     <div className="h-[92vh] flex justify-center items-center">
+      <PageTitle title='SignUp'></PageTitle>
       <div className="card flex-shrink-0 w-full md:max-w-lg max-w-xs shadow-2xl bg-base-100 mx-auto">
         <div className="card-body">
           <form onSubmit={handleSubmit(onSubmit)}>

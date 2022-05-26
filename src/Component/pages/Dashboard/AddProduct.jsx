@@ -6,6 +6,7 @@ import toast from "react-hot-toast";
 import axiosPrivate from '../../../axiosPrivate/axiosPrivate'
 import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 
 const AddProduct = () => {
     const [user] = useAuthState(auth)
@@ -48,6 +49,7 @@ const AddProduct = () => {
   };
   return (
     <div className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto">
+      <PageTitle title='Dashboard/Add-Product'></PageTitle>
       <h1 className="text-2xl font-semibold text-gray-500">Add A Product</h1>
       <div className="card-body">
         <form onSubmit={handleSubmit(onSubmit)}>

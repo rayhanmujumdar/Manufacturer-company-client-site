@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 import OrderDeleteModal from "./OrderDeleteModal";
 import OrderRow from "./OrderRow";
 
@@ -33,6 +34,7 @@ const MyOrders = () => {
   }
   return (
     <div className="w-full">
+      <PageTitle title='Dashboard/My-Orders'></PageTitle>
       <div className="lg:container mx-auto overflow-x-auto sm:-mx-6 lg:-mx-8">
         <div className="inline-block min-w-full sm:px-6 lg:px-8">
           <div className="overflow-hidden">

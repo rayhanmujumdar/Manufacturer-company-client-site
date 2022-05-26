@@ -2,6 +2,7 @@ import React from "react";
 import { useQuery } from "react-query";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import Loading from "../../Shared/Loading/Loading";
+import PageTitle from "../../Shared/PageTitle/PageTitle";
 import Review from "../Home/Review";
 
 const Reviews = () => {
@@ -13,6 +14,7 @@ const Reviews = () => {
     }
   return (
     <div className="sm:container sm:mx-auto mx-5">
+      <PageTitle title='Reviews'></PageTitle>
       <h1 className="text-4xl text-stone-700 font-semibold">
         Customer Reviews
       </h1>
