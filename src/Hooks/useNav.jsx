@@ -5,7 +5,7 @@ const useNav = () => {
   useEffect(() => {
     window.onscroll = function () {
       let currentScrollPos = window.scrollY;
-      if (currentScrollPos > 400) {
+      if (currentScrollPos > 300) {
           setNav(true)
       }
        else {

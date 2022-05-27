@@ -57,6 +57,14 @@ const SingleManageProduct = ({ product, refetch }) => {
           </div>
         )}
         <div className="card-actions justify-between">
+        {!update && (
+            <button
+              onClick={openDeleteModal}
+              className="btn btn-error text-white"
+            >
+              Delete
+            </button>
+          )}
           {!update && (
             <button
               onClick={() => setUpdate(true)}
@@ -67,14 +75,7 @@ const SingleManageProduct = ({ product, refetch }) => {
               Update
             </button>
           )}
-          {!update && (
-            <button
-              onClick={openDeleteModal}
-              className="btn btn-error text-white"
-            >
-              Delete
-            </button>
-          )}
+          
         </div>
         <DeleteProductModal
           product={product}

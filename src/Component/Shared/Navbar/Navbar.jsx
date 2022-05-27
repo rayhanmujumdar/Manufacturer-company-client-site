@@ -100,8 +100,8 @@ const Navbar = () => {
             Sign out
           </button>
         ) : (
-          <Link to="/login" className="btn btn-xs h-10 btn-primary">
-            Login
+          <Link to="/login" className="btn btn-xs h-10 bg-primary">
+            Log in
           </Link>
         )}
       </div>
