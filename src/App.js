@@ -55,7 +55,7 @@ function App() {
           <Route index element={<Profile></Profile>}></Route>
           <Route path='/dashboard/my-orders' element={<PrivateUser><MyOrders></MyOrders></PrivateUser>}></Route>
           <Route path='/dashboard/add-review' element={<PrivateUser><AddReview></AddReview></PrivateUser>}></Route>
-          <Route path='/dashboard/payment' element={<Payment></Payment>}></Route>
+          <Route path='/dashboard/payment/:id' element={<PrivateUser><Payment></Payment></PrivateUser>}></Route>
           <Route path='/dashboard/add-product' element={<PrivateAdmin><AddProduct></AddProduct></PrivateAdmin>}></Route>
           <Route path='/dashboard/manage-product' element={<PrivateAdmin><ManageProduct></ManageProduct></PrivateAdmin>}></Route>
           <Route path='/dashboard/make-admin' element={<PrivateAdmin><MakeAdmin></MakeAdmin></PrivateAdmin>}></Route>

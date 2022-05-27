@@ -6,7 +6,7 @@ const useAdmin = (user) => {
   const [loading,setLoading] = useState(true)
   useEffect(() => {
     const admin = async () => {
-      if (user.email) {
+      if (user?.email) {
         const url = `http://localhost:5000/admin/${user?.email}`;
         const { data } = await axiosPrivate.get(url);
         setLoading(false)
