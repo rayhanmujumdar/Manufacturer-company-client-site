@@ -26,11 +26,11 @@ const ManageAllOrders = () => {
     return <Loading className="text-black"></Loading>;
   }
   const { data: orders } = allOrders;
+  console.log(orders)
   return (
     <div className="w-full">
       <PageTitle title="Dashboard/Manage-All-Orders"></PageTitle>
       <div  className="overflow-x-auto">
-        {allOrders.data.length && (
           <table  className="table w-full">
             {/* <!-- head --> */}
             <thead>
@@ -56,7 +56,6 @@ const ManageAllOrders = () => {
               ))}
             </tbody>
           </table>
-        )}
       </div>
     </div>
   );
