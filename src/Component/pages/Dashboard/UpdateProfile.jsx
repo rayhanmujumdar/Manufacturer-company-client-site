@@ -37,7 +37,7 @@ const UpdateProfile = ({ setUpdateProfile }) => {
       return <Loading className='text-black'></Loading>
   }
   return (
-    <div  className="card w-96 bg-base-100 shadow-xl">
+    <div data-aos="zoom-in" className="card w-96 bg-base-100 shadow-xl">
       <div  className="card-body relative">
         <h1 className="text-xl font-semibold text-stone-600">Update Profile</h1>
         <form onSubmit={handleSubmit(onSubmit)}>

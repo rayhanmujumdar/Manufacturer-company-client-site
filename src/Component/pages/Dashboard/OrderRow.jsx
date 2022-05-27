@@ -48,7 +48,7 @@ const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
                 </button>
               </div>
             )}
-            {cost && paid && (
+            {(cost && paid) && (
               <>
                 <span className="text-lg text-green-600 mr-3">Paid</span>
                 <p>transactionId: <span className="font-extrabold">{transactionId}</span></p>

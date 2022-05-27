@@ -32,12 +32,12 @@ const Payment = () => {
     });
     return <Loading className="text-black"></Loading>;
   }
-  const { product, orderQuantity, img, email, cost, address } = order.data;
+  const { product, orderQuantity, email, cost } = order.data;
   return (
     <div  className="hero bg-base-200">
       <PageTitle title="payment"></PageTitle>
       <div  className="hero-content text-center  flex-col">
-        <div  className="card w-96 bg-base-100 shadow-xl">
+        <div data-aos="zoom-in" className="card w-96 bg-base-100 shadow-xl">
           <div  className="card-body">
             <h1 className="text-xl text-green-400">Payment</h1>
             <h2  className="text-xl">
@@ -58,7 +58,7 @@ const Payment = () => {
             </div> */}
           </div>
         </div>
-        <div  className="card w-96 bg-base-100 shadow-xl">
+        <div data-aos="zoom-in" className="card w-96 bg-base-100 shadow-xl">
           <div  className="card-body">
             <Elements  stripe={stripePromise}>
               <CheckoutForm order={order} refetch={refetch}/>

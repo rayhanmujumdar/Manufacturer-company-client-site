@@ -5,6 +5,7 @@ import auth from "../../../firebase/firebase.init";
 import useAdmin from "../../../Hooks/useAdmin";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from '../../Shared/PageTitle/PageTitle'
+import Footer from '../../Shared/Footer/Footer'
 
 const Dashboard = () => {
   const [user] = useAuthState(auth)
@@ -13,6 +14,7 @@ const Dashboard = () => {
     return <Loading className='text-black'></Loading>
   }
   return (
+    <>
     <div className="drawer drawer-mobile">
       <PageTitle title='Dashboard'></PageTitle>
       <input id="my-dashboard" type="checkbox" className="drawer-toggle" />
@@ -55,6 +57,8 @@ const Dashboard = () => {
         </ul>
       </div>
     </div>
+      <Footer></Footer>
+    </>
   );
 };
 

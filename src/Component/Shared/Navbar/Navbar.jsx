@@ -94,12 +94,12 @@ const Navbar = () => {
               signOut(auth);
               localStorage.removeItem("accessToken");
             }}
-            className="btn btn-xs h-10"
+            className="btn btn-xs h-10 btn-error"
           >
             Sign out
           </button>
         ) : (
-          <Link to="/login" className="btn btn-xs h-10">
+          <Link to="/login" className="btn btn-xs h-10 btn-primary">
             Login
           </Link>
         )}

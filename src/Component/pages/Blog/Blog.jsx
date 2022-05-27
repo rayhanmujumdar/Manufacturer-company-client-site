@@ -14,8 +14,8 @@ const Blog = () => {
       >
         <PageTitle title="MyPortfolio"></PageTitle>
         <div className="">
-          <h1 className="mt-2 text-4xl relative text-stone-700 font-bold inline-block before:w-full before:h-1 before:bg-black  before:absolute before:-bottom-3">
-            Blogs
+        <h1 className="mt-2 text-4xl relative text-stone-700 font-bold inline-block before:w-full before:h-1 before:bg-black  before:absolute before:-bottom-3">
+            Blog
           </h1>
         </div>
       </div>

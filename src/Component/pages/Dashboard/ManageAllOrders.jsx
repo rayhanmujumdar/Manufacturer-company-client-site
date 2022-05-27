@@ -29,9 +29,9 @@ const ManageAllOrders = () => {
   return (
     <div className="w-full">
       <PageTitle title="Dashboard/Manage-All-Orders"></PageTitle>
-      <div class="overflow-x-auto">
+      <div  className="overflow-x-auto">
         {allOrders.data.length && (
-          <table class="table w-full">
+          <table  className="table w-full">
             {/* <!-- head --> */}
             <thead>
               <tr>
@@ -47,9 +47,11 @@ const ManageAllOrders = () => {
             <tbody>
               {/* <!-- row 1 --> */}
               {orders.map((order,index) => (
-                <ManageOrderRow 
+                <ManageOrderRow
+                key={order._id}
                 order={order}
                 index={index}
+                refetch={refetch}
                 ></ManageOrderRow>
               ))}
             </tbody>

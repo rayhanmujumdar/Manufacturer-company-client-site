@@ -11,7 +11,7 @@ const CheckoutForm = ({ order ,refetch}) => {
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [loading, setLoading] = useState(false);
-  const { _id, cost, email, name,paid} = order?.data;
+  const { _id, cost, email, name, paid} = order?.data;
   useEffect(() => {
     const url = "http://localhost:5000/create-payment-intent";
     axiosPrivate
@@ -41,7 +41,6 @@ const CheckoutForm = ({ order ,refetch}) => {
       card,
     });
     setCardError(error?.message || "");
-    setLoading(true);
     //confirm card payment
     const { paymentIntent, error: confirmError } =
       await stripe.confirmCardPayment(clientSecret, {
@@ -53,12 +52,14 @@ const CheckoutForm = ({ order ,refetch}) => {
           },
         },
       });
+      setLoading(true)
     if (confirmError) {
       setCardError(confirmError);
       setLoading(false);
     } else {
       setCardError("");
-      setTransactionId(paymentIntent.id);
+      console.log(paymentIntent?.id)
+      setTransactionId(paymentIntent?.id);
       toast.success("Congrats! your payment is completed", {
         id: "success",
       });
@@ -66,7 +67,7 @@ const CheckoutForm = ({ order ,refetch}) => {
       const url = `http://localhost:5000/orderPayment/${_id}`;
       const payment = {
         order_id: _id,
-        transactionId: paymentIntent.id
+        transactionId: paymentIntent?.id
       };
       axiosPrivate.patch(url,payment).then((res) => {
         setLoading(false);
@@ -77,6 +78,7 @@ const CheckoutForm = ({ order ,refetch}) => {
   if(loading){
       return <Loading className='text-black'></Loading>
   }
+  console.log(cardError)
   return (
     <form onSubmit={handleSubmit}>
       <CardElement
@@ -103,7 +105,7 @@ const CheckoutForm = ({ order ,refetch}) => {
           Pay
         </button>
       </div>
-      {cardError && <p className="mt-3 text-red-400">{cardError}</p>}
+      {cardError && <p className="mt-3 text-red-400">{cardError?.message}</p>}
       {transactionId && (
         <p className="mt-3 text-orange-400 font-bold">
           Your transaction id: <span>{transactionId}</span>
