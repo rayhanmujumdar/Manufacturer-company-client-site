@@ -42,11 +42,19 @@ const UpdateProfile = ({ setUpdateProfile }) => {
         <h1 className="text-xl font-semibold text-stone-600">Update Profile</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
-            {...register("displayName")}
+            {...register("displayName",{
+              required: {
+                value: true,
+                message: 'Your name is required'
+              }
+            })}
             type="text"
-            className="py-3 border-2 border-gray-500  w-[300px] pl-2 rounded-md mb-4"
+            className="py-3 border-2 border-gray-500  w-[300px] pl-2 rounded-md"
             placeholder="Your Name"
           />
+          {errors?.displayName?.type === "required" && (
+            <p className="text-left text-red-500 ml-4">{errors.displayName.message}</p>
+          )}
           <input
             {...register("img", {
               required: {
@@ -55,7 +63,7 @@ const UpdateProfile = ({ setUpdateProfile }) => {
               },
             })}
             type="file"
-            className="py-3 border-2 w-[300px] pl-2 rounded-md"
+            className="py-3 border-2 w-[300px] pl-2 rounded-md mt-4"
           />
           {errors?.img?.type === "required" && (
             <p className="text-left text-red-500 ml-4">{errors.img.message}</p>
