@@ -63,8 +63,8 @@ const PurchaseModal = ({
         phoneNumber,
         img,
         address,
+        name: user?.displayName
       };
-      console.log(orderPlaced);
       const url = "http://localhost:5000/productOrder";
       const { data } = await axiosPrivate.post(url, orderPlaced);
       if (data.acknowledged) {

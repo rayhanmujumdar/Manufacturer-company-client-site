@@ -1,44 +1,82 @@
 import React, { useEffect, useState } from "react";
-import { CardElement, useStripe,useElements } from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import toast from "react-hot-toast";
+import Loading from "../../Shared/Loading/Loading";
 
-const CheckoutForm = ({order}) => {
+const CheckoutForm = ({ order ,refetch}) => {
   const stripe = useStripe();
-  const [cardError,setCardError] = useState('')
-  const elements = useElements()
-  const [clientSecret,setClientSecret] = useState('')
-  const {cost} = order?.data
+  const [cardError, setCardError] = useState("");
+  const elements = useElements();
+  const [clientSecret, setClientSecret] = useState("");
+  const [transactionId, setTransactionId] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { _id, cost, email, name,paid} = order?.data;
   useEffect(() => {
-    const url = "http://localhost:5000/create-payment-intent"
-    axiosPrivate.post(url,{price: cost})
-    .then(res => {
-        console.log(res)
-        if(res?.data?.clientSecret){
-            setClientSecret(res.data.clientSecret)
+    const url = "http://localhost:5000/create-payment-intent";
+    axiosPrivate
+      .post(url, { price: cost })
+      .then((res) => {
+        if (res?.data?.clientSecret) {
+          setClientSecret(res.data.clientSecret);
         }
-    }).catch(err => {
-        toast.error(err.code,{
-            id: 'error'
-        })
-    })
-  },[cost])
+      })
+      .catch((err) => {
+        toast.error(err.code, {
+          id: "error",
+        });
+      });
+  }, [cost]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if(!stripe || !elements){
-        return
+    if (!stripe || !elements) {
+      return;
     }
     const card = elements.getElement(CardElement);
-    if(card === null){
-        return
+    if (card === null) {
+      return;
     }
-    const {error,paymentMethod} = await stripe.createPaymentMethod({
-        type: "card",
-        card,
-    })
-    setCardError(error?.message || '')
-    console.log(error,paymentMethod)
+    const { error, paymentMethod } = await stripe.createPaymentMethod({
+      type: "card",
+      card,
+    });
+    setCardError(error?.message || "");
+    setLoading(true);
+    //confirm card payment
+    const { paymentIntent, error: confirmError } =
+      await stripe.confirmCardPayment(clientSecret, {
+        payment_method: {
+          card: card,
+          billing_details: {
+            name,
+            email,
+          },
+        },
+      });
+    if (confirmError) {
+      setCardError(confirmError);
+      setLoading(false);
+    } else {
+      setCardError("");
+      setTransactionId(paymentIntent.id);
+      toast.success("Congrats! your payment is completed", {
+        id: "success",
+      });
+      //payment update to database
+      const url = `http://localhost:5000/orderPayment/${_id}`;
+      const payment = {
+        order_id: _id,
+        transactionId: paymentIntent.id
+      };
+      axiosPrivate.patch(url,payment).then((res) => {
+        setLoading(false);
+        refetch()
+      });
+    }
   };
+  if(loading){
+      return <Loading className='text-black'></Loading>
+  }
   return (
     <form onSubmit={handleSubmit}>
       <CardElement
@@ -57,12 +95,23 @@ const CheckoutForm = ({order}) => {
           },
         }}
       />
-      <div  className="card-actions justify-center mt-5">
-        <button  className="btn btn-primary btn-sm" disabled={!stripe || !clientSecret}>
+      <div className="card-actions justify-center mt-5">
+        <button
+          className="btn btn-primary btn-sm"
+          disabled={!stripe || !clientSecret || paid}
+        >
           Pay
         </button>
       </div>
       {cardError && <p className="mt-3 text-red-400">{cardError}</p>}
+      {transactionId && (
+        <p className="mt-3 text-orange-400 font-bold">
+          Your transaction id: <span>{transactionId}</span>
+        </p>
+      )}
+      {
+          paid && <p className="text-green-500 mt-3">Money paid</p>
+      }
     </form>
   );
 };
