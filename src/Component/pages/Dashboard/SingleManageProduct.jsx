@@ -50,7 +50,7 @@ const SingleManageProduct = ({ product, refetch }) => {
               Single Quantity Price: ${price}
             </p>
             {warning && (
-              <p className="text-red-500">
+              <p className="text-yellow-500">
                 This product available quantity is low,please quick update
               </p>
             )}
@@ -60,8 +60,8 @@ const SingleManageProduct = ({ product, refetch }) => {
           {!update && (
             <button
               onClick={() => setUpdate(true)}
-              className={`btn btn-primary ${
-                warning && "bg-red-500 border-0 hover:bg-red-600"
+              className={`btn btn-success text-white ${
+                warning && "bg-yellow-500 border-0 hover:bg-yellow-600"
               }`}
             >
               Update

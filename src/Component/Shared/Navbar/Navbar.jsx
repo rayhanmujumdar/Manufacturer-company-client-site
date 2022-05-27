@@ -6,6 +6,7 @@ import { signOut } from "firebase/auth";
 import logo from "../../../image/logo/company logo.png";
 import useNav from "../../../Hooks/useNav";
 import { useLocation } from "react-router-dom";
+import NavLink from "../NavLink/NavLink";
 
 const Navbar = () => {
   const [user] = useAuthState(auth);
@@ -14,23 +15,23 @@ const Navbar = () => {
   const navLink = (
     <>
       <li>
-        <Link to="home">Home</Link>
+        <NavLink to="home">Home</NavLink>
       </li>
       <li>
-        <Link to="products">Product</Link>
+        <NavLink to="products">Product</NavLink>
       </li>
       <li>
-        <Link to="reviews">Reviews</Link>
+        <NavLink to="reviews">Reviews</NavLink>
       </li>
       <li>
-        <Link to="blog">Blogs</Link>
+        <NavLink to="blog">Blogs</NavLink>
       </li>
       <li>
-        <Link to="my-portfolio">My Portfolio</Link>
+        <NavLink to="my-portfolio">My Portfolio</NavLink>
       </li>
       {user && (
         <li>
-          <Link to="dashboard">Dashboard</Link>
+          <NavLink to="dashboard">Dashboard</NavLink>
         </li>
       )}
     </>
@@ -66,7 +67,7 @@ const Navbar = () => {
             {navLink}
           </ul>
         </div>
-        <div className="md:block hidden">
+        <div className="md:block hidden w-64">
           <Link
             to="/"
             className="btn btn-ghost normal-case text-xl font-bold mb-2.5 text-gray-800 flex flex-col justify-start items-start"
@@ -94,7 +95,7 @@ const Navbar = () => {
               signOut(auth);
               localStorage.removeItem("accessToken");
             }}
-            className="btn btn-xs h-10 btn-error"
+            className="btn btn-xs h-10 btn-error text-white"
           >
             Sign out
           </button>

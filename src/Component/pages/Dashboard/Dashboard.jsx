@@ -6,6 +6,8 @@ import useAdmin from "../../../Hooks/useAdmin";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from '../../Shared/PageTitle/PageTitle'
 import Footer from '../../Shared/Footer/Footer'
+import NavLink from "../../Shared/NavLink/NavLink";
+import DashBoardLink from "../../Shared/DashBoardLink/DashBoardLink";
 
 const Dashboard = () => {
   const [user] = useAuthState(auth)
@@ -28,29 +30,29 @@ const Dashboard = () => {
         <ul className="menu p-4 overflow-y-auto w-80 bg-base-100 text-base-content">
           {/* <!-- Sidebar content here --> */}
           <li>
-            <Link to="/dashboard">My Profile</Link>
+            <DashBoardLink to='/dashboard'>My Profile</DashBoardLink>
           </li>
           {!admin && <>
             <li>
-            <Link to="my-orders">My Orders</Link>
+            <DashBoardLink to="my-orders">My Orders</DashBoardLink>
           </li>
           <li>
-            <Link to="add-review">Add a Review</Link>
+            <DashBoardLink to="add-review">Add a Review</DashBoardLink>
           </li>
           </>}
           {admin && (
             <>
               <li>
-                <Link to="manage-all-orders">Manage All Orders</Link>
+                <DashBoardLink to="manage-all-orders">Manage All Orders</DashBoardLink>
               </li>
               <li>
-                <Link to="add-product">Add a Product</Link>
+                <DashBoardLink to="add-product">Add a Product</DashBoardLink>
               </li>
               <li>
-                <Link to="manage-product">Manage Product</Link>
+                <DashBoardLink to="manage-product">Manage Product</DashBoardLink>
               </li>
               <li>
-                <Link to="make-admin">Make Admin</Link>
+                <DashBoardLink to="make-admin">Make Admin</DashBoardLink>
               </li>
             </>
           )}
