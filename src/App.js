@@ -24,6 +24,8 @@ import ManageAllOrders from './Component/pages/Dashboard/ManageAllOrders';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
+import Blog from './Component/pages/Blog/Blog';
+import MyPortfolio from './Component/pages/MyPortfolio/MyPortfolio';
 
 function App() {
   useEffect(() => {
@@ -61,6 +63,8 @@ function App() {
           <Route path='/dashboard/make-admin' element={<PrivateAdmin><MakeAdmin></MakeAdmin></PrivateAdmin>}></Route>
           <Route path='/dashboard/manage-all-orders' element={<PrivateAdmin><ManageAllOrders></ManageAllOrders></PrivateAdmin>}></Route>
         </Route>
+        <Route path='/blog' element={<Blog></Blog>}></Route>
+        <Route path='/my-portfolio' element={<MyPortfolio></MyPortfolio>}></Route>
         <Route path='/signUp' element={<SignUp></SignUp>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
