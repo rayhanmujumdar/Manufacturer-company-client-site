@@ -14,26 +14,27 @@ const customStyles = {
   },
 };
 Modal.setAppElement("#root");
-const DeleteManageOrderModal = ({
+const DeleteProductModal = ({
   deleteModalIsOpen,
   setDeleteModalIsOpen,
-  refetch,
-  order,
+  product,
+  refetch
 }) => {
   Modal.defaultStyles.overlay.zIndex = "100";
   function closeModal() {
     setDeleteModalIsOpen(false);
   }
-  const {_id,email,product} = order
+  const { _id,name } = product;
   const handleDelete = async(id) => {
-        const url = `http://localhost:5000/deleteOrder/${id}`
-        const {data} = await axiosPrivate.delete(url)
-        if(data.deletedCount){
-            toast.success('Order Cancel',{
-                id: 'success'
-            })
-            refetch()
-        }
+    const url = `http://localhost:5000/deleteProduct/${id}`
+    const {data} = await axiosPrivate.delete(url)
+    if(data.deletedCount > 0){
+        toast.success('Product Deleted',{
+            id: 'success'
+        })
+        refetch()
+        setDeleteModalIsOpen(false)
+    }
   }
   return (
     <div>
@@ -41,7 +42,6 @@ const DeleteManageOrderModal = ({
         appElement={document.getElementById("root")}
         isOpen={deleteModalIsOpen}
         style={customStyles}
-        // onRequestClose={closeModal}
         contentLabel="Example Modal"
       >
         <div className="card lg:w-[600px] w-96 bg-base-100 shadow-xl">
@@ -53,7 +53,8 @@ const DeleteManageOrderModal = ({
               Are You Sure?
             </h2>
             <p className="text-center text-lg">
-              Do you really-want to <span className="font-bold">{email}</span> ordered <span className="font-bold">{product}</span> Product deleted?
+              Do you really-want to <span className="font-bold">{name}</span>
+              <span className="font-bold"></span> Product deleted?
             </p>
             <div className="card-actions justify-end">
               <button
@@ -73,4 +74,4 @@ const DeleteManageOrderModal = ({
   );
 };
 
-export default DeleteManageOrderModal;
+export default DeleteProductModal;
