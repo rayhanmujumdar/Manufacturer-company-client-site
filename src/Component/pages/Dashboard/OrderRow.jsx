@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 
 const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
   const navigate = useNavigate();
-  const { _id, img, product, orderQuantity, cost, paid, transactionId } = order;
+  const { _id, img, product, orderQuantity, cost, paid, transactionId,delivery } = order;
   function openModal(order) {
     setIsOpen(true);
     setOrderDelete(order);
@@ -48,12 +48,13 @@ const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
                 </button>
               </div>
             )}
-            {(cost && paid) && (
+            {(cost && paid && !delivery) && (
               <>
                 <span className="text-lg text-green-600 mr-3">Paid</span>
                 <p>transactionId: <span className="font-extrabold">{transactionId}</span></p>
               </>
             )}
+            {delivery && <span className="text-lg text-green-500">Product delivered</span>}
           </div>
         </td>
       </tr>

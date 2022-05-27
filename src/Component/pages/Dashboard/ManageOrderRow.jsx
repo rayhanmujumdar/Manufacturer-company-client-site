@@ -1,14 +1,26 @@
 import React, { useState } from "react";
+import toast from "react-hot-toast";
+import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import DeleteManageOrderModal from "./DeleteManageOrderModal";
 
 const ManageOrderRow = ({ order, index, refetch }) => {
-  const { address, paid, product, email, cost, orderQuantity } = order;
+  const { _id,address, paid, product, email, cost, orderQuantity,delivery } = order;
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   function openDeleteModal() {
     setDeleteModalIsOpen(true);
   }
+  const handlePending = async(id) => {
+    const url = `http://localhost:5000/orderShipping/${id}`
+    const {data} = await axiosPrivate.patch(url)
+    if(data.matchedCount){
+      toast.success('Delivered',{
+        id: 'success'
+      })
+      refetch()
+    }
+  }
   return (
-    <>
+    !delivery && <>
       <tr data-aos="fade-right">
         <th>{index + 1}</th>
         <td>{product}</td>
@@ -19,7 +31,7 @@ const ManageOrderRow = ({ order, index, refetch }) => {
         <td>
           <div>
             {paid ? (
-              <button  className="btn btn-sm btn-warning">Pending</button>
+              <button onClick={() => handlePending(_id)} className="btn btn-sm btn-warning">Pending</button>
             ) : (
               <button onClick={openDeleteModal}  className="btn btn-sm btn-error">
                 cancel
