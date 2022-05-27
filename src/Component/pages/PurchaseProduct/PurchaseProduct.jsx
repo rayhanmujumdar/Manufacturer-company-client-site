@@ -61,7 +61,7 @@ const PurchaseProduct = () => {
     <div>
       <PageTitle title={"Purchase-Product"}></PageTitle>
       <div className="hero min-h-screen bg-base-200 py-10">
-        <div className="hero-content flex-col lg:flex-row-reverse">
+        <div className="hero-content p-0 flex-col lg:flex-row-reverse">
           <div data-aos="fade-down-left">
             <img
               src={img}
@@ -69,9 +69,9 @@ const PurchaseProduct = () => {
               alt=""
             />
           </div>
-          <div className="text-left" data-aos="fade-down-right">
+          <div className="text-left px-3" data-aos="fade-down-right">
             <div className="mb-5">
-              <h1 className="text-5xl font-bold">{name}</h1>
+              <h1 className="md:text-5xl text-3xl font-bold">{name}</h1>
               <p className="py-6">{description}</p>
               <p className="text-xl">
                 Price:{" "}

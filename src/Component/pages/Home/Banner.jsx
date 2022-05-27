@@ -12,8 +12,8 @@ const Banner = () => {
         style={{ backgroundImage: `url(${bg1})` }}
       >
         <div className="hero-overlay bg-opacity-60" />
-        <div className="hero min-h-screen">
-          <div className="hero-content flex-col lg:flex-row gap-x-11">
+        <div className="hero min-h-screen md:my-0 my-3">
+          <div className="hero-content p-0 flex-col lg:flex-row gap-x-11">
             <div data-aos="fade-right">
               <img
                 src={bannarImg}
@@ -21,7 +21,7 @@ const Banner = () => {
                 alt="graphics card"
               />
             </div>
-            <div data-aos="fade-left" className="text-white text-left">
+            <div data-aos="fade-left" className="text-white text-left p-4">
               <h1 className="text-5xl font-bold">
                 MSI GeForce RTX 3080 Gaming X Trio 10G
               </h1>

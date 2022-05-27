@@ -17,13 +17,13 @@ const MyPortfolio = () => {
           My Portfolio
         </h1>
         <div  className="hero min-h-[90vh] mt-5">
-          <div  className="hero-content flex-col lg:flex-row-reverse lg:items-start">
-            <div  className="avatar w-[400px] bg-gray-500 h-[400px] flex justify-center items-center rounded-md">
+          <div  className="hero-content p-0 flex-col lg:flex-row-reverse lg:items-start">
+            <div  className="avatar md:w-[400px] w-[350px] bg-gray-500 h-[400px] flex justify-center items-center rounded-md">
               <div  className="rounded-xl p-2.5 flex mx-auto">
                 <img src={profile} alt="" />
               </div>
             </div>
-            <div className="text-left md:w-3/4">
+            <div className="text-left md:w-3/4 md:my-0 m-2">
               <h1  className="md:text-5xl text-3xl font-bold">
                 Hello Brother, My Name is Rayhan Mojumdar
               </h1>
@@ -33,7 +33,7 @@ const MyPortfolio = () => {
                   rayhanmujumdar0177@gmail.com
                 </span>
               </p>
-              <div className="border-2 border-gray-400 p-2 rounded-md">
+              <div className="border-2 border-gray-400 p-2 rounded-md md:mx-0 mx-2">
                   <h1 className="uppercase font-semibold text-2xl text-gray-600">Education details:</h1>
                 <p className="text-xl">
                   Running Eduction:{" "}
@@ -42,7 +42,7 @@ const MyPortfolio = () => {
                 <p className="text-xl">Subject: <span className="font-bold text-lg text-orange-500 uppercase">Political science</span></p>
                 <p className="text-xl">College Name: <span className="font-bold text-lg text-orange-500 uppercase">Chandpur Puran Bazar Degree College and university</span></p>
               </div>
-              <div className="border-2 border-gray-400 p-2 rounded-md mt-2">
+              <div className="border-2 border-gray-400 p-2 rounded-md mt-2 md:mx-0 mx-2">
               <h1 className="uppercase font-semibold text-2xl text-gray-600">My web development Skill:</h1>
               <ul className="uppercase">
                   <li className="grid lg:grid-cols-3 grid-cols-2 gap-x-2">

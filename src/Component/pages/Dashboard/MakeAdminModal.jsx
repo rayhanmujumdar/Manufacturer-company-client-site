@@ -50,7 +50,7 @@ const MakeAdminModal = ({ user, adminModalIsOpen, setAdminModalIsOpen,refetch })
             <p className="w-14 h-14 text-2xl border-2 border-green-600 text-center leading-[50px] rounded-full text-green-500">
               <i  className="fa-solid fa-xmark-large">✓</i>
             </p>
-            <h2  className="card-title justify-center text-3xl font-light">
+            <h2  className="card-title text-center justify-center text-3xl font-light">
               Are You Add New Admin?
             </h2>
             <p className="text-center text-lg">

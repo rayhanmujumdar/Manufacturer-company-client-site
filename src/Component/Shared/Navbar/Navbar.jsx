@@ -39,7 +39,7 @@ const Navbar = () => {
   return (
     <div
       className={`navbar  ${
-        nav ? "fixed z-10 top-0 bg-base-200" : "bg-base-100"
+        nav ? "fixed z-50 top-0 bg-base-200" : "bg-base-100"
       }`}
     >
       <div className="navbar-start">

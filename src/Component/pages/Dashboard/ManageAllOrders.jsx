@@ -26,7 +26,6 @@ const ManageAllOrders = () => {
     return <Loading className="text-black"></Loading>;
   }
   const { data: orders } = allOrders;
-  console.log(orders)
   return (
     <div className="w-full">
       <PageTitle title="Dashboard/Manage-All-Orders"></PageTitle>
