@@ -26,7 +26,7 @@ const UpdateProduct = ({
       minimumOrderQuantity: parseInt(minimumOrderQuantity),
       price: parseInt(price),
     };
-    const url = `http://localhost:5000/updateProduct/${id}?email=${user?.email}`;
+    const url = `https://fast-river-13040.herokuapp.com/updateProduct/${id}?email=${user?.email}`;
     const { data: updateData } = await axiosPrivate.put(url, updateProductData);
     if (updateData.modifiedCount > 0) {
       toast.success("Product Quantity updated", {

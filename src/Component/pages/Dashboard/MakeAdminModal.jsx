@@ -25,7 +25,7 @@ const MakeAdminModal = ({ user, adminModalIsOpen, setAdminModalIsOpen,refetch })
     setAdminModalIsOpen(false);
   }
   const handleAdmin = async (email) => {
-    const url = `http://localhost:5000/user/admin/${email}`;
+    const url = `https://fast-river-13040.herokuapp.com/user/admin/${email}`;
     const verifyEmail = {email: authUser?.email}
     const { data } = await axiosPrivate.put(url,verifyEmail);
     if (data.modifiedCount > 0) {

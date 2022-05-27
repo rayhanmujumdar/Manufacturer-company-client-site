@@ -26,7 +26,7 @@ const DeleteUserModal = ({ user, deleteModalIsOpen, setDeleteModalIsOpen,refetch
   }
   const handleDelete = async (email) => {
     try {
-      const url = `http://localhost:5000/deleteAdmin/${email}`;
+      const url = `https://fast-river-13040.herokuapp.com/deleteAdmin/${email}`;
       const authEmail = { email: authUser?.email };
       const { data } = await axiosPrivate.put(url, authEmail);
       if(data.matchedCount > 0){

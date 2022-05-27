@@ -26,7 +26,7 @@ const DeleteManageOrderModal = ({
   }
   const {_id,email,product} = order
   const handleDelete = async(id) => {
-        const url = `http://localhost:5000/deleteOrder/${id}`
+        const url = `https://fast-river-13040.herokuapp.com/deleteOrder/${id}`
         const {data} = await axiosPrivate.delete(url)
         if(data.deletedCount){
             toast.success('Order Cancel',{

@@ -13,7 +13,7 @@ const ManageAllOrders = () => {
     error,
     refetch,
   } = useQuery("allOrders", () => {
-    const url = `http://localhost:5000/orders`;
+    const url = `https://fast-river-13040.herokuapp.com/orders`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

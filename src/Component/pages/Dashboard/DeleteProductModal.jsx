@@ -26,7 +26,7 @@ const DeleteProductModal = ({
   }
   const { _id,name } = product;
   const handleDelete = async(id) => {
-    const url = `http://localhost:5000/deleteProduct/${id}`
+    const url = `https://fast-river-13040.herokuapp.com/deleteProduct/${id}`
     const {data} = await axiosPrivate.delete(url)
     if(data.deletedCount > 0){
         toast.success('Product Deleted',{

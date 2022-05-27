@@ -30,7 +30,7 @@ const PurchaseProduct = () => {
     isError,
   } = useQuery("singleProduct", () => {
     return axiosPrivate.get(
-      `http://localhost:5000/product/${id}?email=${user?.email}`
+      `https://fast-river-13040.herokuapp.com/product/${id}?email=${user?.email}`
     );
   });
   // handle error

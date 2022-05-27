@@ -13,7 +13,7 @@ const CheckoutForm = ({ order ,refetch}) => {
   const [loading, setLoading] = useState(false);
   const { _id, cost, email, name, paid} = order?.data;
   useEffect(() => {
-    const url = "http://localhost:5000/create-payment-intent";
+    const url = "https://fast-river-13040.herokuapp.com/create-payment-intent";
     axiosPrivate
       .post(url, { price: cost })
       .then((res) => {
@@ -64,7 +64,7 @@ const CheckoutForm = ({ order ,refetch}) => {
         id: "success",
       });
       //payment update to database
-      const url = `http://localhost:5000/orderPayment/${_id}`;
+      const url = `https://fast-river-13040.herokuapp.com/orderPayment/${_id}`;
       const payment = {
         order_id: _id,
         transactionId: paymentIntent?.id

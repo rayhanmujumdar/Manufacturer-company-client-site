@@ -20,7 +20,7 @@ const Payment = () => {
     error,
     refetch,
   } = useQuery(["order", id], () => {
-    const url = `http://localhost:5000/orders/${id}`;
+    const url = `https://fast-river-13040.herokuapp.com/orders/${id}`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

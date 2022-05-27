@@ -11,7 +11,7 @@ const ManageOrderRow = ({ order, index, refetch }) => {
     setDeleteModalIsOpen(true);
   }
   const handlePending = async (id) => {
-    const url = `http://localhost:5000/orderShipping/${id}`;
+    const url = `https://fast-river-13040.herokuapp.com/orderShipping/${id}`;
     const { data } = await axiosPrivate.patch(url);
     if (data.matchedCount) {
       toast.success("Delivered", {

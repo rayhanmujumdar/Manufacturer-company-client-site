@@ -8,7 +8,7 @@ const useToken = (authUser) => {
         if(authUser){
             setLoading(true)
             const user = {email:authUser?.email}
-            const url = `http://localhost:5000/user/${user.email}`
+            const url = `https://fast-river-13040.herokuapp.com/user/${user.email}`
             axiosPrivate.put(url,user)
             .then(res => {
                 const {token} = res?.data
