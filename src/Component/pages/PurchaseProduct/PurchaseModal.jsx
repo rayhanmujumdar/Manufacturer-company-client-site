@@ -178,7 +178,7 @@ const PurchaseModal = ({
               </div>
               <div className="form-control">
                 <label className="label">
-                  <span className="label-text">Minimum Quantity Price</span>
+                  <span className="label-text">Quantity Price</span>
                 </label>
                 <input
                   type="number"
