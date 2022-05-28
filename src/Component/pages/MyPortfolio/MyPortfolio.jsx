@@ -128,6 +128,17 @@ const MyPortfolio = () => {
                     ></progress>
                   </li>
                   <li className="grid lg:grid-cols-3 grid-cols-2 gap-x-2 items-center">
+                    <span className="font-semibold">github</span>
+                    <span className="text-xl lg:block hidden">
+                      <i className="fa-brands fa-github"></i>
+                    </span>
+                    <progress
+                      className="progress progress-success w-36 h-3"
+                      value="75"
+                      max="100"
+                    ></progress>
+                  </li>
+                  <li className="grid lg:grid-cols-3 grid-cols-2 gap-x-2 items-center">
                     <span className="font-semibold">js es6</span>
                     <span className="text-xl lg:block hidden">
                       <i className="fa-brands fa-js"></i>
@@ -262,16 +273,44 @@ const MyPortfolio = () => {
         </h1>
         <div className="mt-5 container mx-auto">
           <p className="text-xl">
-            project-1: <a href="https://my-gym-center.web.app/home" target='_blank' className="underline text-blue-500">MUSCLES MARCO PERSONAL TRAINER</a>
+            project-1:{" "}
+            <a
+              href="https://my-gym-center.web.app/home"
+              target="_blank"
+              className="underline text-blue-500"
+            >
+              MUSCLES MARCO PERSONAL TRAINER
+            </a>
           </p>
           <p className="text-xl">
-            project-2: <a href="https://assignment-11-wirehouse.web.app/home" target='_blank' className="underline text-blue-500">My Choose House</a>
+            project-2:{" "}
+            <a
+              href="https://assignment-11-wirehouse.web.app/home"
+              target="_blank"
+              className="underline text-blue-500"
+            >
+              My Choose House
+            </a>
           </p>
           <p className="text-xl">
-            project-3: <a href="https://task-manager-c5f2a.web.app/home" className="underline text-blue-500" target='_blank'>Task Manager (simple TODO App)</a>
+            project-3:{" "}
+            <a
+              href="https://task-manager-c5f2a.web.app/home"
+              className="underline text-blue-500"
+              target="_blank"
+            >
+              Task Manager (simple TODO App)
+            </a>
           </p>
           <p className="text-xl">
-            project-4: <a href="https://assignment-12-full-stack.web.app/home" className="underline text-blue-500" target='_blank'>Computer Market (Full Stack Website)</a>
+            project-4:{" "}
+            <a
+              href="https://assignment-12-full-stack.web.app/home"
+              className="underline text-blue-500"
+              target="_blank"
+            >
+              Computer Market (Full Stack Website)
+            </a>
           </p>
         </div>
       </div>
