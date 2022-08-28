@@ -8,7 +8,7 @@ import Review from "../Home/Review";
 
 const Reviews = () => {
     const {data: reviews,isLoading,error,refetch} = useQuery('reviews',() => {
-        return axiosPrivate.get('https://fast-river-13040.herokuapp.com/allReviews')
+        return axiosPrivate.get('https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/allReviews')
     })
     if(isLoading){
         return <Loading className='text-black'></Loading>

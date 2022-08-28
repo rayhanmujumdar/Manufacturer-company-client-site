@@ -24,7 +24,7 @@ const AddReview = () => {
         rating: parseInt(rating)
     }
     if(data){
-        const url = `https://fast-river-13040.herokuapp.com/addReview?email=${user?.email}`
+        const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/addReview?email=${user?.email}`
         console.log(url)
         const {data} = await axiosPrivate.post(url,review)
         if(data.insertedId){

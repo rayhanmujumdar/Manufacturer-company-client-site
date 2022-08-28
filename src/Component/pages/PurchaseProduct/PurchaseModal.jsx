@@ -65,7 +65,7 @@ const PurchaseModal = ({
         address,
         name: user?.displayName
       };
-      const url = "https://fast-river-13040.herokuapp.com/productOrder";
+      const url = "https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/productOrder";
       const { data } = await axiosPrivate.post(url, orderPlaced);
       if (data.acknowledged) {
         toast.success("Order Confirmed", {
@@ -74,7 +74,7 @@ const PurchaseModal = ({
         setIsOpen(false);
         const quantity = availableQuantity - minimumQuantity;
         const available = { quantity };
-        const url = `https://fast-river-13040.herokuapp.com/product/${_id}`;
+        const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/product/${_id}`;
         await axiosPrivate.put(url, available);
         refetch();
       } else {

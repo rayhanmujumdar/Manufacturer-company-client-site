@@ -20,7 +20,7 @@ const Payment = () => {
     error,
     refetch,
   } = useQuery(["order", id], () => {
-    const url = `https://fast-river-13040.herokuapp.com/orders/${id}`;
+    const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/orders/${id}`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

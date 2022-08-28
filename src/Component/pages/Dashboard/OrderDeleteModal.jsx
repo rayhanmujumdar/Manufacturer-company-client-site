@@ -22,7 +22,7 @@ const OrderDeleteModal = ({ orderDelete, modalIsOpen, setIsOpen,refetch }) => {
   }
   Modal.defaultStyles.overlay.zIndex = '100';
   const handleOrderDelete = async(id) => {
-    const url = `https://fast-river-13040.herokuapp.com/deleteOrder/${id}`
+    const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/deleteOrder/${id}`
     const {data} = await axiosPrivate.delete(url)
     if(data.deletedCount > 0) {
         toast.success("Cancel Product",{

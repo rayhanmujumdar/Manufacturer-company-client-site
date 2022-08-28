@@ -13,7 +13,7 @@ const ManageAllOrders = () => {
     error,
     refetch,
   } = useQuery("allOrders", () => {
-    const url = `https://fast-river-13040.herokuapp.com/orders`;
+    const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/orders`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {
