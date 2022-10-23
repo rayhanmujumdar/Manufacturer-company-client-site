@@ -1,6 +1,6 @@
 import React from "react";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
-import profile from "../../../image/Me/Profile.jpg";
+import profile from "../../../image/Me/Profile.png";
 
 const MyPortfolio = () => {
   return (
@@ -276,7 +276,7 @@ const MyPortfolio = () => {
             project-1:{" "}
             <a
               href="https://my-gym-center.web.app/home"
-              target="_blank"
+              target="__blank"
               className="underline text-blue-500"
             >
               MUSCLES MARCO PERSONAL TRAINER
@@ -286,7 +286,7 @@ const MyPortfolio = () => {
             project-2:{" "}
             <a
               href="https://assignment-11-wirehouse.web.app/home"
-              target="_blank"
+              target="__blank"
               className="underline text-blue-500"
             >
               My Choose House
@@ -297,7 +297,7 @@ const MyPortfolio = () => {
             <a
               href="https://task-manager-c5f2a.web.app/home"
               className="underline text-blue-500"
-              target="_blank"
+              target="__blank"
             >
               Task Manager (simple TODO App)
             </a>
@@ -307,7 +307,7 @@ const MyPortfolio = () => {
             <a
               href="https://assignment-12-full-stack.web.app/home"
               className="underline text-blue-500"
-              target="_blank"
+              target="__blank"
             >
               Computer Market (Full Stack Website)
             </a>

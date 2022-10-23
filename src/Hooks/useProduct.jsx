@@ -10,7 +10,7 @@ const useProduct = () => {
     error,
     refetch,
   } = useQuery("product", () => {
-    const url = "https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/product";
+    const url = "https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/product";
     return axiosPrivate.get(url);
   });
   if(isLoading){

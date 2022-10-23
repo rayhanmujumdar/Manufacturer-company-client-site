@@ -26,7 +26,7 @@ const UpdateProduct = ({
       minimumOrderQuantity: parseInt(minimumOrderQuantity),
       price: parseInt(price),
     };
-    const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/updateProduct/${id}?email=${user?.email}`;
+    const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/updateProduct/${id}?email=${user?.email}`;
     const { data: updateData } = await axiosPrivate.put(url, updateProductData);
     if (updateData.modifiedCount > 0) {
       toast.success("Product Quantity updated", {

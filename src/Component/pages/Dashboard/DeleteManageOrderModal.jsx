@@ -26,7 +26,7 @@ const DeleteManageOrderModal = ({
   }
   const {_id,email,product} = order
   const handleDelete = async(id) => {
-        const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/deleteOrder/${id}`
+        const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/deleteOrder/${id}`
         const {data} = await axiosPrivate.delete(url)
         if(data.deletedCount){
             toast.success('Order Cancel',{

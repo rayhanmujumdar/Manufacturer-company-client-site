@@ -8,7 +8,7 @@ import Loading from '../../Shared/Loading/Loading'
 const CustomerReviews = () => {
     const navigate = useNavigate()
     const {data: reviews,isLoading} = useQuery('review',() => {
-        return axiosPrivate.get('https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/homeReview')
+        return axiosPrivate.get('https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/homeReview')
     })
     if(isLoading){
         return <Loading className='text-black'></Loading>

@@ -30,7 +30,7 @@ const PurchaseProduct = () => {
     isError,
   } = useQuery("singleProduct", () => {
     return axiosPrivate.get(
-      `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/product/${id}?email=${user?.email}`
+      `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/product/${id}?email=${user?.email}`
     );
   });
   // handle error

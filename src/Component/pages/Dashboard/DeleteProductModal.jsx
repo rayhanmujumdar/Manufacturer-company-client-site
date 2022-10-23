@@ -26,7 +26,7 @@ const DeleteProductModal = ({
   }
   const { _id,name } = product;
   const handleDelete = async(id) => {
-    const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/deleteProduct/${id}`
+    const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/deleteProduct/${id}`
     const {data} = await axiosPrivate.delete(url)
     if(data.deletedCount > 0){
         toast.success('Product Deleted',{

@@ -13,7 +13,7 @@ const CheckoutForm = ({ order ,refetch}) => {
   const [loading, setLoading] = useState(false);
   const { _id, cost, email, name, paid} = order?.data;
   useEffect(() => {
-    const url = "https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/create-payment-intent";
+    const url = "https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/create-payment-intent";
     axiosPrivate
       .post(url, { price: cost })
       .then((res) => {
@@ -64,7 +64,7 @@ const CheckoutForm = ({ order ,refetch}) => {
         id: "success",
       });
       //payment update to database
-      const url = `https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/orderPayment/${_id}`;
+      const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/orderPayment/${_id}`;
       const payment = {
         order_id: _id,
         transactionId: paymentIntent?.id

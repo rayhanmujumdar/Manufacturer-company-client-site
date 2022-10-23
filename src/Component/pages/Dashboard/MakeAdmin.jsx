@@ -11,7 +11,7 @@ import UserRow from "./UserRow";
 const MakeAdmin = () => {
   const [authUser,loading] = useAuthState(auth);
   const { data, isLoading, error,refetch } = useQuery("users", () => {
-    return axiosPrivate.get(`https://assignment-12-manufacturer-company-server-site-rayhanmujumdar.vercel.app/user?email=${authUser?.email}`);
+    return axiosPrivate.get(`https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/user?email=${authUser?.email}`);
   });
   if (isLoading || loading) {
     return <Loading className="text-black"></Loading>;
