@@ -24,7 +24,7 @@ const AddReview = () => {
         rating: parseInt(rating)
     }
     if(data){
-        const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/addReview?email=${user?.email}`
+        const url = `${process.env.REACT_APP_SERVER_URL}/addReview?email=${user?.email}`
         console.log(url)
         const {data} = await axiosPrivate.post(url,review)
         if(data.insertedId){

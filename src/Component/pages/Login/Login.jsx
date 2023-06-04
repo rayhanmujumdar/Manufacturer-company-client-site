@@ -23,7 +23,6 @@ const Login = () => {
   } = useForm();
   const onSubmit = async (data) => {
     const { email, password } = data;
-    console.log(data)
     await signInWithEmailAndPassword(email, password);
   };
   const [token,isLoading] = useToken(user)

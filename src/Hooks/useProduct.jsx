@@ -10,17 +10,17 @@ const useProduct = () => {
     error,
     refetch,
   } = useQuery("product", () => {
-    const url = "https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/product";
+    const url = `${process.env.REACT_APP_SERVER_URL}/product`;
     return axiosPrivate.get(url);
   });
-  if(isLoading){
-    return <Loading className='text-black'></Loading>
+  if (isLoading) {
+    return <Loading className="text-black"></Loading>;
   }
-  if(error){
-    toast.error(error.message,{
-      id: 'error'
-    })
-    return <Loading className='text-black'></Loading>
+  if (error) {
+    toast.error(error.message, {
+      id: "error",
+    });
+    return <Loading className="text-black"></Loading>;
   }
   return {
     products: product.data,

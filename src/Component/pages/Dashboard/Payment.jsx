@@ -20,7 +20,7 @@ const Payment = () => {
     error,
     refetch,
   } = useQuery(["order", id], () => {
-    const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/orders/${id}`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/orders/${id}`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

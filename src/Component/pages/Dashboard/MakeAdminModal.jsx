@@ -25,7 +25,7 @@ const MakeAdminModal = ({ user, adminModalIsOpen, setAdminModalIsOpen,refetch })
     setAdminModalIsOpen(false);
   }
   const handleAdmin = async (email) => {
-    const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/user/admin/${email}`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/user/admin/${email}`;
     const verifyEmail = {email: authUser?.email}
     const { data } = await axiosPrivate.put(url,verifyEmail);
     if (data.modifiedCount > 0) {

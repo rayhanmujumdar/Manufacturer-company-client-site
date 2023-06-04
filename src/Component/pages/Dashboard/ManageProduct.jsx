@@ -11,7 +11,7 @@ import SingleManageProduct from './SingleManageProduct';
 const ManageProduct = () => {
     const [user] = useAuthState(auth)
     const {data,isLoading,error,refetch} = useQuery('manageProduct',() => {
-        const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/manageProduct?email=${user?.email}`
+        const url = `${process.env.REACT_APP_SERVER_URL}/manageProduct?email=${user?.email}`
         return axiosPrivate.get(url)
     })
     if(error){

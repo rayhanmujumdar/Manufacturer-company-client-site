@@ -11,7 +11,7 @@ const ManageOrderRow = ({ order, index, refetch }) => {
     setDeleteModalIsOpen(true);
   }
   const handlePending = async (id) => {
-    const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/orderShipping/${id}`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/orderShipping/${id}`;
     const { data } = await axiosPrivate.patch(url);
     if (data.matchedCount) {
       toast.success("Delivered", {

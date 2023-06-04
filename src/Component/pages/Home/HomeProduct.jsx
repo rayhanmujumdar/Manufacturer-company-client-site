@@ -6,6 +6,7 @@ import Product from "../Product/Product";
 
 const HomeProduct = () => {
   const { products, isLoading, error, refetch } = useProduct();
+  console.log(products)
   const navigate = useNavigate()
   if (isLoading) {
     return <Loading className="text-black"></Loading>;

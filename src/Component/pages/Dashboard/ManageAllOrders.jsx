@@ -13,7 +13,7 @@ const ManageAllOrders = () => {
     error,
     refetch,
   } = useQuery("allOrders", () => {
-    const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/orders`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/orders`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

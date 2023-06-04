@@ -65,7 +65,7 @@ const PurchaseModal = ({
         address,
         name: user?.displayName
       };
-      const url = "https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/productOrder";
+      const url = `${process.env.REACT_APP_SERVER_URL}/productOrder`;
       const { data } = await axiosPrivate.post(url, orderPlaced);
       if (data.acknowledged) {
         toast.success("Order Confirmed", {
@@ -74,7 +74,7 @@ const PurchaseModal = ({
         setIsOpen(false);
         const quantity = availableQuantity - minimumQuantity;
         const available = { quantity };
-        const url = `https://assignment-12-manufacturer-company-server-site.vercel.app/api/v1/tools/product/${_id}`;
+        const url = `${process.env.REACT_APP_SERVER_URL}/product/${_id}`;
         await axiosPrivate.put(url, available);
         refetch();
       } else {
