@@ -6,8 +6,7 @@ import Product from "../Product/Product";
 
 const HomeProduct = () => {
   const { products, isLoading, error, refetch } = useProduct();
-  console.log(products)
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   if (isLoading) {
     return <Loading className="text-black"></Loading>;
   }
@@ -19,7 +18,9 @@ const HomeProduct = () => {
       }}
     >
       <div className="md:container md:mx-auto py-20 mx-5">
-        <h1 className="text-5xl font-bold text-left mb-5 text-stone-800 uppercase">Our Product</h1>
+        <h1 className="text-5xl font-bold text-left mb-5 text-stone-800 uppercase">
+          Our Product
+        </h1>
         <div className="grid lg:grid-cols-2 gap-3">
           <div className="lg:mx-0 md:mx-auto">
             <div className="sticky top-0">
@@ -35,7 +36,12 @@ const HomeProduct = () => {
           </div>
         </div>
         <div className="mt-5">
-        <button onClick={() => navigate('/products')} className="btn btn-active">See More</button>
+          <button
+            onClick={() => navigate("/products")}
+            className="btn btn-active"
+          >
+            See More
+          </button>
         </div>
       </div>
     </div>

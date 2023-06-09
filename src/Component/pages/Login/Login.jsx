@@ -1,5 +1,9 @@
 import React, { useEffect } from "react";
-import { useAuthState, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import {
+  useAuthState,
+  useSendPasswordResetEmail,
+  useSignInWithEmailAndPassword,
+} from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -12,10 +16,12 @@ import SocialLogin from "./SocialLogin";
 const Login = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const [user,authLoading] = useAuthState(auth)
+  const [user, authLoading] = useAuthState(auth);
   const from = location?.state?.from.pathname || "/";
   const [signInWithEmailAndPassword, loginUser, loading, error] =
-  useSignInWithEmailAndPassword(auth);
+    useSignInWithEmailAndPassword(auth);
+  // forget password hooks
+
   const {
     register,
     handleSubmit,
@@ -25,28 +31,28 @@ const Login = () => {
     const { email, password } = data;
     await signInWithEmailAndPassword(email, password);
   };
-  const [token,isLoading] = useToken(user)
+  const [token, isLoading] = useToken(user);
   useEffect(() => {
     if (token) {
-        toast.success('Successfully Login',{
-            id: 'success'
-        })
+      toast.success("Successfully Login", {
+        id: "success",
+      });
       navigate(from, { replace: true });
     }
   }, [token, navigate, from]);
   useEffect(() => {
-    if(error){
-        toast.error(error.code,{
-            id: 'error'
-        })
+    if (error) {
+      toast.error(error.code, {
+        id: "error",
+      });
     }
-  },[error])
-  if(isLoading || loading || authLoading){
-    return <Loading className='text-black'></Loading>
+  }, [error]);
+  if (isLoading || loading || authLoading) {
+    return <Loading className="text-black"></Loading>;
   }
   return (
     <div className="h-[92vh] flex justify-center items-center">
-      <PageTitle title='LogIn'></PageTitle>
+      <PageTitle title="LogIn"></PageTitle>
       <div className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto">
         <div className="card-body">
           <form onSubmit={handleSubmit(onSubmit)}>
@@ -70,10 +76,14 @@ const Login = () => {
                 className="input input-bordered"
               />
               {errors.email?.type === "required" && (
-                <p className="text-left mt-0.5 text-red-500">{errors.email.message}</p>
+                <p className="text-left mt-0.5 text-red-500">
+                  {errors.email.message}
+                </p>
               )}
               {errors.email?.type === "pattern" && (
-                <p className="text-left mt-0.5 text-red-500">{errors.email.message}</p>
+                <p className="text-left mt-0.5 text-red-500">
+                  {errors.email.message}
+                </p>
               )}
             </div>
             <div className="form-control">
@@ -106,9 +116,9 @@ const Login = () => {
                 </p>
               )}
               <label className="label">
-                <a href="#!" className="label-text-alt link link-hover">
+                <Link to="/forget_password" className="label-text-alt link link-hover">
                   Forgot password?
-                </a>
+                </Link>
               </label>
             </div>
             <p>
@@ -123,7 +133,7 @@ const Login = () => {
             <div className="form-control mt-6">
               <button className="btn btn-primary">
                 Login
-                {loading && <Loading className='text-white'></Loading>}
+                {loading && <Loading className="text-white"></Loading>}
               </button>
             </div>
           </form>

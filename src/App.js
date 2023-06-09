@@ -2,6 +2,7 @@ import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Home from './Component/pages/Home/Home';
 import Login from './Component/pages/Login/Login';
+import ForgetPassword from './Component/pages/Login/ForgetPassword';
 import SignUp from './Component/pages/SignUp/SignUp';
 import Navbar from './Component/Shared/Navbar/Navbar';
 import { Toaster } from 'react-hot-toast';
@@ -67,6 +68,7 @@ function App() {
         <Route path='/my-portfolio' element={<MyPortfolio></MyPortfolio>}></Route>
         <Route path='/signUp' element={<SignUp></SignUp>}></Route>
         <Route path='/login' element={<Login></Login>}></Route>
+        <Route path='/forget_password' element={<ForgetPassword></ForgetPassword>}></Route>
         <Route path='*' element={<NotFound></NotFound>}></Route>
       </Routes>
       <Toaster/>

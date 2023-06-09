@@ -1,12 +1,16 @@
 import axios from "axios";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useUpdateProfile } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 
-const UpdateProfile = ({ setUpdateProfile }) => {
+const UpdateProfile = ({ setUpdateProfile, userName, photoURL }) => {
+  const [displayName, setDisplayName] = useState("");
+  useEffect(() => {
+    setDisplayName(userName);
+  }, [userName]);
   const {
     register,
     handleSubmit,
@@ -21,62 +25,58 @@ const UpdateProfile = ({ setUpdateProfile }) => {
     const formData = new FormData();
     formData.append("image", image);
     const url = `https://api.imgbb.com/1/upload?key=${imgStoredKey}`;
-    const {data:uploadImg} = await axios(url, {
-      method: "POST",
-      data: formData,
-    })
-    const img = uploadImg?.data.url;
-    await updateProfile({displayName: data?.displayName,photoURL: img})
-    toast.success('Updated',{
-        id: 'success'
-    })
-    reset()
-    setUpdateProfile(false)
+    let img = null;
+    if (data.img.length > 0) {
+      const { data: uploadImg } = await axios(url, {
+        method: "POST",
+        data: formData,
+      });
+      img = uploadImg?.data.url;
+    }
+    await updateProfile({ displayName, photoURL: img ? img : photoURL });
+    toast.success("Updated", {
+      id: "success",
+    });
+    reset();
+    setUpdateProfile(false);
   };
-  if(updating){
-      return <Loading className='text-black'></Loading>
+  if (updating) {
+    return <Loading className="text-black"></Loading>;
   }
   return (
     <div data-aos="zoom-in" className="card w-96 bg-base-100 shadow-xl">
-      <div  className="card-body relative">
+      <div className="card-body relative">
         <h1 className="text-xl font-semibold text-stone-600">Update Profile</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           <input
-            {...register("displayName",{
-              required: {
-                value: true,
-                message: 'Your name is required'
-              }
-            })}
+            onChange={(e) => setDisplayName(e.target.value)}
+            value={displayName}
             type="text"
             className="py-3 border-2 border-gray-500  w-[300px] pl-2 rounded-md"
             placeholder="Your Name"
           />
           {errors?.displayName?.type === "required" && (
-            <p className="text-left text-red-500 ml-4">{errors.displayName.message}</p>
+            <p className="text-left text-red-500 ml-4">
+              {errors.displayName.message}
+            </p>
           )}
           <input
-            {...register("img", {
-              required: {
-                value: true,
-                message: "img is required",
-              },
-            })}
+            {...register("img")}
             type="file"
             className="py-3 border-2 w-[300px] pl-2 rounded-md mt-4"
           />
           {errors?.img?.type === "required" && (
             <p className="text-left text-red-500 ml-4">{errors.img.message}</p>
           )}
-          <div  className="card-actions justify-center mt-4">
-            <button  className="btn btn-primary">Update</button>
+          <div className="card-actions justify-center mt-4">
+            <button className="btn btn-primary">Update</button>
           </div>
-          <p
+          <div
             onClick={() => setUpdateProfile(false)}
             className="absolute top-5 right-5 border border-gray-400 px-2 hover:bg-stone-700 hover:text-white"
           >
-            <i  className="fa-solid fa-xmark"></i>
-          </p>
+            <i className="fa-solid fa-xmark"></i>
+          </div>
         </form>
       </div>
     </div>

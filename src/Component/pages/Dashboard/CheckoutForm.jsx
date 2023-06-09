@@ -78,7 +78,6 @@ const CheckoutForm = ({ order ,refetch}) => {
   if(loading){
       return <Loading className='text-black'></Loading>
   }
-  console.log(cardError)
   return (
     <form onSubmit={handleSubmit}>
       <CardElement
