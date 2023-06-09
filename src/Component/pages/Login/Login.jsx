@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {
   useAuthState,
-  useSendPasswordResetEmail,
   useSignInWithEmailAndPassword,
 } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
@@ -31,7 +30,8 @@ const Login = () => {
     const { email, password } = data;
     await signInWithEmailAndPassword(email, password);
   };
-  const [token, isLoading] = useToken(user);
+  const [token, isLoading, tokenError] = useToken(user);
+  console.log(tokenError);
   useEffect(() => {
     if (token) {
       toast.success("Successfully Login", {
@@ -116,7 +116,10 @@ const Login = () => {
                 </p>
               )}
               <label className="label">
-                <Link to="/forget_password" className="label-text-alt link link-hover">
+                <Link
+                  to="/forget_password"
+                  className="label-text-alt link link-hover"
+                >
                   Forgot password?
                 </Link>
               </label>

@@ -19,15 +19,23 @@ const CustomerReviews = () => {
         <h1 className="uppercase md:text-5xl text-3xl font-bold">
           Customer Reviews
         </h1>
-        <button onClick={() => navigate("/reviews")} className="text-3xl mt-2">
+        {/* <button onClick={() => navigate("/reviews")} className="text-3xl mt-2">
           <i className="fa-solid fa-arrow-right animate-pulse"></i>
-        </button>
+        </button> */}
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 mt-5">
         {reviews?.data.slice(0, 3).map((review) => (
           <Review key={review._id} review={review}></Review>
         ))}
       </div>
+      <div className="mt-5">
+          <button
+            onClick={() => navigate("/reviews")}
+            className="btn btn-active"
+          >
+            More Reviews
+          </button>
+        </div>
     </div>
   );
 };
