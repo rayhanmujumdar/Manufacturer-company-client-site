@@ -11,10 +11,10 @@ const Profile = () => {
   const [sendEmailVerification, sending, error] =
     useSendEmailVerification(auth);
   useEffect(() => {
-    if(error){
-      toast.error(error.message,{
-        id: 'loading'
-      })
+    if (error) {
+      toast.error(error.message, {
+        id: "error",
+      });
     }
   }, [error]);
   const [updateProfile, setUpdateProfile] = useState(false);
@@ -23,16 +23,6 @@ const Profile = () => {
     return <Loading className="text-black"></Loading>;
   }
   const { displayName, email, emailVerified, photoURL } = user;
-
-  // handle email verification
-  const handleVerifyEmail = async () => {
-    const success = await sendEmailVerification();
-    if (success) {
-      toast.success("Send email", {
-        id: "success",
-      });
-    }
-  };
   const profile = (
     <div data-aos="zoom-in">
       <PageTitle title="Dashboard/My-Profile"></PageTitle>
@@ -60,7 +50,12 @@ const Profile = () => {
             ) : (
               <div className="flex justify-center items-center gap-x-4">
                 <span className="text-xl text-red-500">No verify</span>
-                <div onClick={handleVerifyEmail}>
+                <div
+                  onClick={async () => {
+                    const success = await sendEmailVerification();
+                    success && toast.success("sent email", { id: "success" });
+                  }}
+                >
                   <i
                     title="verify email send"
                     className="fa-solid fa-right-from-bracket cursor-pointer hover:text-gray-500"
