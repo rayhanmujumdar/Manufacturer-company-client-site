@@ -1,6 +1,4 @@
-# What i use This website
---------------------------------------------------
-how i am install to in this project (client side)
+# What technology i am using in this project?
 --------------------------------------------------
 1.tailwind --
 2.react router dom --
@@ -18,4 +16,4 @@ how i am install to in this project (client side)
 14.aos animation --
 
 
-computer Market Live site link [deployment](https://assignment-12-full-stack.web.app/)
+computer Market Live site link [live link](https://assignment-12-full-stack.web.app/)
