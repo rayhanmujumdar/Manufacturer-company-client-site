@@ -26,7 +26,7 @@ const DeleteProductModal = ({
   }
   const { _id,name } = product;
   const handleDelete = async(id) => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/product/${id}`
+    const url = `${import.meta.env.VITE_SERVER_URL}/product/${id}`
     const {data} = await axiosPrivate.delete(url)
     if(data.deletedCount > 0){
         toast.success('Product Deleted',{

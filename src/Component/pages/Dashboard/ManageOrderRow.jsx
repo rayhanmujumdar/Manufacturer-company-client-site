@@ -11,7 +11,7 @@ const ManageOrderRow = ({ order, index, refetch }) => {
     setDeleteModalIsOpen(true);
   }
   const handlePending = async (id) => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/order/${id}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/order/${id}`;
     const { data } = await axiosPrivate.patch(url);
     console.log(data)
     if (data.matchedCount) {

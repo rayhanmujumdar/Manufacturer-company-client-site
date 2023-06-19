@@ -24,7 +24,7 @@ const AddReview = () => {
         rating: parseInt(rating)
     }
     if(data){
-        const url = `${process.env.REACT_APP_SERVER_URL}/review?email=${user?.email}`
+        const url = `${import.meta.env.VITE_SERVER_URL}/review?email=${user?.email}`
         const {data} = await axiosPrivate.post(url,review)
         if(data.insertedId){
             toast.success("Thanks for you Feedback")

@@ -27,6 +27,7 @@ import 'aos/dist/aos.css';
 import { useEffect } from 'react';
 import Blog from './Component/pages/Blog/Blog';
 import MyPortfolio from './Component/pages/MyPortfolio/MyPortfolio';
+import './App.css'
 
 function App() {
   useEffect(() => {
@@ -76,4 +77,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

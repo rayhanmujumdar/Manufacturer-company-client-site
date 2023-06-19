@@ -1,58 +1,44 @@
 {
-  "name": "my-react",
-  "version": "0.1.0",
+  "name": "assignment-12-client-side-with-vite",
   "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint src --ext js,jsx --report-unused-disable-directives --max-warnings 0",
+    "preview": "vite preview"
+  },
   "dependencies": {
-    "@stripe/react-stripe-js": "^1.8.1",
-    "@stripe/stripe-js": "^1.30.0",
-    "@testing-library/jest-dom": "^5.14.1",
-    "@testing-library/react": "^12.0.0",
-    "@testing-library/user-event": "^13.2.1",
-    "aos": "^3.0.0-beta.6",
-    "axios": "^0.27.2",
+    "@stripe/react-stripe-js": "^2.1.1",
+    "@stripe/stripe-js": "^1.54.0",
+    "aos": "^2.3.4",
+    "axios": "^1.4.0",
     "daisyui": "^2.15.0",
-    "firebase": "^9.8.1",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
+    "firebase": "^9.22.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
     "react-helmet-async": "^1.3.0",
-    "react-hook-form": "^7.31.2",
-    "react-hot-toast": "^2.2.0",
+    "react-hook-form": "^7.45.0",
+    "react-hot-toast": "^2.4.1",
     "react-infinite-scroll-component": "^6.1.0",
-    "react-modal": "^3.15.1",
-    "react-query": "^3.39.0",
-    "react-router-dom": "^6.3.0",
-    "react-scripts": "5.0.0",
-    "tw-elements": "^1.0.0-alpha12",
-    "web-vitals": "^2.1.0"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
-  },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+    "react-modal": "^3.16.1",
+    "react-query": "^3.39.3",
+    "react-router-dom": "^6.13.0",
+    "tw-elements": "^1.0.0-beta2"
   },
   "devDependencies": {
-    "autoprefixer": "^10.4.7",
-    "postcss": "^8.4.14",
-    "tailwindcss": "^3.0.24"
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@vitejs/plugin-react-swc": "^3.0.0",
+    "autoprefixer": "^10.4.14",
+    "eslint": "^8.38.0",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.3.4",
+    "postcss": "^8.4.24",
+    "tailwindcss": "^3.3.2",
+    "vite": "^4.3.9"
   }
 }

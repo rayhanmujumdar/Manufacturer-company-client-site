@@ -9,7 +9,7 @@ const useToken = (authUser) => {
     if (authUser) {
       setLoading(true);
       const user = { email: authUser?.email };
-      const url = `${process.env.REACT_APP_SERVER_URL}/user/${user.email}`;
+      const url = `${import.meta.env.VITE_SERVER_URL}/user/${user.email}`;
       axiosPrivate
         .put(url, user)
         .then((res) => {

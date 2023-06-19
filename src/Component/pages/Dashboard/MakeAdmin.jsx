@@ -11,7 +11,7 @@ import UserRow from "./UserRow";
 const MakeAdmin = () => {
   const [authUser,loading] = useAuthState(auth);
   const { data, isLoading, error,refetch } = useQuery("users", () => {
-    return axiosPrivate.get(`${process.env.REACT_APP_SERVER_URL}/user?email=${authUser?.email}`);
+    return axiosPrivate.get(`${import.meta.env.VITE_SERVER_URL}/user?email=${authUser?.email}`);
   });
   if (isLoading || loading) {
     return <Loading className="text-black"></Loading>;

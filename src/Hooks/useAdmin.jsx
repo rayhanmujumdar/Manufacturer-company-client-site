@@ -8,7 +8,7 @@ const useAdmin = (user) => {
     (async () => {
       try {
         if (user?.email) {
-          const url = `${process.env.REACT_APP_SERVER_URL}/user/admin/${user?.email}`;
+          const url = `${import.meta.env.VITE_SERVER_URL}/user/admin/${user?.email}`;
           const { data } = await axiosPrivate.get(url);
           setLoading(false);
           setAdmin(data.admin);

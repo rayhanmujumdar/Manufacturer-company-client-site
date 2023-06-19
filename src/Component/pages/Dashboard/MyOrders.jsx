@@ -20,7 +20,7 @@ const MyOrders = () => {
     error,
     refetch,
   } = useQuery("MyOrders", () => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/order?email=${user?.email}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/order?email=${user?.email}`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

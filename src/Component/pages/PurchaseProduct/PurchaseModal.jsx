@@ -65,7 +65,7 @@ const PurchaseModal = ({
         address,
         name: user?.displayName
       };
-      const url = `${process.env.REACT_APP_SERVER_URL}/order`;
+      const url = `${import.meta.env.VITE_SERVER_URL}/order`;
       const { data } = await axiosPrivate.post(url, orderPlaced);
       if (data.acknowledged) {
         toast.success("Order Confirmed", {
@@ -74,7 +74,7 @@ const PurchaseModal = ({
         setIsOpen(false);
         const quantity = availableQuantity - minimumQuantity;
         const available = { quantity };
-        const url = `${process.env.REACT_APP_SERVER_URL}/product/${_id}`;
+        const url = `${import.meta.env.VITE_SERVER_URL}/product/${_id}`;
         await axiosPrivate.put(url, available);
         refetch();
       } else {

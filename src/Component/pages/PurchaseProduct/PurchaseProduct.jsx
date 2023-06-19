@@ -30,7 +30,7 @@ const PurchaseProduct = () => {
     isError,
   } = useQuery("singleProduct", () => {
     return axiosPrivate.get(
-      `${process.env.REACT_APP_SERVER_URL}/product/${id}?email=${user?.email}`
+      `${import.meta.env.VITE_SERVER_URL}/product/${id}?email=${user?.email}`
     );
   });
   // handle error

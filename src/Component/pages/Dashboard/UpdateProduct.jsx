@@ -26,7 +26,7 @@ const UpdateProduct = ({
       minimumOrderQuantity: parseInt(minimumOrderQuantity),
       price: parseInt(price),
     };
-    const url = `${process.env.REACT_APP_SERVER_URL}/product/updateProduct/${id}?email=${user?.email}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/product/updateProduct/${id}?email=${user?.email}`;
     const { data: updateData } = await axiosPrivate.put(url, updateProductData);
     if (updateData.modifiedCount > 0) {
       toast.success("Product Quantity updated", {

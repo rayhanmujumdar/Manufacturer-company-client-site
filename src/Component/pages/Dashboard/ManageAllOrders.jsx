@@ -17,7 +17,7 @@ const ManageAllOrders = () => {
     error,
     refetch,
   } = useQuery("allOrders", () => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/order`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/order`;
     return axiosPrivate.get(url);
   });
   // pagination page count and condition check

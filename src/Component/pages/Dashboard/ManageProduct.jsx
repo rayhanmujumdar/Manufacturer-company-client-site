@@ -11,7 +11,7 @@ import SingleManageProduct from './SingleManageProduct';
 const ManageProduct = () => {
     const [user] = useAuthState(auth)
     const {data,isLoading,error,refetch} = useQuery('manageProduct',() => {
-        const url = `${process.env.REACT_APP_SERVER_URL}/product/manageProduct?email=${user?.email}`
+        const url = `${import.meta.env.VITE_SERVER_URL}/product/manageProduct?email=${user?.email}`
         return axiosPrivate.get(url)
     })
     if(error){

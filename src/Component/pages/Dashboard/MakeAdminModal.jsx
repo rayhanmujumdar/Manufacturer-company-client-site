@@ -25,7 +25,7 @@ const MakeAdminModal = ({ user, adminModalIsOpen, setAdminModalIsOpen,refetch })
     setAdminModalIsOpen(false);
   }
   const handleAdmin = async (email) => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/user/admin/${email}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/user/admin/${email}`;
     const verifyEmail = {email: authUser?.email}
     const { data } = await axiosPrivate.put(url,verifyEmail);
     if (data.modifiedCount > 0) {

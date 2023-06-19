@@ -10,7 +10,7 @@ const useProduct = () => {
     error,
     refetch,
   } = useQuery("product", () => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/product`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/product`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

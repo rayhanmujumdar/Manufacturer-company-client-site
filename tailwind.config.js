@@ -1,10 +1,17 @@
-module.exports = {
-  content:['./src/**/*.{html,js}', './node_modules/tw-elements/dist/js/**/*.js',"./src/**/*.{js,jsx,ts,tsx}"],
+/** @type {import('tailwindcss').Config} */
+import daisyui from "daisyui";
+import twElement from "tw-elements/dist/plugin";
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+    "./node_modules/tw-elements/dist/js/**/*.js",
+  ],
   theme: {
     extend: {},
   },
   daisyui: {
-    themes: false,
+    themes: false, // true: all themes | false: only light + dark | array: specific themes like this ["light", "dark", "cupcake"]
   },
-  plugins: [require("daisyui"),require('tw-elements/dist/plugin')],
-}
+  plugins: [daisyui,twElement],
+};
