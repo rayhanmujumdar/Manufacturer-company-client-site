@@ -3,19 +3,22 @@ import axiosPrivate from "../axiosPrivate/axiosPrivate";
 
 const useAdmin = (user) => {
   const [admin, setAdmin] = useState({});
-  const [loading,setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
-    const admin = async () => {
-      if (user?.email) {
-        const url = `${process.env.REACT_APP_SERVER_URL}/admin/${user?.email}`;
-        const { data } = await axiosPrivate.get(url);
-        setLoading(false)
-        setAdmin(data.admin);
+    (async () => {
+      try {
+        if (user?.email) {
+          const url = `${process.env.REACT_APP_SERVER_URL}/user/admin/${user?.email}`;
+          const { data } = await axiosPrivate.get(url);
+          setLoading(false);
+          setAdmin(data.admin);
+        }
+      } catch (err) {
+        setLoading(false);
       }
-    };
-    admin();
+    })();
   }, [user]);
-  return [admin,loading];
+  return [admin, loading];
 };
 
 export default useAdmin;

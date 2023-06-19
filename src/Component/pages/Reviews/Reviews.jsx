@@ -7,8 +7,8 @@ import PageTitle from "../../Shared/PageTitle/PageTitle";
 import Review from "../Home/Review";
 
 const Reviews = () => {
-    const {data: reviews,isLoading,error,refetch} = useQuery('reviews',() => {
-        return axiosPrivate.get(`${process.env.REACT_APP_SERVER_URL}/allReviews`)
+    const {data: reviews,isLoading} = useQuery('reviews',() => {
+        return axiosPrivate.get(`${process.env.REACT_APP_SERVER_URL}/review`)
     })
     if(isLoading){
         return <Loading className='text-black'></Loading>

@@ -11,8 +11,9 @@ const ManageOrderRow = ({ order, index, refetch }) => {
     setDeleteModalIsOpen(true);
   }
   const handlePending = async (id) => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/orderShipping/${id}`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/order/${id}`;
     const { data } = await axiosPrivate.patch(url);
+    console.log(data)
     if (data.matchedCount) {
       toast.success("Delivered", {
         id: "success",
@@ -23,7 +24,7 @@ const ManageOrderRow = ({ order, index, refetch }) => {
   return (
     (
       <>
-        <tr data-aos="fade-right">
+        <tr>
           <th>{index + 1}</th>
           <td>{delivery ? <s>{product}</s>: <span>{product}</span>}</td>
           <td>{delivery ? <s>{email}</s>: <span>{email}</span>}</td>
@@ -44,7 +45,7 @@ const ManageOrderRow = ({ order, index, refetch }) => {
                   onClick={openDeleteModal}
                   className="btn btn-sm btn-error"
                 >
-                  cancel
+                  Order cancel
                 </button>
               )}
             </div>

@@ -65,7 +65,7 @@ const PurchaseModal = ({
         address,
         name: user?.displayName
       };
-      const url = `${process.env.REACT_APP_SERVER_URL}/productOrder`;
+      const url = `${process.env.REACT_APP_SERVER_URL}/order`;
       const { data } = await axiosPrivate.post(url, orderPlaced);
       if (data.acknowledged) {
         toast.success("Order Confirmed", {

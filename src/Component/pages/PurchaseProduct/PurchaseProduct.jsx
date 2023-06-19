@@ -75,7 +75,7 @@ const PurchaseProduct = () => {
               <p className="py-6">{description}</p>
               <p className="text-xl">
                 Price:{" "}
-                <span className="font-bold">${price} (Single quantity)</span>
+                <span className="font-bold">${price} (per quantity price)</span>
               </p>
               <p className="text-xl">
                 MiniMum Order Quantity:{" "}
@@ -83,7 +83,7 @@ const PurchaseProduct = () => {
               </p>
               <p className="text-xl">
                 Available Quantity:{" "}
-                <span className="font-bold">{availableQuantity}</span>
+                <span className="font-bold">{availableQuantity} pieces</span>
               </p>
               {quantityCondition && (
                 <p className="text-red-500">

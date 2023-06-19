@@ -26,9 +26,10 @@ const DeleteUserModal = ({ user, deleteModalIsOpen, setDeleteModalIsOpen,refetch
   }
   const handleDelete = async (email) => {
     try {
-      const url = `${process.env.REACT_APP_SERVER_URL}/deleteAdmin/${email}`;
+      const url = `${process.env.REACT_APP_SERVER_URL}/user/admin/change/${email}`;
       const authEmail = { email: authUser?.email };
       const { data } = await axiosPrivate.put(url, authEmail);
+      console.log(data)
       if(data.matchedCount > 0){
         toast.success('Admin Removed',{
           id: 'error'

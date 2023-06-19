@@ -20,7 +20,7 @@ const Payment = () => {
     error,
     refetch,
   } = useQuery(["order", id], () => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/orders/${id}`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/order/${id}`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

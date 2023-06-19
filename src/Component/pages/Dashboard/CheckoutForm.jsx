@@ -4,16 +4,16 @@ import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import toast from "react-hot-toast";
 import Loading from "../../Shared/Loading/Loading";
 
-const CheckoutForm = ({ order ,refetch}) => {
+const CheckoutForm = ({ order, refetch }) => {
   const stripe = useStripe();
   const [cardError, setCardError] = useState("");
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [loading, setLoading] = useState(false);
-  const { _id, cost, email, name, paid} = order?.data;
+  const { _id, cost, email, name, paid } = order?.data;
   useEffect(() => {
-    const url = `${process.env.REACT_APP_SERVER_URL}/create-payment-intent`;
+    const url = `${process.env.REACT_APP_SERVER_URL}/payment/create-payment-intent`;
     axiosPrivate
       .post(url, { price: cost })
       .then((res) => {
@@ -52,31 +52,31 @@ const CheckoutForm = ({ order ,refetch}) => {
           },
         },
       });
-      setLoading(true)
+    setLoading(true);
     if (confirmError) {
       setCardError(confirmError);
       setLoading(false);
     } else {
       setCardError("");
-      console.log(paymentIntent?.id)
+      console.log(paymentIntent?.id);
       setTransactionId(paymentIntent?.id);
       toast.success("Congrats! your payment is completed", {
         id: "success",
       });
       //payment update to database
-      const url = `${process.env.REACT_APP_SERVER_URL}/orderPayment/${_id}`;
+      const url = `${process.env.REACT_APP_SERVER_URL}/payment/order/${_id}`;
       const payment = {
         order_id: _id,
-        transactionId: paymentIntent?.id
+        transactionId: paymentIntent?.id,
       };
-      axiosPrivate.patch(url,payment).then((res) => {
+      axiosPrivate.patch(url, payment).then((res) => {
         setLoading(false);
-        refetch()
+        refetch();
       });
     }
   };
-  if(loading){
-      return <Loading className='text-black'></Loading>
+  if (loading) {
+    return <Loading className="text-black"></Loading>;
   }
   return (
     <form onSubmit={handleSubmit}>
@@ -110,9 +110,7 @@ const CheckoutForm = ({ order ,refetch}) => {
           Your transaction id: <span>{transactionId}</span>
         </p>
       )}
-      {
-          paid && <p className="text-green-500 mt-3">Money paid</p>
-      }
+      {paid && <p className="text-green-500 mt-3">Money paid</p>}
     </form>
   );
 };

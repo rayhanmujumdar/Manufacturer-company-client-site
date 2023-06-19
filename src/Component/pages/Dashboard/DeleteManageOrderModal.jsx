@@ -26,8 +26,10 @@ const DeleteManageOrderModal = ({
   }
   const {_id,email,product} = order
   const handleDelete = async(id) => {
-        const url = `${process.env.REACT_APP_SERVER_URL}/deleteOrder/${id}`
+        const url = `${process.env.REACT_APP_SERVER_URL}/order/${id}`
+        console.log(url)
         const {data} = await axiosPrivate.delete(url)
+        console.log(data)
         if(data.deletedCount){
             toast.success('Order Cancel',{
                 id: 'success'

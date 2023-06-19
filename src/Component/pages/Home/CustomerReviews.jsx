@@ -8,7 +8,7 @@ import Loading from "../../Shared/Loading/Loading";
 const CustomerReviews = () => {
   const navigate = useNavigate();
   const { data: reviews, isLoading } = useQuery("review", () => {
-    return axiosPrivate.get(`${process.env.REACT_APP_SERVER_URL}/homeReview`);
+    return axiosPrivate.get(`${process.env.REACT_APP_SERVER_URL}/review/home-review`);
   });
   if (isLoading) {
     return <Loading className="text-black"></Loading>;

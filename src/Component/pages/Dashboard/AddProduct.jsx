@@ -37,7 +37,7 @@ const AddProduct = () => {
         availableQuantity: parseInt(data?.availableQuantity),
         minimumOrderQuantity: parseInt(data?.minimumOrderQuantity)
     }
-    const postUrl = `${process.env.REACT_APP_SERVER_URL}/addProduct?email=${user?.email}`
+    const postUrl = `${process.env.REACT_APP_SERVER_URL}/product?email=${user?.email}`
     const {data: postData} = await axiosPrivate.post(postUrl,addProductData)
     if(postData.insertedId){
         toast.success('Add To Product',{
