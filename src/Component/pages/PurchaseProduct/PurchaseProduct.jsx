@@ -1,5 +1,5 @@
 import { signOut } from "firebase/auth";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
@@ -10,12 +10,12 @@ import Footer from "../../Shared/Footer/Footer";
 import Loading from "../../Shared/Loading/Loading";
 import PurchaseModal from "./PurchaseModal";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
-import useAdmin from '../../../Hooks/useAdmin'
+import useAdmin from "../../../Hooks/useAdmin";
 
 const PurchaseProduct = () => {
   const [user] = useAuthState(auth);
   const navigate = useNavigate();
-  const [admin] = useAdmin(user)
+  const [admin] = useAdmin(user);
   const { id } = useParams();
   const [modalIsOpen, setIsOpen] = useState(false);
   function openModal() {
@@ -38,17 +38,16 @@ const PurchaseProduct = () => {
     return <Loading className="text-black"></Loading>;
   }
   if (isError) {
-    if (error?.response.status === 401 || error?.response.status === 403) {
+    if (error?.response?.status === 401 || error?.response?.status === 403) {
       signOut(auth);
       navigate("/login");
-      toast.error(error?.response?.data.message || "SameThing was wrong", {
+      toast.error(error?.response?.data?.message || "SameThing was wrong", {
         id: "error",
       });
     }
     return <Loading className="text-black"></Loading>;
   }
   const {
-    _id,
     img,
     name,
     description,
@@ -90,7 +89,9 @@ const PurchaseProduct = () => {
                   This product minimum quantity is not available
                 </p>
               )}
-              {admin && <p className="text-red-500">Admin Not Ordered Product</p>}
+              {admin && (
+                <p className="text-red-500">Admin Not Ordered Product</p>
+              )}
             </div>
             <button
               disabled={quantityCondition || admin}

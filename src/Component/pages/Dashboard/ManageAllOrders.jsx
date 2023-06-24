@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
@@ -17,7 +17,7 @@ const ManageAllOrders = () => {
     error,
     refetch,
   } = useQuery("allOrders", () => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/order`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/order?limit=10&page=8&`;
     return axiosPrivate.get(url);
   });
   // pagination page count and condition check

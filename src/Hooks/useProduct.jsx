@@ -13,6 +13,7 @@ const useProduct = () => {
     const url = `${import.meta.env.VITE_SERVER_URL}/product`;
     return axiosPrivate.get(url);
   });
+  // console.log(product?.headers?.get('X-Total-Count'))
   if (isLoading) {
     return <Loading className="text-black"></Loading>;
   }

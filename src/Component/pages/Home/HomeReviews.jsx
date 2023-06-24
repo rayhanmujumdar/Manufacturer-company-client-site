@@ -1,4 +1,3 @@
-import React from 'react';
 import AddReview from '../Dashboard/AddReview';
 
 const HomeReviews = () => {

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import {useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -22,12 +22,11 @@ const PurchaseModal = ({
   setIsOpen,
   product,
   refetch,
-  setAvailable,
+  // setAvailable,
 }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     reset,
   } = useForm();
@@ -73,7 +72,7 @@ const PurchaseModal = ({
         });
         setIsOpen(false);
         const quantity = availableQuantity - minimumQuantity;
-        const available = { quantity };
+        const available = { availableQuantity: quantity };
         const url = `${import.meta.env.VITE_SERVER_URL}/product/${_id}`;
         await axiosPrivate.put(url, available);
         refetch();

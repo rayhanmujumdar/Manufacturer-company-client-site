@@ -16,8 +16,9 @@ const MakeAdmin = () => {
   if (isLoading || loading) {
     return <Loading className="text-black"></Loading>;
   }
+  console.log({data,error})
   if (error) {
-    toast.error(error.message, {
+    toast.error(error.response.data.message, {
       id: "error",
     });
     return <Loading className="text-black"></Loading>;

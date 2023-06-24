@@ -1,4 +1,4 @@
-import React from 'react';
+
 import useProduct from '../../../Hooks/useProduct'
 import Footer from '../../Shared/Footer/Footer';
 import PageTitle from '../../Shared/PageTitle/PageTitle';

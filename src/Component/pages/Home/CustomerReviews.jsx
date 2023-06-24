@@ -24,7 +24,7 @@ const CustomerReviews = () => {
         </button> */}
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 mt-5">
-        {reviews?.data.slice(0, 3).map((review) => (
+        {reviews?.data.map((review) => (
           <Review key={review._id} review={review}></Review>
         ))}
       </div>

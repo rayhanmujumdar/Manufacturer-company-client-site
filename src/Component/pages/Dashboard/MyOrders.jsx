@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
@@ -20,7 +20,7 @@ const MyOrders = () => {
     error,
     refetch,
   } = useQuery("MyOrders", () => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/order?email=${user?.email}`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/order?property=email&search=${user?.email}&sort=paid&order=asc`;
     return axiosPrivate.get(url);
   });
   if (isLoading) {

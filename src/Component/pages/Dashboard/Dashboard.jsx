@@ -1,12 +1,10 @@
-import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import auth from "../../../firebase/firebase.init";
 import useAdmin from "../../../Hooks/useAdmin";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from '../../Shared/PageTitle/PageTitle'
 import Footer from '../../Shared/Footer/Footer'
-import NavLink from "../../Shared/NavLink/NavLink";
 import DashBoardLink from "../../Shared/DashBoardLink/DashBoardLink";
 
 const Dashboard = () => {

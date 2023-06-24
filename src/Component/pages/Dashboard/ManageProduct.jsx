@@ -1,4 +1,3 @@
-import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import toast from 'react-hot-toast';
 import { useQuery } from 'react-query';
@@ -23,7 +22,7 @@ const ManageProduct = () => {
     if(isLoading){
         return <Loading className='text-black'></Loading>
     }
-    const {data: products} = data
+    const {data: products} = data || {}
     return (
         <div className='my-5'>
             <PageTitle title='Dashboard/Manage-Product'></PageTitle>
