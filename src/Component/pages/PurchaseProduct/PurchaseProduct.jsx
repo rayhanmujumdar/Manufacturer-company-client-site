@@ -65,7 +65,7 @@ const PurchaseProduct = () => {
             <img
               src={img}
               className="lg:max-w-lg max-w-sm rounded-md shadow-2xl mx"
-              alt=""
+              alt="product img"
             />
           </div>
           <div className="text-left px-3" data-aos="fade-down-right">

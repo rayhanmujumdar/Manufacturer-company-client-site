@@ -13,7 +13,7 @@ const useToken = (authUser) => {
       axiosPrivate
         .put(url, user)
         .then((res) => {
-          const { token } = res?.data;
+          const { token } = res.data;
           localStorage.setItem("accessToken", token);
           setToken(token);
           setLoading(false);

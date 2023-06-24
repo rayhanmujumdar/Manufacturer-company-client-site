@@ -1,15 +1,33 @@
 import { useQuery } from "react-query";
+import { signOut } from "firebase/auth";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import Footer from "../../Shared/Footer/Footer";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
 import Review from "../Home/Review";
+import { useEffect } from "react";
+import auth from "../../../firebase/firebase.init";
+import { toast } from "react-hot-toast";
 
 const Reviews = () => {
-  const { data: reviews, isLoading } = useQuery("reviews", () => {
+  const {
+    data: reviews,
+    isLoading,
+    error,
+    isError,
+  } = useQuery("reviews", () => {
     return axiosPrivate.get(`${import.meta.env.VITE_SERVER_URL}/review`);
   });
-  if (isLoading) {
+  useEffect(() => {
+    if (isError) {
+      if (error?.response?.status === 403) {
+        signOut(auth);
+        localStorage.removeItem("accessToken");
+        toast.error(error.response.data?.message)
+      }
+    }
+  }, [error, isError]);
+  if (!error && isLoading) {
     return <Loading className="text-black"></Loading>;
   }
   return (

@@ -6,6 +6,8 @@ import Loading from "../../Shared/Loading/Loading";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
 import ManageOrderRow from "./ManageOrderRow";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { signOut } from "firebase/auth";
+import auth from "../../../firebase/firebase.init";
 
 const ManageAllOrders = () => {
   const [page, setPage] = useState(1);
@@ -16,36 +18,43 @@ const ManageAllOrders = () => {
     isLoading,
     error,
     refetch,
+    isError,
   } = useQuery("allOrders", () => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/order?limit=10&page=8&`;
+    const url = `${import.meta.env.VITE_SERVER_URL}/order?limit=15&page=${page}&`;
     return axiosPrivate.get(url);
   });
+  const totalOrders = Number(allOrders?.headers.get("X-Total-Count"));
   // pagination page count and condition check
   useEffect(() => {
-    if (allOrders?.data?.length > 0) {
-      const hasMore = Math.floor(allOrders.data.length / 20) > page;
+    if (totalOrders > 0) {
+      const hasMore = Math.floor(totalOrders / 20) > page;
       setHasMore(hasMore);
     }
-  }, [allOrders?.data?.length, page]);
+  }, [totalOrders, page]);
+  useEffect(() => {
+    if (isError) {
+      if (error?.response?.status === 403) {
+        signOut(auth);
+        localStorage.removeItem("accessToken");
+        toast.error(error.response.data?.message);
+      }
+    }
+  }, [error, isError]);
   if (isLoading) {
     return <Loading className="text-black"></Loading>;
   }
-  if (error) {
-    toast.error(error.code, {
-      id: "error",
-    });
-    return <Loading className="text-black"></Loading>;
-  }
-  const { data: orders } = allOrders;
+  const { data: orders } = allOrders || {};
   const fetchMore = () => {
+    refetch()
     setPage((prev) => prev + 1);
   };
+  console.log(page);
   return (
     <div className="w-full">
       <PageTitle title="Dashboard/Manage-All-Orders"></PageTitle>
       <div className="overflow-x-auto">
         <InfiniteScroll
-          dataLength={orders.length}
+          dataLength={totalOrders || 0}
           next={fetchMore}
           hasMore={hasMore}
           loader={<h4>Loading...</h4>}
@@ -65,9 +74,7 @@ const ManageAllOrders = () => {
               </tr>
             </thead>
             <tbody>
-              {/* <!-- row 1 --> */}
-
-              {orders.map((order, index) => (
+              {orders?.map((order, index) => (
                 <ManageOrderRow
                   key={order._id}
                   order={order}

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import {
   useAuthState,
   useSignInWithEmailAndPassword,
@@ -17,10 +17,9 @@ const Login = () => {
   const location = useLocation();
   const [user, authLoading] = useAuthState(auth);
   const from = location?.state?.from.pathname || "/";
-  const [signInWithEmailAndPassword, loginUser, loading, error] =
+  const [signInWithEmailAndPassword, loginUser, loading, isError] =
     useSignInWithEmailAndPassword(auth);
   // forget password hooks
-
   const {
     register,
     handleSubmit,
@@ -40,12 +39,12 @@ const Login = () => {
     }
   }, [token, navigate, from]);
   useEffect(() => {
-    if (error) {
-      toast.error(error.code, {
+    if (isError) {
+      toast.error("Something was wrong", {
         id: "error",
       });
     }
-  }, [error]);
+  }, [isError]);
   if (isLoading || loading || authLoading) {
     return <Loading className="text-black"></Loading>;
   }
