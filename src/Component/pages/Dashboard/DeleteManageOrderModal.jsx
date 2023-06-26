@@ -1,4 +1,3 @@
-import React from "react";
 import toast from "react-hot-toast";
 import Modal from "react-modal/lib/components/Modal";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
@@ -27,14 +26,13 @@ const DeleteManageOrderModal = ({
   const {_id,email,product} = order
   const handleDelete = async(id) => {
         const url = `${import.meta.env.VITE_SERVER_URL}/order/${id}`
-        console.log(url)
         const {data} = await axiosPrivate.delete(url)
-        console.log(data)
         if(data.deletedCount){
             toast.success('Order Cancel',{
                 id: 'success'
             })
             refetch()
+            setDeleteModalIsOpen(false)
         }
   }
   return (

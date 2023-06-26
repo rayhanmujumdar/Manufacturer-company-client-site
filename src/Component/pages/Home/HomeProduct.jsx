@@ -5,7 +5,7 @@ import Loading from "../../Shared/Loading/Loading";
 import Product from "../Product/Product";
 
 const HomeProduct = () => {
-  const { products, isLoading, error, refetch } = useProduct();
+  const { products, isLoading } = useProduct(undefined,5);
   const navigate = useNavigate();
   if (isLoading) {
     return <Loading className="text-black"></Loading>;

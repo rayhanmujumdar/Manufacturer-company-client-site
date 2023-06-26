@@ -1,4 +1,3 @@
-import React from "react";
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Review from "./Review";
@@ -8,7 +7,7 @@ import Loading from "../../Shared/Loading/Loading";
 const CustomerReviews = () => {
   const navigate = useNavigate();
   const { data: reviews, isLoading } = useQuery("review", () => {
-    return axiosPrivate.get(`${import.meta.env.VITE_SERVER_URL}/review/home-review`);
+    return axiosPrivate.get(`${import.meta.env.VITE_SERVER_URL}/review/home-review?limit=3`);
   });
   if (isLoading) {
     return <Loading className="text-black"></Loading>;

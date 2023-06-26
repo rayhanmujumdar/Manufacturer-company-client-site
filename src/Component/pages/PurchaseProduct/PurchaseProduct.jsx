@@ -86,7 +86,7 @@ const PurchaseProduct = () => {
               </p>
               {quantityCondition && (
                 <p className="text-red-500">
-                  This product minimum quantity is not available
+                  This product quantity is not available
                 </p>
               )}
               {admin && (
