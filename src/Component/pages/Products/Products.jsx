@@ -15,17 +15,26 @@ const Products = () => {
   const pages = (count && Math.ceil(Number(count) / size)) || 0;
   let content = null;
   if (isLoading && !isError) {
-    content = <Loading className="text-black"></Loading>;
+    return <Loading className="text-black"></Loading>;
   } else if (!isLoading && isError) {
     toast.error(error.message, {
       id: "error",
     });
   } else if (!isLoading && !isError && products?.length === 0) {
-    content = <p className="text-center">Loading...</p>;
+    content = (
+      <p className="text-center py-5 text-xl text-red-400">Not Found</p>
+    );
   } else {
-    content = products?.map((product) => (
-      <Product key={product._id} product={product}></Product>
-    ));
+    content = (
+      <div
+        id="top"
+        className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 md:mx-0 mx-3 my-5"
+      >
+        {products?.map((product) => (
+          <Product key={product._id} product={product}></Product>
+        ))}
+      </div>
+    );
   }
   return (
     <>
@@ -34,14 +43,10 @@ const Products = () => {
         <h1 className="mt-2 text-4xl relative text-stone-700 font-bold inline-block before:w-full before:h-1 before:bg-black  before:absolute before:-bottom-3">
           Our Products
         </h1>
-        <div
-          id="top"
-          className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 md:mx-0 mx-3 my-5"
-        >
-          {content}
-        </div>
+        {content}
+
         <div>
-          {pages !== 0 && (
+          {pages > 0 && (
             <div className="btn-group">
               <a
                 onClick={(e) => setPage(Number(e.target.id) - 1)}

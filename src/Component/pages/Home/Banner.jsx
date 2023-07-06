@@ -1,6 +1,5 @@
-import React from "react";
 import bg1 from "../../../image/bg1.jpg";
-import bannarImg from "../../../image/bannerImg2.png";
+import bannerImg from "../../../image/bannerImg2.png";
 import { useNavigate } from "react-router-dom";
 
 const Banner = () => {
@@ -16,8 +15,8 @@ const Banner = () => {
           <div className="hero-content p-0 flex-col lg:flex-row gap-x-11">
             <div data-aos="fade-right">
               <img
-                src={bannarImg}
-                className="max-w-sm rounded-lg shadow-2xl bg-black bg-opacity-50"
+                src={bannerImg}
+                className="max-w-sm rounded-lg shadow-2xl"
                 alt="graphics card"
               />
             </div>

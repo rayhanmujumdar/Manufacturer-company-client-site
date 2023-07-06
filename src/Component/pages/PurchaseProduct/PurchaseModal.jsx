@@ -1,4 +1,4 @@
-import {useState } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
@@ -38,7 +38,7 @@ const PurchaseModal = ({
     setValue(1);
   }
   const { _id, img, name, availableQuantity, price, minimumOrderQuantity } =
-    product;
+    product || {};
   const handleChange = (e) => {
     if (e.target.value > minimumOrderQuantity) {
       setValue(e.target.value);
@@ -55,6 +55,7 @@ const PurchaseModal = ({
     const { phoneNumber, minimumQuantity, address } = data;
     if (availableQuantity >= minimumQuantity) {
       const orderPlaced = {
+        productId: _id,
         email: user?.email,
         product: name,
         cost: currentPrice,
@@ -62,7 +63,8 @@ const PurchaseModal = ({
         phoneNumber,
         img,
         address,
-        name: user?.displayName
+        name: user?.displayName,
+        createAt: Date.now(),
       };
       const url = `${import.meta.env.VITE_SERVER_URL}/order`;
       const { data } = await axiosPrivate.post(url, orderPlaced);
@@ -115,7 +117,7 @@ const PurchaseModal = ({
                   type="text"
                   placeholder="email"
                   className="input input-bordered"
-                  defaultValue={user.email}
+                  defaultValue={user?.email}
                   readOnly
                   disabled
                 />
@@ -128,7 +130,7 @@ const PurchaseModal = ({
                   type="number"
                   placeholder=""
                   className="input input-bordered"
-                  value={availableQuantity}
+                  value={availableQuantity || 0}
                   readOnly
                   disabled
                 />
@@ -157,7 +159,7 @@ const PurchaseModal = ({
                   type="number"
                   placeholder={`Minimum order ${minimumOrderQuantity} or Max Order ${availableQuantity}`}
                   className="input input-bordered"
-                  defaultValue={minimumOrderQuantity}
+                  defaultValue={minimumOrderQuantity || 0}
                 />
                 {errors.minimumQuantity?.type === "required" && (
                   <p className="text-left mt-0.5 text-red-500">
@@ -183,7 +185,7 @@ const PurchaseModal = ({
                   type="number"
                   placeholder=""
                   className="input input-bordered"
-                  value={currentPrice}
+                  value={currentPrice || 0}
                   disabled
                   readOnly
                 />

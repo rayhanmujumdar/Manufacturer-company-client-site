@@ -12,22 +12,22 @@ import { toast } from "react-hot-toast";
 const Reviews = () => {
   const [page, setPage] = useState(1);
   const [size] = useState(9);
-
   const {
     data: reviews,
     isLoading,
     error,
     isError,
   } = useQuery(
-    ["reviews",page],
+    ["reviews", page],
     () => {
-      return axiosPrivate.get(`${import.meta.env.VITE_SERVER_URL}/review?page=${page}&limit=${size}`);
+      return axiosPrivate.get(
+        `${import.meta.env.VITE_SERVER_URL}/review?page=${page}&limit=${size}`
+      );
     },
     {
       keepPreviousData: true,
     }
   );
-    console.log(page)
   const count = reviews?.headers.get("X-Total-count");
   const pages = (count && Math.ceil(Number(count) / size)) || 0;
   useEffect(() => {

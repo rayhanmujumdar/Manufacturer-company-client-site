@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-
-const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
+import React from "react";
+const OrderRow = React.forwardRef(({ order, index, setOrderDelete, setIsOpen},ref) => {
   const navigate = useNavigate();
   const { _id, img, product, orderQuantity, cost, paid, transactionId,delivery } = order;
   function openModal(order) {
@@ -8,8 +8,7 @@ const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
     setOrderDelete(order);
   }
   return (
-    <>
-      <tr className="bg-gray-100 border-b text-left">
+      <tr ref={ref} className="bg-gray-100 border-b text-left">
         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
           {index + 1}
         </td>
@@ -57,8 +56,7 @@ const OrderRow = ({ order, index, setOrderDelete, setIsOpen }) => {
           </div>
         </td>
       </tr>
-    </>
   );
-};
+})
 
 export default OrderRow;

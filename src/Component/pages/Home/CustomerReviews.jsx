@@ -13,7 +13,7 @@ const CustomerReviews = () => {
     return <Loading className="text-black"></Loading>;
   }
   return (
-    <div className="sm:container sm:mx-auto mx-4 md:h-[75vh] flex justify-center items-center flex-col md:my-0 my-5">
+    <div className="sm:container sm:mx-auto mx-4 flex lg:py-20 justify-center items-center flex-col md:my-0 my-5">
       <div>
         <h1 className="uppercase md:text-5xl text-3xl font-bold">
           Customer Reviews

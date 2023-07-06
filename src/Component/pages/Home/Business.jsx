@@ -1,8 +1,6 @@
-import React from 'react';
-
 const Business = () => {
     return (
-        <div className='sm:container sm:mx-auto mx-3 py-10 lg:h-[75vh] flex flex-col justify-center items-center'>
+        <div className='sm:container sm:mx-auto mx-3 py-10 lg:py-20 flex flex-col justify-center items-center'>
             <div className='mb-4'>
             <h1 className='md:text-5xl text-2xl mt-4 font-bold text-stone-800 uppercase'>Our Business introduction</h1>
             <p className='uppercase my-2 md:text-xl text-sm text-primary'>introduction of our business and user expectation</p>
