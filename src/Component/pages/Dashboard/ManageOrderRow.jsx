@@ -1,23 +1,28 @@
 import React, { useState } from "react";
 import toast from "react-hot-toast";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import DeleteManageOrderModal from "./DeleteManageOrderModal";
+import { useMutation, useQueryClient } from "react-query";
+import { updateOrder } from "../../../api/orderApi";
 
-const ManageOrderRow = React.forwardRef(({ order, index, refetch }, ref) => {
+const ManageOrderRow = React.forwardRef(({ order, index }, ref) => {
   const { _id, address, paid, product, email, cost, orderQuantity, delivery } =
     order;
+    const queryClient = useQueryClient()
+    const updateOrderMutation = useMutation(updateOrder,{
+      onSuccess: () => {
+        queryClient.invalidateQueries("Orders")
+      }
+    })
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   function openDeleteModal() {
     setDeleteModalIsOpen(true);
   }
   const handlePending = async (id) => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/order/${id}`;
-    const { data } = await axiosPrivate.patch(url);
+    const { data } = await updateOrderMutation.mutateAsync(id);
     if (data.matchedCount) {
       toast.success("Delivered", {
         id: "success",
       });
-      refetch();
     }
   };
   return (
@@ -48,7 +53,6 @@ const ManageOrderRow = React.forwardRef(({ order, index, refetch }, ref) => {
           )}
         </div>
         <DeleteManageOrderModal
-          refetch={refetch}
           order={order}
           deleteModalIsOpen={deleteModalIsOpen}
           setDeleteModalIsOpen={setDeleteModalIsOpen}

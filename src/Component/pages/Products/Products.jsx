@@ -5,13 +5,12 @@ import Loading from "../../Shared/Loading/Loading";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
 import Product from "../Product/Product";
 import { useState } from "react";
-// import Product from "../Product/Product";
 
 const Products = () => {
   const [page, setPage] = useState(1);
   const [size] = useState(9);
   const { products, isLoading, count, isError, error } =
-    useProduct({page, size}) || {};
+    useProduct({page, limit: size}) || {};
   const pages = (count && Math.ceil(Number(count) / size)) || 0;
   let content = null;
   if (isLoading && !isError) {

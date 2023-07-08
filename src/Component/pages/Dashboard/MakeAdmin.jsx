@@ -1,21 +1,19 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
 import UserRow from "./UserRow";
 import { useEffect } from "react";
 import { signOut } from "firebase/auth";
+import { getUsers } from "../../../api/userApi";
 
 const MakeAdmin = () => {
-  const [authUser, loading] = useAuthState(auth);
-  const { data, isLoading, error, refetch, isError } = useQuery("users", () => {
-    return axiosPrivate.get(
-      `${import.meta.env.VITE_SERVER_URL}/user?email=${authUser?.email}`
-    );
-  });
+  const [user, loading] = useAuthState(auth);
+  const { data, isLoading, error, isError } = useQuery(["users"], () =>
+    getUsers(user?.email)
+  );
   useEffect(() => {
     if (isError) {
       if (error?.response.status === 403 || error?.response.status === 401) {
@@ -27,14 +25,13 @@ const MakeAdmin = () => {
       }
     }
   }, [error, isError]);
-  if (isLoading || loading) {
+  if (isLoading || loading && !isError) {
     return <Loading className="text-black"></Loading>;
-  }
-  if (error) {
+  } else if (!isLoading && isError) {
     toast.error(error.response.data.message, {
       id: "error",
     });
-    return <Loading className="text-black"></Loading>;
+    return;
   }
   const { data: users } = data;
   return (
@@ -53,7 +50,6 @@ const MakeAdmin = () => {
         <tbody>
           {users.map((user, index) => (
             <UserRow
-              refetch={refetch}
               key={user._id}
               user={user}
               index={index}

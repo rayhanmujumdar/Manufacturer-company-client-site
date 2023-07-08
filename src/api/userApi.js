@@ -1,26 +1,26 @@
 import axiosPrivate from "../axiosPrivate/axiosPrivate";
 
-export const getUsers = async () => {
-  const response = await axiosPrivate.get(`/user`);
-  return response.data;
+export const getUsers = async (email) => {
+  const response = await axiosPrivate.get(`/user?email=${email}`);
+  return response;
 };
 
-export const getAdmin = async (email) => {
+export const getAdminUser = async (email) => {
   const response = await axiosPrivate.get(`/user/admin/${email}`);
   return response.data;
 };
 
-export const updateUser = async (email) => {
-  const response = await axiosPrivate.get(`/user/${email}`);
-  return response.data;
+export const updateUser = async ({email,data}) => {
+  const response = await axiosPrivate.put(`/user/${email}`,data);
+  return response;
 };
 
-export const updateAdmin = async (email) => {
-  const response = await axiosPrivate.get(`/user/admin/${email}`);
-  return response.data;
+export const updateAdmin = async ({email,data}) => {
+  const response = await axiosPrivate.put(`/user/admin/${email}`,data);
+  return response;
 };
 
-export const updateAdminRole = async (email) => {
-  const response = await axiosPrivate.get(`/user/change/${email}`);
-  return response.data;
+export const updateAdminRole = async ({email,data}) => {
+  const response = await axiosPrivate.put(`/user/admin/change/${email}`,data);
+  return response;
 };

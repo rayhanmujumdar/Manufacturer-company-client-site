@@ -1,5 +1,4 @@
-import { signOut } from "firebase/auth";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";

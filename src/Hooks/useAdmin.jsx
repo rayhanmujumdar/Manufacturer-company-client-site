@@ -1,24 +1,22 @@
-import { useEffect, useState } from "react";
-import axiosPrivate from "../axiosPrivate/axiosPrivate";
+import { useQuery } from "react-query";
+import { getAdminUser } from "../api/userApi";
 
 const useAdmin = (user) => {
-  const [admin, setAdmin] = useState(false);
-  const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    (async () => {
-      try {
-        if (user?.email) {
-          const url = `${import.meta.env.VITE_SERVER_URL}/user/admin/${user?.email}`;
-          const { data } = await axiosPrivate.get(url);
-          setLoading(false);
-          setAdmin(data.admin);
-        }
-      } catch (err) {
-        setLoading(false);
-      }
-    })();
-  }, [user]);
-  return [admin, loading];
+  const {
+    data,
+    isLoading: loading,
+    isError,
+    error,
+  } = useQuery(["admin"], () => getAdminUser(user?.email));
+  let admin = null;
+  if (loading) {
+    admin = false;
+  } else if (!loading && isError) {
+    admin = false;
+  } else {
+    admin = data.admin;
+  }
+  return [admin, loading, error];
 };
 
 export default useAdmin;

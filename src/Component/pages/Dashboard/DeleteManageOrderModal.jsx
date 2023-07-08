@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import Modal from "react-modal/lib/components/Modal";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteOrder } from "../../../api/orderApi";
 const customStyles = {
   content: {
     top: "50%",
@@ -13,28 +14,34 @@ const customStyles = {
   },
 };
 Modal.setAppElement("#root");
+Modal.defaultStyles.overlay.zIndex = "100";
 const DeleteManageOrderModal = ({
   deleteModalIsOpen,
   setDeleteModalIsOpen,
-  refetch,
   order,
 }) => {
-  Modal.defaultStyles.overlay.zIndex = "100";
-  function closeModal() {
-    setDeleteModalIsOpen(false);
-  }
-  const {_id,email,product} = order
-  const handleDelete = async(id) => {
-        const url = `${import.meta.env.VITE_SERVER_URL}/order/${id}`
-        const {data} = await axiosPrivate.delete(url)
-        if(data.deletedCount){
-            toast.success('Order Cancel',{
-                id: 'success'
-            })
-            refetch()
-            setDeleteModalIsOpen(false)
-        }
-  }
+  const { _id, email, product, productId, orderQuantity } = order;
+  const queryClient = useQueryClient();
+  const deleteOrderMutation = useMutation(deleteOrder, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: "Orders",
+      });
+    },
+  });
+  const handleDelete = async (id) => {
+    const { data } = await deleteOrderMutation.mutateAsync({
+      id,
+      productId,
+      orderQuantity,
+    });
+    if (data.deletedCount) {
+      toast.success("Order Cancel", {
+        id: "success",
+      });
+      setDeleteModalIsOpen(false);
+    }
+  };
   return (
     <div>
       <Modal
@@ -53,7 +60,9 @@ const DeleteManageOrderModal = ({
               Are You Sure?
             </h2>
             <p className="text-center text-lg">
-              Do you really-want to <span className="font-bold">{email}</span> ordered <span className="font-bold">{product}</span> Product deleted?
+              Do you really-want to <span className="font-bold">{email}</span>{" "}
+              ordered <span className="font-bold">{product}</span> Product
+              deleted?
             </p>
             <div className="card-actions justify-end">
               <button
@@ -62,7 +71,10 @@ const DeleteManageOrderModal = ({
               >
                 delete
               </button>
-              <button onClick={closeModal} className="btn btn-success">
+              <button
+                onClick={() => setDeleteModalIsOpen(false)}
+                className="btn btn-success"
+              >
                 cancel
               </button>
             </div>

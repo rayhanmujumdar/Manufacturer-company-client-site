@@ -3,10 +3,10 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 import Modal from "react-modal/lib/components/Modal";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
 import { useMutation, useQueryClient } from "react-query";
 import { updateProductQuantity } from "../../../api/productApi";
+import { addOrder } from "../../../api/orderApi";
 
 const customStyles = {
   content: {
@@ -26,6 +26,7 @@ const PurchaseModal = ({
   refetch,
   // setAvailable,
 }) => {
+  
   const {
     register,
     handleSubmit,
@@ -42,6 +43,7 @@ const PurchaseModal = ({
   const { _id, img, name, availableQuantity, price, minimumOrderQuantity } =
     product || {};
   const queryClient = useQueryClient();
+  // update product quantity mutation
   const updateQuantityMutation = useMutation(updateProductQuantity, {
     onSuccess: () => {
       queryClient.invalidateQueries({
@@ -49,6 +51,12 @@ const PurchaseModal = ({
       });
     },
   });
+//  add new order mutation
+  const addOrderMutation = useMutation(addOrder,{
+    onSuccess: () => {
+      queryClient.invalidateQueries('MyOrders')
+    }
+  })
   const handleChange = (e) => {
     if (e.target.value > minimumOrderQuantity) {
       setValue(e.target.value);
@@ -76,8 +84,7 @@ const PurchaseModal = ({
         name: user?.displayName,
         createAt: Date.now(),
       };
-      const url = `${import.meta.env.VITE_SERVER_URL}/order`;
-      const { data } = await axiosPrivate.post(url, orderPlaced);
+      const { data } = await addOrderMutation.mutateAsync(orderPlaced);
       if (data.acknowledged) {
         toast.success("Order Confirmed", {
           id: "success",

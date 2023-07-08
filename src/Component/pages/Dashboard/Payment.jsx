@@ -1,46 +1,40 @@
-import React from "react";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
 import { loadStripe } from "@stripe/stripe-js";
-import {Elements} from '@stripe/react-stripe-js';
+import { Elements } from "@stripe/react-stripe-js";
 import CheckoutForm from "./CheckoutForm";
+import { getOrder } from "../../../api/orderApi";
 
-const stripePromise = loadStripe(
-  "pk_test_51L1yDZHs6wuzh3Fh3csuDAEL2eQAkqCVbbJsqylqoD6cMJkhjGuO8dZuncqAm2NfiwatKpAH55Stfdjx8vWPOWyg004tLQ2a3b"
-);
 const Payment = () => {
   const { id } = useParams();
+  const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_SECRET_KEY);
   const {
     data: order,
     isLoading,
-    error,
+    isError,
     refetch,
-  } = useQuery(["order", id], () => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/order/${id}`;
-    return axiosPrivate.get(url);
-  });
-  if (isLoading) {
+  } = useQuery(["order", id], () => getOrder(id));
+  if (isLoading && !isError) {
     return <Loading className="text-black"></Loading>;
   }
-  if (error) {
-    toast.error(error?.code, {
+  if (!isLoading && isError) {
+    toast.error("Something was wrong", {
       id: "paymentError",
     });
-    return <Loading className="text-black"></Loading>;
+    return;
   }
   const { product, orderQuantity, email, cost } = order.data;
   return (
-    <div  className="hero bg-base-200">
+    <div className="hero bg-base-200">
       <PageTitle title="payment"></PageTitle>
-      <div  className="hero-content text-center  flex-col">
+      <div className="hero-content text-center  flex-col">
         <div data-aos="zoom-in" className="card w-96 bg-base-100 shadow-xl">
-          <div  className="card-body">
+          <div className="card-body">
             <h1 className="text-xl text-green-400">Payment</h1>
-            <h2  className="text-xl">
+            <h2 className="text-xl">
               Please Pay for <span className="font-bold">{product}</span>
             </h2>
             <p>
@@ -59,9 +53,9 @@ const Payment = () => {
           </div>
         </div>
         <div data-aos="zoom-in" className="card w-96 bg-base-100 shadow-xl">
-          <div  className="card-body">
-            <Elements  stripe={stripePromise}>
-              <CheckoutForm order={order} refetch={refetch}/>
+          <div className="card-body">
+            <Elements stripe={stripePromise}>
+              <CheckoutForm order={order} refetch={refetch} />
             </Elements>
           </div>
         </div>

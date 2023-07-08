@@ -1,6 +1,7 @@
 import toast from "react-hot-toast";
 import Modal from "react-modal/lib/components/Modal";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteOrder } from "../../../api/orderApi";
 
 const customStyles = {
   content: {
@@ -15,24 +16,28 @@ const customStyles = {
   },
 };
 Modal.setAppElement("#root");
-const OrderDeleteModal = ({ orderDelete, modalIsOpen, setIsOpen, refetch }) => {
-  const { _id, product,orderQuantity,productId } = orderDelete;
-  function closeModal() {
-    setIsOpen(false);
-  }
-  console.log(product)
-  Modal.defaultStyles.overlay.zIndex = "100";
+Modal.defaultStyles.overlay.zIndex = "100";
+const OrderDeleteModal = ({ orderDelete, modalIsOpen, setIsOpen }) => {
+  const { _id, product, orderQuantity, productId } = orderDelete;
+  const queryClient = useQueryClient();
+  const deleteOrderMutation = useMutation(deleteOrder, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: "MyOrders",
+      });
+    },
+  });
   const handleOrderDelete = async (id) => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/order/${id}?orderQuantity=${
-      orderQuantity
-    }&productId=${productId}`;
-    const { data } = await axiosPrivate.delete(url);
+    const { data } = await deleteOrderMutation.mutateAsync({
+      id,
+      orderQuantity,
+      productId,
+    });
     if (data.deletedCount > 0) {
-      toast.success("Cancel Product", {
+      toast.success("cancel done", {
         id: "success",
       });
       setIsOpen(false);
-      refetch();
     }
   };
   return (
@@ -64,7 +69,7 @@ const OrderDeleteModal = ({ orderDelete, modalIsOpen, setIsOpen, refetch }) => {
                 >
                   delete
                 </button>
-                <button onClick={closeModal} className="btn btn-success">
+                <button onClick={() => setIsOpen(false)} className="btn btn-success">
                   cancel
                 </button>
               </div>

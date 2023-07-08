@@ -21,7 +21,6 @@ const MyOrders = () => {
     data: orderPages,
     isLoading,
     error,
-    refetch,
     hasNextPage,
     fetchNextPage,
     isFetchingNextPage,
@@ -101,18 +100,6 @@ const MyOrders = () => {
       }
     });
   }
-  /* 
-  <thead>
-            <tr>
-              <th>No</th>
-              <th>Product img</th>
-              <th>Product</th>
-              <th>order</th>
-              <th>cost</th>
-              <th>payment</th>
-            </tr>
-          </thead>
-  */
   return (
     <div className="w-full overflow-x-auto">
       <PageTitle title="Dashboard/My-Orders"></PageTitle>
@@ -147,7 +134,6 @@ const MyOrders = () => {
             orderDelete={orderDelete}
             modalIsOpen={modalIsOpen}
             setIsOpen={setIsOpen}
-            refetch={refetch}
           ></OrderDeleteModal>
         )}
         {!hasNextPage && orders.length > 30 && (

@@ -1,9 +1,9 @@
-import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import Modal from "react-modal/lib/components/Modal";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
+import { useMutation, useQueryClient } from "react-query";
+import { updateAdminRole } from "../../../api/userApi";
 
 const customStyles = {
   content: {
@@ -17,32 +17,35 @@ const customStyles = {
   },
 };
 Modal.setAppElement("#root");
-const DeleteUserModal = ({ user, deleteModalIsOpen, setDeleteModalIsOpen,refetch }) => {
+Modal.defaultStyles.overlay.zIndex = "100";
+const DeleteUserModal = ({ user, deleteModalIsOpen, setDeleteModalIsOpen }) => {
+  const queryClient = useQueryClient();
+  const updateAdminRoleMutation = useMutation(updateAdminRole, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["users"],
+      });
+    },
+  });
   const [authUser] = useAuthState(auth);
   const { email } = user;
-  Modal.defaultStyles.overlay.zIndex = "100";
-  function closeModal() {
-    setDeleteModalIsOpen(false);
-  }
   const handleDelete = async (email) => {
     try {
-      const url = `${import.meta.env.VITE_SERVER_URL}/user/admin/change/${email}`;
       const authEmail = { email: authUser?.email };
-      const { data } = await axiosPrivate.put(url, authEmail);
-      console.log(data)
-      if(data.matchedCount > 0){
-        toast.success('Admin Removed',{
-          id: 'error'
-        })
-        refetch()
-        setDeleteModalIsOpen(false)
+      const { data } = await updateAdminRoleMutation.mutateAsync({
+        email,
+        data: authEmail,
+      });
+      if (data.matchedCount > 0) {
+        toast.success("Admin Removed", {
+          id: "error",
+        });
+        setDeleteModalIsOpen(false);
       }
-    } catch(error) {
-      if(error){
-        toast.error(error.code,{
-          id: 'error'
-        })
-      }
+    } catch (err) {
+      toast.error(err.code, {
+        id: "error",
+      });
     }
   };
   return (
@@ -73,7 +76,10 @@ const DeleteUserModal = ({ user, deleteModalIsOpen, setDeleteModalIsOpen,refetch
               >
                 delete
               </button>
-              <button onClick={closeModal} className="btn btn-success">
+              <button
+                onClick={() => setDeleteModalIsOpen(false)}
+                className="btn btn-success"
+              >
                 cancel
               </button>
             </div>
