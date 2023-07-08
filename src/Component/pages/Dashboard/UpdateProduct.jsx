@@ -1,8 +1,9 @@
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
+import { useMutation, useQueryClient } from "react-query";
+import { updateProduct } from "../../../api/productApi";
 
 const UpdateProduct = ({
   id,
@@ -11,12 +12,22 @@ const UpdateProduct = ({
   availableQuantity: oldAvailable,
 }) => {
   const [user] = useAuthState(auth);
+  const queryClient = useQueryClient()
+  const updateProductMutation = useMutation(updateProduct,{
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: "manageProduct"
+      })
+    }
+  })
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm();
+
+  // update product quantity,price submit button
   const onSubmit = async (data) => {
     const { availableQuantity, minimumOrderQuantity, price } = data;
     const updateProductData = {
@@ -24,8 +35,7 @@ const UpdateProduct = ({
       minimumOrderQuantity: parseInt(minimumOrderQuantity),
       price: parseInt(price),
     };
-    const url = `${import.meta.env.VITE_SERVER_URL}/product/updateProduct/${id}?email=${user?.email}`;
-    const { data: updateData } = await axiosPrivate.put(url, updateProductData);
+    const { data: updateData } = await updateProductMutation.mutateAsync({id,email: user?.email,data: updateProductData});
     if (updateData.modifiedCount > 0) {
       toast.success("Product Quantity updated", {
         id: "success",

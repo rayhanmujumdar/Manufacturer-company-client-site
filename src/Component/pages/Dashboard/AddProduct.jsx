@@ -1,55 +1,71 @@
 import axios from "axios";
-import React, { useState } from "react";
+import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
-import axiosPrivate from '../../../axiosPrivate/axiosPrivate'
 import auth from "../../../firebase/firebase.init";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
+import { useMutation, useQueryClient } from "react-query";
+import { addProduct } from "../../../api/productApi";
+import { useNavigate } from "react-router-dom";
 
 const AddProduct = () => {
-    const [user] = useAuthState(auth)
-    const [loading,setLoading] = useState(false)
+  const [user] = useAuthState(auth);
+  const [loading, setLoading] = useState(false);
+  const queryClient = useQueryClient();
+  const navigate = useNavigate()
+  const addProductMutation = useMutation(addProduct, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["product"],
+      });
+    },
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
-    reset
   } = useForm();
-
-  const imgStoredKey = "763e2f260eb7b5d787a4005fb156c3a8"
+  // upload A new product btn
   const onSubmit = async (data) => {
-    setLoading(true)
-    const image = data?.img[0]
+    setLoading(true);
+    const image = data?.img[0];
     const formData = new FormData();
-    formData.append('image',image)
-    const url = `https://api.imgbb.com/1/upload?key=${imgStoredKey}`
-    const {data : imageUpload} = await axios(url,{
-        method: "POST",
-        data: formData
-    })
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMG_STORE_KEY
+    }`;
+    const { data: imageUpload } = await axios(url, {
+      method: "POST",
+      data: formData,
+    });
     const img = imageUpload?.data.url;
     const addProductData = {
-        ...data,
-        img,
-        price: parseInt(data?.price),
-        availableQuantity: parseInt(data?.availableQuantity),
-        minimumOrderQuantity: parseInt(data?.minimumOrderQuantity)
-    }
-    const postUrl = `${import.meta.env.VITE_SERVER_URL}/product?email=${user?.email}`
-    const {data: postData} = await axiosPrivate.post(postUrl,addProductData)
-    if(postData.insertedId){
-        toast.success('Add To Product',{
-            id: 'success'
-        })
-        reset()
-        setLoading(false)
+      ...data,
+      img,
+      price: parseInt(data?.price),
+      availableQuantity: parseInt(data?.availableQuantity),
+      minimumOrderQuantity: parseInt(data?.minimumOrderQuantity),
+    };
+    const { data: postData } = await addProductMutation.mutateAsync({
+      email: user?.email,
+      data: addProductData,
+    });
+    if (postData.insertedId) {
+      toast.success("Add To Product", {
+        id: "success",
+      });
+      navigate('/products')
+      setLoading(false);
     }
   };
   return (
-    <div data-aos="zoom-in-down" className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto">
-      <PageTitle title='Dashboard/Add-Product'></PageTitle>
+    <div
+      data-aos="zoom-in-down"
+      className="card flex-shrink-0 w-full md:max-w-lg max-w-sm shadow-2xl bg-base-100 mx-auto"
+    >
+      <PageTitle title="Dashboard/Add-Product" />
       <h1 className="text-2xl font-semibold text-gray-500">Add A Product</h1>
       <div className="card-body">
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -214,7 +230,7 @@ const AddProduct = () => {
           <div className="form-control mt-6">
             <button disabled={loading || false} className="btn btn-primary">
               upload product
-              {loading && <Loading className='text-white'></Loading>}
+              {loading && <Loading className="text-white"></Loading>}
             </button>
           </div>
         </form>

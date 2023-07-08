@@ -35,11 +35,11 @@ const ManageAllOrders = () => {
     },
   });
   useEffect(() => {
-    if(allOrders?.pages?.length){
-      const page = allOrders.pages.map(page => {
-        return [...page.data]
-      })
-      setOrders(page.flat())
+    if (allOrders?.pages?.length) {
+      const page = allOrders.pages.map((page) => {
+        return [...page.data];
+      });
+      setOrders(page.flat());
     }
   }, [allOrders]);
   const intObserver = useRef();
@@ -70,29 +70,29 @@ const ManageAllOrders = () => {
   if (status === "loading") {
     return <Loading className="text-black"></Loading>;
   }
-  const content = manageOrders?.map((order,i) => {
-      if (manageOrders.length === i + 1) {
-        return (
-          <ManageOrderRow
-            key={i}
-            order={order}
-            index={i}
-            refetch={refetch}
-            ref={lastPostRef}
-          ></ManageOrderRow>
-        );
-      }
+  const content = manageOrders?.map((order, i) => {
+    if (manageOrders.length === i + 1) {
       return (
         <ManageOrderRow
           key={i}
           order={order}
           index={i}
           refetch={refetch}
+          ref={lastPostRef}
         ></ManageOrderRow>
       );
+    }
+    return (
+      <ManageOrderRow
+        key={i}
+        order={order}
+        index={i}
+        refetch={refetch}
+      ></ManageOrderRow>
+    );
   });
   // console.log(orderRef.current.)
- 
+
   return (
     <div className="w-full overflow-x-auto">
       <PageTitle title="Dashboard/Manage-All-Orders"></PageTitle>
@@ -112,7 +112,7 @@ const ManageAllOrders = () => {
           </thead>
           <tbody>{content}</tbody>
         </table>
-        {!hasNextPage && (
+        {!hasNextPage && manageOrders?.length > limit && (
           <p className="text-center text-lg underline hover:text-blue-500 font-semibold">
             <a href="#top">Back to Top</a>
           </p>

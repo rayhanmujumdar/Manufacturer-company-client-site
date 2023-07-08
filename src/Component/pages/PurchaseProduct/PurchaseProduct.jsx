@@ -4,13 +4,13 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import toast from "react-hot-toast";
 import { useQuery } from "react-query";
 import { useNavigate, useParams } from "react-router-dom";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
 import Footer from "../../Shared/Footer/Footer";
 import Loading from "../../Shared/Loading/Loading";
 import PurchaseModal from "./PurchaseModal";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
 import useAdmin from "../../../Hooks/useAdmin";
+import { getProduct } from "../../../api/productApi";
 
 const PurchaseProduct = () => {
   const [user] = useAuthState(auth);
@@ -28,23 +28,18 @@ const PurchaseProduct = () => {
     error,
     refetch,
     isError,
-  } = useQuery("singleProduct", () => {
-    return axiosPrivate.get(
-      `${import.meta.env.VITE_SERVER_URL}/product/${id}?email=${user?.email}`
-    );
-  });
+  } = useQuery("singleProduct", () => getProduct({ id, email: user?.email }));
   // handle error
-  if (isLoading) {
+  if (isLoading && !isError) {
     return <Loading className="text-black"></Loading>;
-  }
-  if (!isLoading && isError) {
+  } else if (!isLoading && isError) {
     if (error?.response?.status === 401 || error?.response?.status === 403) {
       signOut(auth);
       navigate("/login");
       toast.error(error?.response?.data?.message || "SameThing was wrong", {
         id: "error",
       });
-    }else if(error?.response?.status === 500){
+    } else if (error?.response?.status === 500) {
       toast.error("Product Not Found", {
         id: "error",
       });
@@ -113,7 +108,7 @@ const PurchaseProduct = () => {
                 product={product.data}
                 modalIsOpen={modalIsOpen}
                 setIsOpen={setIsOpen}
-              ></PurchaseModal>
+              />
             </div>
           </div>
         </div>

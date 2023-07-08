@@ -30,7 +30,7 @@ const CustomerReviews = () => {
       <div className="mt-5">
           <button
             onClick={() => navigate("/reviews")}
-            className="btn btn-active"
+            className="btn btn-sm btn-active"
           >
             More Reviews
           </button>

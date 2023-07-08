@@ -1,11 +1,10 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
 import useProduct from "../../../Hooks/useProduct";
 import Loading from "../../Shared/Loading/Loading";
 import Product from "../Product/Product";
 
 const HomeProduct = () => {
-  const { products, isLoading } = useProduct(undefined,5);
+  const { products, isLoading } = useProduct({ page: undefined, limit: 5 });
   const navigate = useNavigate();
   if (isLoading) {
     return <Loading className="text-black"></Loading>;
@@ -38,7 +37,7 @@ const HomeProduct = () => {
         <div className="mt-5">
           <button
             onClick={() => navigate("/products")}
-            className="btn btn-active"
+            className="btn  btn-sm btn-active"
           >
             See Products
           </button>

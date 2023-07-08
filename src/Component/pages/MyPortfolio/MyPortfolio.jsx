@@ -43,12 +43,12 @@ const skills = [
     value: 70,
   },
   {
-    id: 7,
+    id: 9,
     name: "express.js",
     value: 80,
   },
   {
-    id: 7,
+    id: 10,
     name: "mongodb database",
     value: 70,
   },

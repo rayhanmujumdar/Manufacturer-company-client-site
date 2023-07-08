@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import axiosPrivate from "../axiosPrivate/axiosPrivate";
 
 const useAdmin = (user) => {
-  const [admin, setAdmin] = useState({});
+  const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
   useEffect(() => {
     (async () => {

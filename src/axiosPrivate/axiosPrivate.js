@@ -1,6 +1,8 @@
 import axios from "axios";
 
-const axiosPrivate = axios.create();
+const axiosPrivate = axios.create({
+  baseURL: import.meta.env.VITE_SERVER_URL,
+});
 axiosPrivate.interceptors.request.use(
   function (config) {
     // Do something before request is sent

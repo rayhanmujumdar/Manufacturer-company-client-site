@@ -11,7 +11,7 @@ const Products = () => {
   const [page, setPage] = useState(1);
   const [size] = useState(9);
   const { products, isLoading, count, isError, error } =
-    useProduct(page, size) || {};
+    useProduct({page, size}) || {};
   const pages = (count && Math.ceil(Number(count) / size)) || 0;
   let content = null;
   if (isLoading && !isError) {

@@ -1,27 +1,19 @@
 import { useQuery } from "react-query";
-import axiosPrivate from "../axiosPrivate/axiosPrivate.js";
+import { getProducts } from "../api/productApi.js";
 
-const useProduct = (page = undefined,limit = 0) => {
-  const {
-    data: product,
-    isLoading,
-    isError,
-    error,
-    refetch
-  } = useQuery(["product",page], () => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/product?page=${page}&limit=${limit}`;
-    return axiosPrivate.get(url);
-  },{
-    keepPreviousData: true
-  });
+const useProduct = ({page = undefined, limit = 0}) => {
+  const { data: product, ...props } = useQuery(
+    ["product", page],
+    () => getProducts({ page, limit }),
+    {
+      keepPreviousData: true,
+    }
+  );
   const count = product?.headers?.get("X-Total-Count");
   return {
     products: product?.data,
-    isLoading,
     count,
-    isError,
-    error,
-    refetch,
+    ...props,
   };
 };
 export default useProduct;

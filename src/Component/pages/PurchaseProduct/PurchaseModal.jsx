@@ -5,6 +5,8 @@ import toast from "react-hot-toast";
 import Modal from "react-modal/lib/components/Modal";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import auth from "../../../firebase/firebase.init";
+import { useMutation, useQueryClient } from "react-query";
+import { updateProductQuantity } from "../../../api/productApi";
 
 const customStyles = {
   content: {
@@ -39,6 +41,14 @@ const PurchaseModal = ({
   }
   const { _id, img, name, availableQuantity, price, minimumOrderQuantity } =
     product || {};
+  const queryClient = useQueryClient();
+  const updateQuantityMutation = useMutation(updateProductQuantity, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: "singleProduct",
+      });
+    },
+  });
   const handleChange = (e) => {
     if (e.target.value > minimumOrderQuantity) {
       setValue(e.target.value);
@@ -75,8 +85,7 @@ const PurchaseModal = ({
         setIsOpen(false);
         const quantity = availableQuantity - minimumQuantity;
         const available = { availableQuantity: quantity };
-        const url = `${import.meta.env.VITE_SERVER_URL}/product/${_id}`;
-        await axiosPrivate.put(url, available);
+        updateQuantityMutation.mutate({ id: _id, data: available });
         refetch();
       } else {
         toast.error("try again", {
