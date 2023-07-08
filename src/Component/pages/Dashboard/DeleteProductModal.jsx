@@ -1,7 +1,7 @@
-import React from "react";
 import toast from "react-hot-toast";
 import Modal from "react-modal/lib/components/Modal";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
+import { useMutation, useQueryClient } from "react-query";
+import { deleteProduct } from "../../../api/productApi";
 const customStyles = {
   content: {
     top: "50%",
@@ -18,24 +18,31 @@ const DeleteProductModal = ({
   deleteModalIsOpen,
   setDeleteModalIsOpen,
   product,
-  refetch
+  refetch,
 }) => {
   Modal.defaultStyles.overlay.zIndex = "100";
   function closeModal() {
     setDeleteModalIsOpen(false);
   }
-  const { _id,name } = product;
-  const handleDelete = async(id) => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/product/${id}`
-    const {data} = await axiosPrivate.delete(url)
-    if(data.deletedCount > 0){
-        toast.success('Product Deleted',{
-            id: 'success'
-        })
-        refetch()
-        setDeleteModalIsOpen(false)
+  const queryClient = useQueryClient();
+  const deleteProductMutation = useMutation(deleteProduct, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: "manageProduct",
+      });
+    },
+  });
+  const { _id, name } = product;
+  const handleDelete = async (id) => {
+    const { data } = await deleteProductMutation.mutateAsync(id);
+    if (data.deletedCount > 0) {
+      toast.success("Product Deleted", {
+        id: "success",
+      });
+      refetch();
+      setDeleteModalIsOpen(false);
     }
-  }
+  };
   return (
     <div>
       <Modal

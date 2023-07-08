@@ -18,13 +18,16 @@ export const addProduct = async ({ email, data }) => {
   return await axiosPrivate.post(`/product?email=${email}`, data);
 };
 
-export const updateProduct = async ({ id, email,data }) => {
-  return await axiosPrivate.put(`/product/updateProduct/${id}?email=${email}`,data);
+export const updateProduct = async ({ id, email, data }) => {
+  return await axiosPrivate.put(
+    `/product/updateProduct/${id}?email=${email}`,
+    data
+  );
 };
-export const updateProductQuantity = async ({id,data}) => {
-  return await axiosPrivate.put(`/product/${id}`,data);
+export const updateProductQuantity = async ({ id, data }) => {
+  return await axiosPrivate.put(`/product/${id}`, data);
 };
 
-export const removeProduct = async (id) => {
+export const deleteProduct = async (id) => {
   return await axiosPrivate.delete(`/product/${id}`);
 };
