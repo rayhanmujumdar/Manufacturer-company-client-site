@@ -1,16 +1,29 @@
 import { useQuery } from "react-query";
 import { useNavigate } from "react-router-dom";
 import Review from "./Review";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import Loading from "../../Shared/Loading/Loading";
+import { getHomeReview } from "../../../api/reviewApi";
+import { toast } from "react-hot-toast";
 
 const CustomerReviews = () => {
   const navigate = useNavigate();
-  const { data: reviews, isLoading } = useQuery("review", () => {
-    return axiosPrivate.get(`${import.meta.env.VITE_SERVER_URL}/review/home-review?limit=3`);
-  });
-  if (isLoading) {
+  const {
+    data: reviews,
+    isLoading,
+    isError,
+  } = useQuery("review", () => getHomeReview({ limit: 3, page: 1 }));
+  let content = null;
+  if (isLoading && !isError) {
     return <Loading className="text-black"></Loading>;
+  } else if (!isLoading && isError) {
+    toast.error("Something was wrong", { id: "error" });
+    content = <Loading className="text-black"></Loading>;
+  } else if (!isLoading && !isError && reviews?.data?.length === 0) {
+    return <p className="text-xl text-center text-red-500">Not found</p>;
+  } else if (!isLoading && !isError && reviews?.data?.length > 0) {
+    content = reviews?.data.map((review) => (
+      <Review key={review._id} review={review}></Review>
+    ));
   }
   return (
     <div className="sm:container sm:mx-auto mx-4 flex lg:py-20 justify-center items-center flex-col md:my-0 my-5">
@@ -18,23 +31,18 @@ const CustomerReviews = () => {
         <h1 className="uppercase md:text-5xl text-3xl font-bold">
           Customer Reviews
         </h1>
-        {/* <button onClick={() => navigate("/reviews")} className="text-3xl mt-2">
-          <i className="fa-solid fa-arrow-right animate-pulse"></i>
-        </button> */}
       </div>
       <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 mt-5">
-        {reviews?.data.map((review) => (
-          <Review key={review._id} review={review}></Review>
-        ))}
+        {content}
       </div>
       <div className="mt-5">
-          <button
-            onClick={() => navigate("/reviews")}
-            className="btn btn-sm btn-active"
-          >
-            More Reviews
-          </button>
-        </div>
+        <button
+          onClick={() => navigate("/reviews")}
+          className="btn btn-sm btn-active"
+        >
+          More Reviews
+        </button>
+      </div>
     </div>
   );
 };

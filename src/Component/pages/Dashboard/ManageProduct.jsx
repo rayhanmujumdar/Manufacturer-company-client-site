@@ -5,6 +5,7 @@ import PageTitle from "../../Shared/PageTitle/PageTitle";
 import SingleManageProduct from "./SingleManageProduct";
 import { useState } from "react";
 import { getManageProducts } from "../../../api/productApi";
+import Pagination from "../../Shared/Pagination/Pagination";
 
 const ManageProduct = () => {
   const [page, setPage] = useState(1);
@@ -46,44 +47,7 @@ const ManageProduct = () => {
       </h1>
       <div className="grid xl:grid-cols-2 gap-4 md:grid-cols-2">{content}</div>
       {/* pagination button */}
-      <div className="mt-5">
-        {pages > 0 && (
-          <div className="btn-group">
-            <a
-              onClick={(e) => setPage(Number(e.target.id) - 1)}
-              id={page}
-              href="#top"
-              className="btn btn-sm btn-outline"
-              disabled={page === 1}
-            >
-              Previous page
-            </a>
-            {[...Array(pages < 5 ? pages : 5).keys()].map((btn) => {
-              return (
-                <a
-                  href="#top"
-                  onClick={(e) => setPage(Number(e.target.innerText))}
-                  key={btn}
-                  className={`btn btn-sm bg-white text-black hover:text-white ${
-                    page === btn + 1 && "btn-active"
-                  }`}
-                >
-                  {btn + 1}
-                </a>
-              );
-            })}
-            <a
-              onClick={(e) => setPage(Number(e.target.id) + 1)}
-              id={page}
-              href="#top"
-              className="btn btn-sm btn-outline"
-              disabled={pages === page}
-            >
-              Next
-            </a>
-          </div>
-        )}
-      </div>
+      <Pagination pages={pages} page={page} setPage={setPage}></Pagination>
     </div>
   );
 };

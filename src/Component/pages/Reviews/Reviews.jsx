@@ -1,6 +1,5 @@
 import { useQuery } from "react-query";
 import { signOut } from "firebase/auth";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import Footer from "../../Shared/Footer/Footer";
 import Loading from "../../Shared/Loading/Loading";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
@@ -8,6 +7,8 @@ import Review from "../Home/Review";
 import { useEffect, useState } from "react";
 import auth from "../../../firebase/firebase.init";
 import { toast } from "react-hot-toast";
+import { getReviews } from "../../../api/reviewApi";
+import Pagination from "../../Shared/Pagination/Pagination";
 
 const Reviews = () => {
   const [page, setPage] = useState(1);
@@ -17,30 +18,31 @@ const Reviews = () => {
     isLoading,
     error,
     isError,
-  } = useQuery(
-    ["reviews", page],
-    () => {
-      return axiosPrivate.get(
-        `${import.meta.env.VITE_SERVER_URL}/review?page=${page}&limit=${size}`
-      );
-    },
-    {
-      keepPreviousData: true,
-    }
-  );
+  } = useQuery(["reviews", page], () => getReviews({ page, size }), {
+    keepPreviousData: true,
+  });
   const count = reviews?.headers.get("X-Total-count");
   const pages = (count && Math.ceil(Number(count) / size)) || 0;
+  let content = null;
   useEffect(() => {
     if (isError) {
       if (error?.response?.status === 403) {
         signOut(auth);
         localStorage.removeItem("accessToken");
-        toast.error(error.response.data?.message);
+        toast.error(error.response.data?.message, { id: "error" });
       }
     }
   }, [error, isError]);
-  if (!error && isLoading) {
-    return <Loading className="text-black"></Loading>;
+  if (isLoading && !isError) {
+    content = <Loading className="text-black"></Loading>;
+  } else if (!isLoading && isError) {
+    content = <Loading className="text-black"></Loading>;
+  } else if (!isLoading && !isError && reviews?.data?.length === 0) {
+    return <p className="text-xl text-center text-red-400">Not Found</p>;
+  } else if (!isLoading && !isError && reviews?.data?.length > 0) {
+    content = reviews?.data?.map((review) => (
+      <Review key={review._id} review={review}></Review>
+    ));
   }
   return (
     <>
@@ -50,48 +52,9 @@ const Reviews = () => {
           Customer Reviews
         </h1>
         <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-5">
-          {reviews?.data?.map((review) => (
-            <Review key={review._id} review={review}></Review>
-          ))}
+          {content}
         </div>
-        <div>
-          {pages !== 0 && (
-            <div className="btn-group">
-              <a
-                onClick={(e) => setPage(Number(e.target.id) - 1)}
-                id={page}
-                href="#top"
-                className="btn btn-sm btn-outline"
-                disabled={page === 1}
-              >
-                Previous page
-              </a>
-              {[...Array(pages < 5 ? pages : 5).keys()].map((btn) => {
-                return (
-                  <a
-                    href="#top"
-                    onClick={(e) => setPage(Number(e.target.innerText))}
-                    key={btn}
-                    className={`btn btn-sm bg-white text-black hover:text-white ${
-                      page === btn + 1 && "btn-active"
-                    }`}
-                  >
-                    {btn + 1}
-                  </a>
-                );
-              })}
-              <a
-                onClick={(e) => setPage(Number(e.target.id) + 1)}
-                id={page}
-                href="#top"
-                className="btn btn-sm btn-outline"
-                disabled={pages === page}
-              >
-                Next
-              </a>
-            </div>
-          )}
-        </div>
+        <Pagination pages={pages} page={page} setPage={setPage}></Pagination>
       </div>
       <Footer></Footer>
     </>

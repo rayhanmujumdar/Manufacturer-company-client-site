@@ -2,20 +2,36 @@ import { useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import auth from "../../../firebase/firebase.init";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import toast from "react-hot-toast";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
+import useAdmin from "../../../Hooks/useAdmin";
+import { useMutation, useQueryClient } from "react-query";
+import { addReview } from "../../../api/reviewApi";
+import { useNavigate } from "react-router-dom";
 
 const AddReview = () => {
+  const pageTitleCheck = location.pathname !== "/home";
   const [user] = useAuthState(auth);
   const [rating, setRating] = useState("4");
+  const [admin, adminLoader] = useAdmin(user);
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
+  const addReviewMutation = useMutation(addReview, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["reviews", "review"],
+      });
+    },
+  });
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm();
+  if (adminLoader) return;
   const onSubmit = async (data) => {
+    if (!data) return;
     const review = {
       ...data,
       name: user?.displayName,
@@ -23,22 +39,17 @@ const AddReview = () => {
       img: user?.photoURL,
       rating: parseInt(rating),
     };
-    if (data) {
-      const url = `${import.meta.env.VITE_SERVER_URL}/review?email=${
-        user?.email
-      }`;
-      const { data } = await axiosPrivate.post(url, review);
-      if (data.insertedId) {
-        toast.success("Thanks for you Feedback");
-        reset();
-      }
+    const { data: reviewResponse } = await addReviewMutation.mutateAsync({
+      data: review,
+      email: user?.email
+    });
+    if (reviewResponse.insertedId) {
+      toast.success("Thanks for you Feedback");
+      navigate("/reviews");
+      reset();
     }
   };
-  const handleValue = (e) => {
-    const rating = e.target.value;
-    setRating(rating);
-  };
-  const pageTitleCheck = location.pathname !== "/home";
+
   return (
     <div
       data-aos="zoom-in"
@@ -91,41 +102,20 @@ const AddReview = () => {
             )}
           </div>
           <h1 className="text-lg mt-3">Please Rating</h1>
-          <div onClick={handleValue} className="rating">
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-              value="1"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-              value="2"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-              value="3"
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-              value="4"
-              defaultChecked
-            />
-            <input
-              type="radio"
-              name="rating-2"
-              className="mask mask-star-2 bg-orange-400"
-              value="5"
-            />
+          <div onClick={(e) => setRating(e.target.value)} className="rating">
+            {[...Array(5).keys()].map((rating) => (
+              <input
+                key={rating}
+                type="radio"
+                name="rating-2"
+                className="mask mask-star-2 bg-orange-400"
+                value={rating + 1}
+                defaultChecked={rating === 3}
+              />
+            ))}
           </div>
           <div className="form-control mt-6">
-            <button type="submit" className="btn btn-primary">
+            <button disabled={admin} type="submit" className="btn btn-primary">
               Submit
             </button>
           </div>

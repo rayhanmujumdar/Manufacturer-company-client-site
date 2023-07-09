@@ -1,19 +1,21 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import toast from "react-hot-toast";
 import Loading from "../../Shared/Loading/Loading";
 
-const CheckoutForm = ({ order, refetch }) => {
+const CheckoutForm = ({ order: { data: order }, refetch }) => {
   const stripe = useStripe();
   const [cardError, setCardError] = useState("");
   const elements = useElements();
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [loading, setLoading] = useState(false);
-  const { _id, cost, email, name, paid } = order?.data;
+  const { _id, cost, email, name, paid } = order;
   useEffect(() => {
-    const url = `${import.meta.env.VITE_SERVER_URL}/payment/create-payment-intent`;
+    const url = `${
+      import.meta.env.VITE_SERVER_URL
+    }/payment/create-payment-intent`;
     axiosPrivate
       .post(url, { price: cost })
       .then((res) => {
@@ -36,7 +38,7 @@ const CheckoutForm = ({ order, refetch }) => {
     if (card === null) {
       return;
     }
-    const { error, paymentMethod } = await stripe.createPaymentMethod({
+    const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
@@ -69,7 +71,7 @@ const CheckoutForm = ({ order, refetch }) => {
         order_id: _id,
         transactionId: paymentIntent?.id,
       };
-      axiosPrivate.patch(url, payment).then((res) => {
+      axiosPrivate.patch(url, payment).then(() => {
         setLoading(false);
         refetch();
       });
