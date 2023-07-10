@@ -198,8 +198,8 @@ const MyPortfolio = () => {
         <h1 className="mt-2 lg:text-4xl text-3xl relative text-stone-700 font-bold inline-block before:w-full before:h-1 before:bg-black  before:absolute before:-bottom-3">
           My Portfolio website link
         </h1>
-        <div className="overflow-x-auto mt-10">
-          <table className="table w-full">
+        <div className="overflow-x-auto w-full mt-10">
+          <table className="table mx-auto">
             {/* head */}
             <thead>
               <tr>
@@ -211,10 +211,15 @@ const MyPortfolio = () => {
               {/* row 1 */}
               {socialLink.map((social) => (
                 <tr key={social.id}>
-                  <td className="font-bold">{social.name}</td>
+                  <td
+                    className="font-bold sticky left-0 z-10 md:relative"
+                  >
+                    {social.name}
+                  </td>
                   <td>
                     <a
                       className="link-hover"
+                      target="__blank"
                       href="https://ephemeral-mermaid-0897f4.netlify.app/"
                     >
                       {social.link}

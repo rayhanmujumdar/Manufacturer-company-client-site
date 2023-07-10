@@ -1,50 +1,65 @@
 import { useEffect, useState } from "react";
 import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
-import axiosPrivate from "../../../axiosPrivate/axiosPrivate";
 import toast from "react-hot-toast";
 import Loading from "../../Shared/Loading/Loading";
+import { useMutation, useQueryClient } from "react-query";
+import { addPayment, updatePayment } from "../../../api/paymentApi";
 
 const CheckoutForm = ({ order: { data: order }, refetch }) => {
+  const { _id, cost, email, name, paid } = order;
   const stripe = useStripe();
-  const [cardError, setCardError] = useState("");
   const elements = useElements();
+  const [cardError, setCardError] = useState("");
   const [clientSecret, setClientSecret] = useState("");
   const [transactionId, setTransactionId] = useState("");
   const [loading, setLoading] = useState(false);
-  const { _id, cost, email, name, paid } = order;
+  const queryClient = useQueryClient();
+  // add a new payment details
+  const addPaymentMutation = useMutation(addPayment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["MyOrders"],
+      });
+    },
+  });
+
+  // update payment details
+  const updatePaymentMutation = useMutation(updatePayment, {
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ["order",_id],
+      });
+    },
+  });
   useEffect(() => {
-    const url = `${
-      import.meta.env.VITE_SERVER_URL
-    }/payment/create-payment-intent`;
-    axiosPrivate
-      .post(url, { price: cost })
-      .then((res) => {
-        if (res?.data?.clientSecret) {
-          setClientSecret(res.data.clientSecret);
+    (async () => {
+      try {
+        const { data } = await addPaymentMutation.mutateAsync({
+          data: { price: cost },
+        });
+        if (data?.clientSecret) {
+          setClientSecret(data.clientSecret);
         }
-      })
-      .catch((err) => {
+      } catch (err) {
         toast.error(err.code, {
           id: "error",
         });
-      });
+      }
+    })();
   }, [cost]);
   const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!stripe || !elements) {
-      return;
-    }
+
+    if (!stripe || !elements) return;
     const card = elements.getElement(CardElement);
-    if (card === null) {
-      return;
-    }
+    if (card === null) return;
     const { error } = await stripe.createPaymentMethod({
       type: "card",
       card,
     });
     setCardError(error?.message || "");
     //confirm card payment
-    const { paymentIntent, error: confirmError } =
+    const { paymentIntent, error: paymentError } =
       await stripe.confirmCardPayment(clientSecret, {
         payment_method: {
           card: card,
@@ -55,29 +70,30 @@ const CheckoutForm = ({ order: { data: order }, refetch }) => {
         },
       });
     setLoading(true);
-    if (confirmError) {
-      setCardError(confirmError);
-      setLoading(false);
-    } else {
-      setCardError("");
-      console.log(paymentIntent?.id);
-      setTransactionId(paymentIntent?.id);
-      toast.success("Congrats! your payment is completed", {
-        id: "success",
-      });
-      //payment update to database
-      const url = `${import.meta.env.VITE_SERVER_URL}/payment/order/${_id}`;
-      const payment = {
-        order_id: _id,
-        transactionId: paymentIntent?.id,
-      };
-      axiosPrivate.patch(url, payment).then(() => {
+    try {
+      if (paymentError) {
+        setCardError(paymentError);
+        setLoading(false);
+      } else {
+        setCardError("");
+        setTransactionId(paymentIntent?.id);
+        toast.success("Congrats! your payment is completed", {
+          id: "success",
+        });
+        //payment update to database
+        const payment = {
+          order_id: _id,
+          transactionId: paymentIntent?.id,
+        };
+        await updatePaymentMutation.mutateAsync({ id: _id, data: payment });
         setLoading(false);
         refetch();
-      });
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
-  if (loading) {
+  if (loading && !cardError) {
     return <Loading className="text-black"></Loading>;
   }
   return (
