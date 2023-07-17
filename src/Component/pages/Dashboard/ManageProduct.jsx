@@ -9,7 +9,7 @@ import Pagination from "../../Shared/Pagination/Pagination";
 
 const ManageProduct = () => {
   const [page, setPage] = useState(1);
-  const [size] = useState(9);
+  const [size] = useState(10);
   const { data, isLoading, error, isError, refetch } = useQuery(
     ["manageProduct", page],
     () => getManageProducts({ page, size }),

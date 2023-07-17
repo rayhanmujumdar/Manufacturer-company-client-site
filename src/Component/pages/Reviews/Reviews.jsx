@@ -9,6 +9,7 @@ import auth from "../../../firebase/firebase.init";
 import { toast } from "react-hot-toast";
 import { getReviews } from "../../../api/reviewApi";
 import Pagination from "../../Shared/Pagination/Pagination";
+import ScrollToTop from "../../Shared/ScrollToTop";
 
 const Reviews = () => {
   const [page, setPage] = useState(1);
@@ -34,9 +35,10 @@ const Reviews = () => {
     }
   }, [error, isError]);
   if (isLoading && !isError) {
-    content = <Loading className="text-black"></Loading>;
+    return <Loading className="text-black"></Loading>;
   } else if (!isLoading && isError) {
-    content = <Loading className="text-black"></Loading>;
+    toast.error("Something was wrong", { id: "error" });
+    return;
   } else if (!isLoading && !isError && reviews?.data?.length === 0) {
     return <p className="text-xl text-center text-red-400">Not Found</p>;
   } else if (!isLoading && !isError && reviews?.data?.length > 0) {
@@ -48,6 +50,7 @@ const Reviews = () => {
     <>
       <div className="sm:container sm:mx-auto mx-5">
         <PageTitle title="Reviews"></PageTitle>
+        <ScrollToTop></ScrollToTop>
         <h1 className="text-4xl text-stone-700 font-semibold">
           Customer Reviews
         </h1>

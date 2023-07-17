@@ -1,5 +1,5 @@
-import React from "react";
 import PageTitle from "../../Shared/PageTitle/PageTitle";
+import ScrollToTop from "../../Shared/ScrollToTop";
 
 const Blog = () => {
   return (
@@ -13,6 +13,7 @@ const Blog = () => {
         }}
       >
         <PageTitle title="MyPortfolio"></PageTitle>
+        <ScrollToTop></ScrollToTop>
         <div className="md:container md:mx-auto mx-4">
           <h1 className="mt-2 text-4xl relative text-stone-700 font-bold inline-block before:w-full before:h-1 before:bg-black  before:absolute before:-bottom-3">
             Answer the Question
@@ -83,11 +84,14 @@ const Blog = () => {
               description, etc. How will you implement a search to find products
               by name?
             </h1>
-            <p><span className="text-green-500">Answer: </span>
-               If I implement a search button and i find to a product name by search i use to javascript filter.
-              This method accepts 2 parameters,1.callback,2.index.
-              The filter() method creates a new array with all elements that pass the test implemented by the provided function.
-              if i anything search javascript filter method test my search text and return search value.
+            <p>
+              <span className="text-green-500">Answer: </span>
+              If I implement a search button and i find to a product name by
+              search i use to javascript filter. This method accepts 2
+              parameters,1.callback,2.index. The filter() method creates a new
+              array with all elements that pass the test implemented by the
+              provided function. if i anything search javascript filter method
+              test my search text and return search value.
             </p>
           </div>
           <div className="max-w-3xl text-left mx-auto my-4">

@@ -1,4 +1,5 @@
 import PageTitle from "../../Shared/PageTitle/PageTitle";
+import ScrollToTop from "../../Shared/ScrollToTop";
 // import profile from "../../../image/Me/Profile.png";
 
 const skills = [
@@ -81,17 +82,13 @@ const MyPortfolio = () => {
       // }}
     >
       <PageTitle title="MyPortfolio"></PageTitle>
+      <ScrollToTop></ScrollToTop>
       <div>
         <h1 className="mt-2 text-4xl relative text-stone-700 font-bold inline-block before:w-full before:h-1 before:bg-black  before:absolute before:-bottom-3">
           My Portfolio
         </h1>
         <div className="hero min-h-[90vh] mt-5">
           <div className="hero-content p-0 flex-col lg:flex-row-reverse lg:items-start">
-            {/* <div className="avatar md:w-[400px] w-[350px] bg-gray-500 h-[400px] flex justify-center items-center rounded-md">
-              <div className="rounded-xl p-2.5 flex mx-auto">
-                <img src={profile} alt="" />
-              </div>
-            </div> */}
             <div className="text-left md:w-3/4 md:my-0 m-2">
               <h1 className="md:text-5xl text-3xl font-bold">
                 Hello There,
@@ -211,9 +208,7 @@ const MyPortfolio = () => {
               {/* row 1 */}
               {socialLink.map((social) => (
                 <tr key={social.id}>
-                  <td
-                    className="font-bold sticky left-0 z-10 md:relative"
-                  >
+                  <td className="font-bold sticky left-0 z-10 md:relative">
                     {social.name}
                   </td>
                   <td>

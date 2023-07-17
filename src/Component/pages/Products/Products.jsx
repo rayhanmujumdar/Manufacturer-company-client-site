@@ -6,6 +6,7 @@ import PageTitle from "../../Shared/PageTitle/PageTitle";
 import Product from "../Product/Product";
 import { useState } from "react";
 import Pagination from "../../Shared/Pagination/Pagination";
+import ScrollToTop from "../../Shared/ScrollToTop";
 
 const Products = () => {
   const [page, setPage] = useState(1);
@@ -40,6 +41,7 @@ const Products = () => {
     <>
       <div className="container mx-auto">
         <PageTitle title={"Products"}></PageTitle>
+        <ScrollToTop></ScrollToTop>
         <h1 className="mt-2 text-4xl relative text-stone-700 font-bold inline-block before:w-full before:h-1 before:bg-black  before:absolute before:-bottom-3">
           Our Products
         </h1>
