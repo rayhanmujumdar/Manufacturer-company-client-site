@@ -6,7 +6,6 @@ const Review = ({ review }) => {
   }
   return (
     <div data-aos="zoom-in" className="card bg-base-100 shadow-xl">
-      
       <div className="card-body">
         <div className="card-actions justify-center flex-col items-center">
           {img ? (

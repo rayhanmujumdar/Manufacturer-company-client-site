@@ -15,6 +15,8 @@
     "aos": "^2.3.4",
     "axios": "^1.4.0",
     "firebase": "^9.22.2",
+    "keep-react": "^1.2.0",
+    "phosphor-react": "^1.4.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-firebase-hooks": "^5.1.1",
