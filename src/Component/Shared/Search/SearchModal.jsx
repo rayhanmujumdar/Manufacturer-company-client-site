@@ -2,6 +2,7 @@ import { Button, Input, Modal } from 'keep-react';
 import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link } from 'react-router-dom';
+import useDebounce from '../../../Hooks/useDebounce';
 import { getProducts } from '../../../api/productApi';
 import Loading from '../Loading/Loading';
 import SearchProductCard from './SearchProductCard';
@@ -10,6 +11,9 @@ export default function SearchModal({ isOpen, openModal, closeModal }) {
     const [error, setError] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [products, setProducts] = useState(null);
+    const handleSearchTerm = useDebounce(e => {
+        setSearchTerm(e.target.value);
+    }, 500);
     useEffect(() => {
         const fetchProductsByQuery = async () => {
             try {
@@ -67,11 +71,10 @@ export default function SearchModal({ isOpen, openModal, closeModal }) {
                 <Modal.Body className="flex w-[30rem] flex-col items-center p-6 lg:p-8">
                     <Modal.Content>
                         <Input
-                            onChange={e => setSearchTerm(e.target.value)}
+                            onChange={handleSearchTerm}
                             placeholder="Search product"
                             type="text"
                             className="w-96"
-                            value={searchTerm}
                         />
                     </Modal.Content>
                     {content}
