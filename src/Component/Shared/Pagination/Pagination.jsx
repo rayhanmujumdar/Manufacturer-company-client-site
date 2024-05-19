@@ -1,6 +1,6 @@
 export default function Pagination({ pages, page, setPage }) {
     return (
-        <div className="my-5">
+        <div className="my-5 flex justify-center">
             {pages > 0 && (
                 <div className="btn-group border rounded-lg border-teal-600">
                     <a
@@ -21,7 +21,7 @@ export default function Pagination({ pages, page, setPage }) {
                                 }
                                 key={btn}
                                 className={`btn btn-sm bg-white text-black hover:text-white ${
-                                    page === btn + 1 && 'bg-teal-600 text-white'
+                                    page === btn + 1 && 'btn-active text-white'
                                 }`}
                             >
                                 {btn + 1}

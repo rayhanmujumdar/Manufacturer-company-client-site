@@ -1,7 +1,6 @@
 import { Button, Card, Divider } from 'keep-react';
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
 export const ProductCard = ({ product }) => {
     const navigate = useNavigate();
     const {
@@ -24,7 +23,9 @@ export const ProductCard = ({ product }) => {
                 <img src={img} alt="image" className="w-[600px] h-[350px]" />
             </Card.Header>
             <Card.Content className="space-y-3">
-                <Card.Title>{name}</Card.Title>
+                <Link to={`/product/${_id}`}>
+                    <Card.Title>{name}</Card.Title>
+                </Link>
                 <Card.Description>
                     {isDes
                         ? des.length < description.length

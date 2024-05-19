@@ -5,7 +5,7 @@ const Business = () => {
                 <h1 className="md:text-5xl text-2xl mt-4 font-bold text-stone-800 uppercase">
                     Our Business introduction
                 </h1>
-                <p className="uppercase my-2 md:text-xl text-sm text-gray-400">
+                <p className="uppercase my-2 md:text-xl text-sm text-gray-400 text-center">
                     introduction of our business and user expectation
                 </p>
             </div>
@@ -17,7 +17,7 @@ const Business = () => {
                  px-14"
                 >
                     <p className="text-4xl text-[#34AFAE]">
-                        <i className="fa-solid fa-flag border-2 border-gray-400 w-20  h-20 leading-[80px] rounded-full"></i>
+                        <i className="fa-solid fa-flag border-2 border-gray-400 w-20  h-20 text-center leading-[80px] rounded-full"></i>
                     </p>
                     <div className="mt-3">
                         <p className="text-5xl font-bold">30</p>
@@ -30,7 +30,7 @@ const Business = () => {
                     className="p-10 bg-slate-200 rounded-md shadow-lg  px-14"
                 >
                     <p className="text-4xl text-[#34AFAE]">
-                        <i className="fa-solid fa-person-dress border-2 border-gray-400 w-20  h-20 leading-[80px] rounded-full"></i>
+                        <i className="fa-solid fa-person-dress border-2 border-gray-400 w-20  h-20 leading-[80px] rounded-full text-center"></i>
                     </p>
                     <div className="mt-3">
                         <p className="text-5xl font-bold">300+</p>
@@ -43,7 +43,7 @@ const Business = () => {
                     className="p-10 bg-slate-200 rounded-md shadow-lg  px-14"
                 >
                     <p className="text-4xl text-[#34AFAE]">
-                        <i className="fa-solid fa-thumbs-up border-2 border-gray-400 w-20  h-20 leading-[80px] rounded-full"></i>
+                        <i className="fa-solid fa-thumbs-up border-2 border-gray-400 w-20  h-20 leading-[80px] rounded-full text-center"></i>
                     </p>
                     <div className="mt-3">
                         <p className="text-5xl font-bold">400+</p>

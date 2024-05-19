@@ -1,9 +1,8 @@
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import { useEffect } from 'react';
+import { Suspense, lazy, useEffect } from 'react';
 import { Toaster } from 'react-hot-toast';
 import { Route, Routes } from 'react-router-dom';
-import './App.css';
 import KeepNavbar from './Component/Shared/Navbar/KeepNavbar';
 import NotFound from './Component/Shared/NotFound/NotFound';
 import PrivateAdmin from './Component/Shared/PrivateAdmin/PrivateAdmin';
@@ -12,7 +11,6 @@ import RequiredAuth from './Component/Shared/RequiredAuth/RequiredAuth';
 import Blog from './Component/pages/Blog/Blog';
 import AddProduct from './Component/pages/Dashboard/AddProduct';
 import AddReview from './Component/pages/Dashboard/AddReview';
-import Dashboard from './Component/pages/Dashboard/Dashboard';
 import MakeAdmin from './Component/pages/Dashboard/MakeAdmin';
 import ManageAllOrders from './Component/pages/Dashboard/ManageAllOrders';
 import ManageProduct from './Component/pages/Dashboard/ManageProduct';
@@ -24,16 +22,19 @@ import ForgetPassword from './Component/pages/Login/ForgetPassword';
 import Login from './Component/pages/Login/Login';
 import MyPortfolio from './Component/pages/MyPortfolio/MyPortfolio';
 import Products from './Component/pages/Products/Products';
-import PurchaseProduct from './Component/pages/PurchaseProduct/PurchaseProduct';
+// import PurchaseProduct from './Component/pages/PurchaseProduct/PurchaseProduct';
+import ProductDetails from './Component/pages/PurchaseProduct/ProductDetails';
 import Reviews from './Component/pages/Reviews/Reviews';
 import SignUp from './Component/pages/SignUp/SignUp';
+
+const Dashboard = lazy(() => import('./Component/pages/Dashboard/Dashboard'));
 
 function App() {
     useEffect(() => {
         AOS.init();
     }, []);
     return (
-        <div className="App bg-gray-100">
+        <div className="bg-gray-100">
             {/* <Navbar /> */}
             <KeepNavbar />
             <Routes>
@@ -51,7 +52,7 @@ function App() {
                     path="/product/:id"
                     element={
                         <RequiredAuth>
-                            <PurchaseProduct />
+                            <ProductDetails />
                         </RequiredAuth>
                     }
                 ></Route>
@@ -68,7 +69,9 @@ function App() {
                     path="/dashboard"
                     element={
                         <RequiredAuth>
-                            <Dashboard />
+                            <Suspense>
+                                <Dashboard />
+                            </Suspense>
                         </RequiredAuth>
                     }
                 >

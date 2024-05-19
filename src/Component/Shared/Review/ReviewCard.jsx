@@ -11,7 +11,7 @@ export const ReviewCard = ({ review }) => {
             <Card.Content className="flex justify-center items-center p-0 pt-3">
                 <Avatar shape="circle" img={img ? img : null} size="2xl" />
             </Card.Content>
-            <Card.Content className="space-y-3">
+            <Card.Content className="space-y-3 flex items-center flex-col">
                 <Card.Title>{name}</Card.Title>
                 <Card.Description>{describe}</Card.Description>
                 <div>

@@ -51,7 +51,7 @@ const Reviews = () => {
             <div className="sm:container sm:mx-auto mx-5">
                 <PageTitle title="Reviews"></PageTitle>
                 <ScrollToTop></ScrollToTop>
-                <h1 className="text-4xl text-stone-700 font-semibold">
+                <h1 className="text-4xl text-center text-stone-700 font-semibold">
                     Customer Reviews
                 </h1>
                 <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-4 my-5">
